@@ -54,3 +54,20 @@ CSV.open('output.csv','w',
             ]
   end
 end
+
+Sums = {}
+history.each do | hist_item|
+  key = /^[^\d]+/.match(hist_item['description'])[0].chomp
+  value = hist_item['amount'].to_f
+  if Sums[key]
+    Sums[key] +=  value
+  else
+    Sums[key]  =  value
+  end
+end
+
+Sums.each do |key, value|
+  puts "Total for #{sprintf('%40s', key)} is #{value}"
+end
+
+
