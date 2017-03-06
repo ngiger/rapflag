@@ -26,7 +26,18 @@ Bitfinex::Client.configure do |conf|
 end
 
 client = Bitfinex::Client.new
-history = client.history('USD', { :limit => 10000 })
+history = []
+timestamp = Time.now.to_i + 1
+while true
+  partial = client.history('USD', { :limit => 500, :until => timestamp })
+  first_time = Time.at(partial.first['timestamp'].to_i).strftime('%Y.%m.%d %H:%M:%S')
+  last_time = Time.at(partial.last['timestamp'].to_i).strftime('%Y.%m.%d %H:%M:%S')
+  puts "Feched #{partial.size} history entries #{first_time} -> #{last_time}"
+  timestamp = partial.last['timestamp'].to_i
+  history = history | partial
+  break if partial.size <= 1
+end
+
 puts "Feched #{history.size} history entries"
 
 CSV.open('output.csv','w',
