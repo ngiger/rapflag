@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'bitfinex-rb'
+  spec.add_dependency 'trollop'
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
