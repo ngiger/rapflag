@@ -10,7 +10,7 @@ module RAPFLAG
       @currency = currency
     end
 
-    def fectch_csv_history
+    def fetch_csv_history
       client = Bitfinex::Client.new
       @history = []
       timestamp = Time.now.to_i + 1
@@ -74,6 +74,47 @@ module RAPFLAG
       puts "Summary for #{@wallet} #{@currency} (#{@history.size} entries}"
       sums.each do |key, value|
         puts " #{sprintf('%40s', key)} is #{value}"
+      end
+    end
+
+    Struct.new("Daily", :date, :amount, :balance, :description, :income)
+    def create_summary
+      @daily = {}
+      @history.sort{|x,y| x['timestamp'] <=> y['timestamp']}.each do | hist_item|
+        date = Time.at(hist_item['timestamp'].to_i).strftime('%Y.%m.%d')
+        info = Struct::Daily.new(date, hist_item['amount'].to_f, hist_item['balance'].to_f, hist_item['description'])
+        amount = hist_item['amount'].to_f
+        balance = hist_item['balance'].to_f
+        if @daily[date]
+          old_balance = @daily[date]
+          existing = @daily[date]
+        else
+          info.income = 0.0
+          existing = info
+        end
+        if /Wire Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i.match( hist_item['description'])
+          existing.income += amount
+        end
+        existing.balance = balance if balance != 0.0
+        @daily[date] = existing
+      end
+      out_file = "output/#{@wallet}_#{@currency}_summary.csv"
+      FileUtils.makedirs(File.dirname(out_file))
+      CSV.open(out_file,'w',
+          :write_headers=> true,
+          :headers => ['currency',
+                       'date',
+                      'income',
+                      'balance',
+                      ] #< column header
+        ) do |csv|
+        @daily.each do |date, info|
+          csv << [@currency,
+                  date,
+                  info.income,
+                  info.balance,
+                 ]
+        end
       end
     end
   end
