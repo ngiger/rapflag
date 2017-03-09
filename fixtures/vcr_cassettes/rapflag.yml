@@ -1,0 +1,333 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.bitfinex.com/v1/history
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      X-BFX-PAYLOAD:
+      - eyJub25jZSI6IjE0ODkwNjUyODE3NjM2IiwicmVxdWVzdCI6Ii92MS9oaXN0b3J5IiwibGltaXQiOjUwMCwidW50aWwiOjE0ODkwNjUyODIsIndhbGxldCI6ImV4Y2hhbmdlIiwiY3VycmVuY3kiOiJCVEMifQ==
+      X-BFX-SIGNATURE:
+      - ecb536e6ba84cab9faeffc04496ead88ce9b5650add4eaaaa8de2d72f61de7783ff6a9deaf9b16f7e082135bf9b5644d
+      X-BFX-APIKEY:
+      - H0pjSg6k1V2Q3J7ItzzEPUYrRwd4KDK7jsK0W48QPXp
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      date:
+      - Thu, 09 Mar 2017 13:14:39 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      set-cookie:
+      - __cfduid=d130000bd204b3bd317c666cad61c82f31489065279; expires=Fri, 09-Mar-18
+        13:14:39 GMT; path=/; domain=.bitfinex.com; HttpOnly
+      strict-transport-security:
+      - max-age=31536000
+      x-frame-options:
+      - SAMEORIGIN, SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+      etag:
+      - '"4861aebe57cd21a276ab0efd9f62044a"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 89cde203-e369-49b0-b561-5cb75afc71ce
+      x-runtime:
+      - '0.027432'
+      server:
+      - cloudflare-nginx
+      cf-ray:
+      - 33ce4c6a5b323e4a-ZRH
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency":"BTC","amount":"-0.00000005","balance":"0.0","description":"Transfer
+        of 0.0 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1480796447.0"},{"currency":"BTC","amount":"-1.36462469","balance":"0.97423027","description":"Exchange
+        1514.398729 BFX for BTC @ 0.0009011 on wallet Exchange","timestamp":"1477141779.0"},{"currency":"BTC","amount":"-0.97423022","balance":"0.00000005","description":"Exchange
+        1081.15660373 BFX for BTC @ 0.0009011 on wallet Exchange","timestamp":"1477141779.0"},{"currency":"BTC","amount":"-0.05772529","balance":"2.33885496","description":"Exchange
+        64.06091069 BFX for BTC @ 0.0009011 on wallet Exchange","timestamp":"1477141769.0"},{"currency":"BTC","amount":"-0.29138975","balance":"2.39658025","description":"Exchange
+        323.37115658 BFX for BTC @ 0.0009011 on wallet Exchange","timestamp":"1477141767.0"},{"currency":"BTC","amount":"-5.65385489","balance":"2.68797","description":"Bitcoin
+        Withdrawal #1384621 on wallet Exchange","timestamp":"1477133928.0"},{"currency":"BTC","amount":"-1.65817512","balance":"8.34182489","description":"Exchange
+        1905.70746047 BFX for BTC @ 0.00087011 on wallet Exchange","timestamp":"1476988887.0"},{"currency":"BTC","amount":"10.0","balance":"10.00000001","description":"Deposit
+        (BITCOIN) #1380647 on wallet Exchange","timestamp":"1476826125.0"},{"currency":"BTC","amount":"-5.04918013","balance":"0.00000001","description":"Exchange
+        5718.40507327 BFX for BTC @ 0.00088297 on wallet Exchange","timestamp":"1476534551.0"},{"currency":"BTC","amount":"-0.04412636","balance":"5.04918014","description":"Exchange
+        49.97492673 BFX for BTC @ 0.00088297 on wallet Exchange","timestamp":"1476533449.0"},{"currency":"BTC","amount":"4.9999","balance":"5.0933065","description":"Deposit
+        (BITCOIN) #1377267 on wallet Exchange","timestamp":"1476526425.0"},{"currency":"BTC","amount":"0.0935","balance":"0.0935","description":"Exchange
+        1000.0 RRT for BTC @ 0.0000935 on wallet Exchange","timestamp":"1476177935.0"},{"currency":"BTC","amount":"-0.0000935","balance":"0.0934065","description":"Trading
+        fees for 1000.0 RRT @ 0.0001 on BFX (0.1%) on wallet Exchange","timestamp":"1476177935.0"},{"currency":"BTC","amount":"-13.97129224","balance":"0.0","description":"Bitcoin
+        Withdrawal #1319091 on wallet Exchange","timestamp":"1472484866.0"},{"currency":"BTC","amount":"-0.00036015","balance":"13.97129224","description":"Trading
+        fees for 257.2501 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484716.0"},{"currency":"BTC","amount":"0.18007509","balance":"13.97165239","description":"Exchange
+        257.25012817 BFX for BTC @ 0.0007 on wallet Exchange","timestamp":"1472484715.0"},{"currency":"BTC","amount":"2.8","balance":"13.7971773","description":"Exchange
+        4000.0 BFX for BTC @ 0.0007 on wallet Exchange","timestamp":"1472484687.0"},{"currency":"BTC","amount":"-0.0056","balance":"13.7915773","description":"Trading
+        fees for 4000.0 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484687.0"},{"currency":"BTC","amount":"3.5","balance":"11.0041773","description":"Exchange
+        5000.0 BFX for BTC @ 0.0007 on wallet Exchange","timestamp":"1472484681.0"},{"currency":"BTC","amount":"-0.007","balance":"10.9971773","description":"Trading
+        fees for 5000.0 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484681.0"},{"currency":"BTC","amount":"-0.00607797","balance":"7.5041773","description":"Trading
+        fees for 4340.786 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484679.0"},{"currency":"BTC","amount":"0.46144981","balance":"4.4721939","description":"Exchange
+        659.21401552 BFX for BTC @ 0.0007 on wallet Exchange","timestamp":"1472484678.0"},{"currency":"BTC","amount":"3.03898427","balance":"7.51117817","description":"Exchange
+        4340.78598448 BFX for BTC @ 0.0007001 on wallet Exchange","timestamp":"1472484678.0"},{"currency":"BTC","amount":"-0.0009229","balance":"7.51025527","description":"Trading
+        fees for 659.214 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484678.0"},{"currency":"BTC","amount":"-0.00167075","balance":"4.01074409","description":"Trading
+        fees for 1191.8591 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484677.0"},{"currency":"BTC","amount":"-0.00441423","balance":"4.01241484","description":"Trading
+        fees for 3148.9269 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484676.0"},{"currency":"BTC","amount":"2.20711434","balance":"2.72086233","description":"Exchange
+        3148.92688448 BFX for BTC @ 0.00070091 on wallet Exchange","timestamp":"1472484675.0"},{"currency":"BTC","amount":"0.46151573","balance":"3.18237806","description":"Exchange
+        659.21401552 BFX for BTC @ 0.0007001 on wallet Exchange","timestamp":"1472484675.0"},{"currency":"BTC","amount":"0.83537404","balance":"4.0177521","description":"Exchange
+        1191.8591 BFX for BTC @ 0.0007009 on wallet Exchange","timestamp":"1472484675.0"},{"currency":"BTC","amount":"-0.00092303","balance":"4.01682907","description":"Trading
+        fees for 659.214 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484675.0"},{"currency":"BTC","amount":"0.51477755","balance":"0.51477755","description":"Exchange
+        734.0333 BFX for BTC @ 0.0007013 on wallet Exchange","timestamp":"1472484650.0"},{"currency":"BTC","amount":"-0.00102956","balance":"0.51374799","description":"Trading
+        fees for 734.0333 BFX @ 0.0007 on BFX (0.2%) on wallet Exchange","timestamp":"1472484650.0"},{"currency":"BTC","amount":"-7.51418602","balance":"0.0","description":"Bitcoin
+        Withdrawal #1318023 on wallet Exchange","timestamp":"1472410087.0"},{"currency":"BTC","amount":"0.2830943","balance":"7.51446911","description":"Exchange
+        392.69566403 BFX for BTC @ 0.0007209 on wallet Exchange","timestamp":"1472409933.0"},{"currency":"BTC","amount":"-0.00028309","balance":"7.51418602","description":"Trading
+        fees for 392.6957 BFX @ 0.0007 on BFX (0.1%) on wallet Exchange","timestamp":"1472409933.0"},{"currency":"BTC","amount":"-0.00006234","balance":"7.23137481","description":"Trading
+        fees for 82.1289 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472406771.0"},{"currency":"BTC","amount":"0.06233584","balance":"7.23143715","description":"Exchange
+        82.12891247 BFX for BTC @ 0.000759 on wallet Exchange","timestamp":"1472406770.0"},{"currency":"BTC","amount":"0.02281563","balance":"7.16912413","description":"Exchange
+        30.06012024 BFX for BTC @ 0.000759 on wallet Exchange","timestamp":"1472406486.0"},{"currency":"BTC","amount":"-0.00002282","balance":"7.16910131","description":"Trading
+        fees for 30.0601 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472406486.0"},{"currency":"BTC","amount":"0.14418876","balance":"7.14645269","description":"Exchange
+        189.97201684 BFX for BTC @ 0.000759 on wallet Exchange","timestamp":"1472406485.0"},{"currency":"BTC","amount":"-0.00014419","balance":"7.1463085","description":"Trading
+        fees for 189.972 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472406485.0"},{"currency":"BTC","amount":"-0.00010413","balance":"7.00226393","description":"Trading
+        fees for 137.0542 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472404761.0"},{"currency":"BTC","amount":"0.10413378","balance":"7.00236806","description":"Exchange
+        137.0542038 BFX for BTC @ 0.0007598 on wallet Exchange","timestamp":"1472404760.0"},{"currency":"BTC","amount":"-0.00073903","balance":"6.89823428","description":"Trading
+        fees for 968.1995 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472404078.0"},{"currency":"BTC","amount":"0.73902668","balance":"6.89897331","description":"Exchange
+        968.1995 BFX for BTC @ 0.0007633 on wallet Exchange","timestamp":"1472404077.0"},{"currency":"BTC","amount":"0.9485655","balance":"6.1608952","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472403584.0"},{"currency":"BTC","amount":"-0.00094857","balance":"6.15994663","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472403584.0"},{"currency":"BTC","amount":"-0.00094857","balance":"5.2123297","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472403157.0"},{"currency":"BTC","amount":"0.9485655","balance":"5.21327827","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472403156.0"},{"currency":"BTC","amount":"0.9485655","balance":"4.26566134","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472403081.0"},{"currency":"BTC","amount":"-0.00094857","balance":"4.26471277","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472403081.0"},{"currency":"BTC","amount":"0.9485655","balance":"3.31804441","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472403021.0"},{"currency":"BTC","amount":"-0.00094857","balance":"3.31709584","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472403021.0"},{"currency":"BTC","amount":"0.9485655","balance":"2.37042748","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472402996.0"},{"currency":"BTC","amount":"-0.00094857","balance":"2.36947891","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472402996.0"},{"currency":"BTC","amount":"-0.00094857","balance":"1.42186198","description":"Trading
+        fees for 1245.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472402953.0"},{"currency":"BTC","amount":"0.9485655","balance":"1.42281055","description":"Exchange
+        1245.0 BFX for BTC @ 0.0007619 on wallet Exchange","timestamp":"1472402952.0"},{"currency":"BTC","amount":"-0.00047472","balance":"0.47424505","description":"Trading
+        fees for 623.0 BFX @ 0.0008 on BFX (0.1%) on wallet Exchange","timestamp":"1472399833.0"},{"currency":"BTC","amount":"0.47471977","balance":"0.47471977","description":"Exchange
+        623.0 BFX for BTC @ 0.00076199 on wallet Exchange","timestamp":"1472399831.0"},{"currency":"BTC","amount":"-1.02821954","balance":"6.15","description":"Exchange
+        1.02821954 BTC for USD @ 648.27 on wallet Exchange","timestamp":"1469528945.0"},{"currency":"BTC","amount":"-6.15","balance":"0.0","description":"Exchange
+        6.15 BTC for USD @ 648.28 on wallet Exchange","timestamp":"1469528945.0"},{"currency":"BTC","amount":"-0.409182","balance":"7.17821954","description":"Exchange
+        0.409182 BTC for USD @ 648.29 on wallet Exchange","timestamp":"1469528905.0"},{"currency":"BTC","amount":"7.58740154","balance":"7.58740154","description":"Deposit
+        (BITCOIN) #1239484 on wallet Exchange","timestamp":"1469528394.0"},{"currency":"BTC","amount":"-7.08153971","balance":"0.0","description":"Exchange
+        7.08153971 BTC for USD @ 647.09 on wallet Exchange","timestamp":"1468229774.0"},{"currency":"BTC","amount":"-0.32574375","balance":"7.08153971","description":"Exchange
+        0.32574375 BTC for USD @ 647.09 on wallet Exchange","timestamp":"1468229329.0"},{"currency":"BTC","amount":"-0.1","balance":"7.40728346","description":"Exchange
+        0.1 BTC for USD @ 647.09 on wallet Exchange","timestamp":"1468229223.0"},{"currency":"BTC","amount":"7.50728346","balance":"7.50728346","description":"Deposit
+        (BITCOIN) #1195544 on wallet Exchange","timestamp":"1468228292.0"},{"currency":"BTC","amount":"-4.24592955","balance":"0.0","description":"Exchange
+        4.24592955 BTC for USD @ 628.35 on wallet Exchange","timestamp":"1468081552.0"},{"currency":"BTC","amount":"-1.0833","balance":"6.04592955","description":"Exchange
+        1.0833 BTC for USD @ 628.35 on wallet Exchange","timestamp":"1468081547.0"},{"currency":"BTC","amount":"-1.8","balance":"4.24592955","description":"Exchange
+        1.8 BTC for USD @ 628.35 on wallet Exchange","timestamp":"1468081547.0"},{"currency":"BTC","amount":"-0.50127045","balance":"7.12922955","description":"Exchange
+        0.50127045 BTC for USD @ 628.35 on wallet Exchange","timestamp":"1468081546.0"},{"currency":"BTC","amount":"7.6305","balance":"7.6305","description":"Deposit
+        (BITCOIN) #1191020 on wallet Exchange","timestamp":"1468080126.0"},{"currency":"BTC","amount":"-15.00005525","balance":"0.0","description":"Bitcoin
+        Withdrawal #1161160 on wallet Exchange","timestamp":"1467380207.0"},{"currency":"BTC","amount":"-0.90528779","balance":"15.00005525","description":"Exchange
+        0.90528779 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378113.0"},{"currency":"BTC","amount":"-0.09917733","balance":"15.90534304","description":"Exchange
+        0.09917733 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378087.0"},{"currency":"BTC","amount":"-0.09091696","balance":"16.00452037","description":"Exchange
+        0.09091696 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378086.0"},{"currency":"BTC","amount":"-0.01989196","balance":"16.09543733","description":"Exchange
+        0.01989196 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378085.0"},{"currency":"BTC","amount":"-0.07813583","balance":"16.11532929","description":"Exchange
+        0.07813583 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378084.0"},{"currency":"BTC","amount":"-0.10979447","balance":"16.19346512","description":"Exchange
+        0.10979447 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378083.0"},{"currency":"BTC","amount":"-0.04629727","balance":"16.30325959","description":"Exchange
+        0.04629727 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378082.0"},{"currency":"BTC","amount":"-0.0451207","balance":"16.34955686","description":"Exchange
+        0.0451207 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378081.0"},{"currency":"BTC","amount":"-0.01646979","balance":"16.39467756","description":"Exchange
+        0.01646979 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378080.0"},{"currency":"BTC","amount":"-0.07643992","balance":"16.41114735","description":"Exchange
+        0.07643992 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378079.0"},{"currency":"BTC","amount":"-0.06680261","balance":"16.48758727","description":"Exchange
+        0.06680261 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378078.0"},{"currency":"BTC","amount":"-0.12706507","balance":"16.61652705","description":"Exchange
+        0.12706507 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378077.0"},{"currency":"BTC","amount":"-0.06213717","balance":"16.55438988","description":"Exchange
+        0.06213717 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378077.0"},{"currency":"BTC","amount":"-0.06111392","balance":"16.74359212","description":"Exchange
+        0.06111392 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378075.0"},{"currency":"BTC","amount":"-0.06537617","balance":"16.80470604","description":"Exchange
+        0.06537617 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378063.0"},{"currency":"BTC","amount":"-0.28733428","balance":"17.04483835","description":"Exchange
+        0.28733428 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378062.0"},{"currency":"BTC","amount":"-0.17475614","balance":"16.87008221","description":"Exchange
+        0.17475614 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378062.0"},{"currency":"BTC","amount":"-0.20977842","balance":"17.33217263","description":"Exchange
+        0.20977842 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378055.0"},{"currency":"BTC","amount":"-0.287","balance":"17.54195105","description":"Exchange
+        0.287 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378053.0"},{"currency":"BTC","amount":"-0.04073805","balance":"17.82895105","description":"Exchange
+        0.04073805 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378050.0"},{"currency":"BTC","amount":"-0.03044319","balance":"17.8696891","description":"Exchange
+        0.03044319 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378030.0"},{"currency":"BTC","amount":"-0.02980392","balance":"17.97936","description":"Exchange
+        0.02980392 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378027.0"},{"currency":"BTC","amount":"-0.07922771","balance":"17.90013229","description":"Exchange
+        0.07922771 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378027.0"},{"currency":"BTC","amount":"-0.1071129","balance":"18.00916392","description":"Exchange
+        0.1071129 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378024.0"},{"currency":"BTC","amount":"-0.07089912","balance":"18.11627682","description":"Exchange
+        0.07089912 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378002.0"},{"currency":"BTC","amount":"-0.04219482","balance":"18.18717594","description":"Exchange
+        0.04219482 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467378001.0"},{"currency":"BTC","amount":"-0.06701531","balance":"18.22937076","description":"Exchange
+        0.06701531 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377999.0"},{"currency":"BTC","amount":"-0.18067114","balance":"18.47705721","description":"Exchange
+        0.18067114 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377998.0"},{"currency":"BTC","amount":"-0.18067114","balance":"18.29638607","description":"Exchange
+        0.18067114 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377998.0"},{"currency":"BTC","amount":"-0.0553726","balance":"18.65772835","description":"Exchange
+        0.0553726 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377987.0"},{"currency":"BTC","amount":"-0.05087954","balance":"18.71310095","description":"Exchange
+        0.05087954 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377963.0"},{"currency":"BTC","amount":"-0.04313437","balance":"18.85130572","description":"Exchange
+        0.04313437 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377961.0"},{"currency":"BTC","amount":"-0.08732523","balance":"18.76398049","description":"Exchange
+        0.08732523 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377961.0"},{"currency":"BTC","amount":"-0.09597927","balance":"18.89444009","description":"Exchange
+        0.09597927 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377960.0"},{"currency":"BTC","amount":"-0.03664871","balance":"18.99041936","description":"Exchange
+        0.03664871 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377956.0"},{"currency":"BTC","amount":"-0.06414854","balance":"19.02706807","description":"Exchange
+        0.06414854 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377955.0"},{"currency":"BTC","amount":"-0.1008384","balance":"19.09121661","description":"Exchange
+        0.1008384 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377954.0"},{"currency":"BTC","amount":"-0.10281357","balance":"19.19205501","description":"Exchange
+        0.10281357 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377953.0"},{"currency":"BTC","amount":"-0.09404939","balance":"19.29486858","description":"Exchange
+        0.09404939 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377952.0"},{"currency":"BTC","amount":"-0.09140524","balance":"19.38891797","description":"Exchange
+        0.09140524 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377939.0"},{"currency":"BTC","amount":"-0.05123132","balance":"19.50160711","description":"Exchange
+        0.05123132 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377938.0"},{"currency":"BTC","amount":"-0.0212839","balance":"19.48032321","description":"Exchange
+        0.0212839 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377938.0"},{"currency":"BTC","amount":"-0.12028223","balance":"19.55283843","description":"Exchange
+        0.12028223 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377937.0"},{"currency":"BTC","amount":"-0.123","balance":"19.67312066","description":"Exchange
+        0.123 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377920.0"},{"currency":"BTC","amount":"-0.03544687","balance":"19.79612066","description":"Exchange
+        0.03544687 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377917.0"},{"currency":"BTC","amount":"-0.01666507","balance":"19.83156753","description":"Exchange
+        0.01666507 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377916.0"},{"currency":"BTC","amount":"-0.15182265","balance":"19.8482326","description":"Exchange
+        0.15182265 BTC for USD @ 679.22 on wallet Exchange","timestamp":"1467377870.0"},{"currency":"BTC","amount":"-1.8372","balance":"20.00005525","description":"Exchange
+        1.8372 BTC for USD @ 636.78 on wallet Exchange","timestamp":"1467218775.0"},{"currency":"BTC","amount":"-0.1002","balance":"26.34725525","description":"Exchange
+        0.1002 BTC for USD @ 636.78 on wallet Exchange","timestamp":"1467218762.0"},{"currency":"BTC","amount":"-4.51","balance":"21.83725525","description":"Exchange
+        4.51 BTC for USD @ 636.78 on wallet Exchange","timestamp":"1467218762.0"},{"currency":"BTC","amount":"-0.02","balance":"26.44745525","description":"Exchange
+        0.02 BTC for USD @ 636.78 on wallet Exchange","timestamp":"1467218761.0"},{"currency":"BTC","amount":"-2.087","balance":"26.46745525","description":"Exchange
+        2.087 BTC for USD @ 636.78 on wallet Exchange","timestamp":"1467218757.0"},{"currency":"BTC","amount":"28.55445525","balance":"28.55445525","description":"Transfer
+        of 28.5545 BTC from wallet Deposit to Exchange on wallet Exchange","timestamp":"1467218453.0"},{"currency":"BTC","amount":"-3.38788533","balance":"0.7754463","description":"Exchange
+        3.38788533 BTC for USD @ 436.96 on wallet Exchange","timestamp":"1463938034.0"},{"currency":"BTC","amount":"-0.5754463","balance":"0.2","description":"Exchange
+        0.5754463 BTC for USD @ 436.96 on wallet Exchange","timestamp":"1463938034.0"},{"currency":"BTC","amount":"-0.2","balance":"0.0","description":"Exchange
+        0.2 BTC for USD @ 436.96 on wallet Exchange","timestamp":"1463938034.0"},{"currency":"BTC","amount":"-0.08658855","balance":"4.16333163","description":"Exchange
+        0.08658855 BTC for USD @ 438.16 on wallet Exchange","timestamp":"1463935981.0"},{"currency":"BTC","amount":"4.24992018","balance":"4.24992018","description":"Transfer
+        of 4.2499 BTC from wallet Deposit to Exchange on wallet Exchange","timestamp":"1463935629.0"},{"currency":"BTC","amount":"-1.30267619","balance":"0.0","description":"Bitcoin
+        Withdrawal #910059 on wallet Exchange","timestamp":"1460202788.0"},{"currency":"BTC","amount":"1.30267619","balance":"1.30267619","description":"Transfer
+        of 1.3027 BTC from wallet Deposit to Exchange on wallet Exchange","timestamp":"1460201566.0"},{"currency":"BTC","amount":"-0.01993207","balance":"0.0","description":"Transfer
+        of 0.0199 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1459698194.0"},{"currency":"BTC","amount":"0.01995202","balance":"0.01995202","description":"Exchange
+        0.01995202 BTC for USD @ 421.01 on wallet Exchange","timestamp":"1459698154.0"},{"currency":"BTC","amount":"-0.00001995","balance":"0.01993207","description":"Trading
+        fees for 0.02 BTC @ 421.01 on BFX (0.1%) on wallet Exchange","timestamp":"1459698154.0"},{"currency":"BTC","amount":"-0.116267","balance":"0.0","description":"Transfer
+        of 0.1163 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1459105732.0"},{"currency":"BTC","amount":"0.07006158","balance":"0.1165","description":"Exchange
+        0.07006158 BTC for USD @ 428.66 on wallet Exchange","timestamp":"1459105319.0"},{"currency":"BTC","amount":"-0.00014012","balance":"0.11635988","description":"Trading
+        fees for 0.0701 BTC @ 428.66 on BFX (0.2%) on wallet Exchange","timestamp":"1459105319.0"},{"currency":"BTC","amount":"-0.00009288","balance":"0.116267","description":"Trading
+        fees for 0.0464 BTC @ 428.65 on BFX (0.2%) on wallet Exchange","timestamp":"1459105319.0"},{"currency":"BTC","amount":"0.04643842","balance":"0.04643842","description":"Exchange
+        0.04643842 BTC for USD @ 428.65 on wallet Exchange","timestamp":"1459105318.0"},{"currency":"BTC","amount":"-13.92296764","balance":"0.0","description":"Transfer
+        of 13.923 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1456095009.0"},{"currency":"BTC","amount":"1.20737406","balance":"13.92417501","description":"Exchange
+        1.20737406 BTC for USD @ 442.1 on wallet Exchange","timestamp":"1456094974.0"},{"currency":"BTC","amount":"-0.00120737","balance":"13.92296764","description":"Trading
+        fees for 1.2074 BTC @ 442.1 on BFX (0.1%) on wallet Exchange","timestamp":"1456094974.0"},{"currency":"BTC","amount":"0.02","balance":"12.71682095","description":"Exchange
+        0.02 BTC for USD @ 442.1 on wallet Exchange","timestamp":"1456094970.0"},{"currency":"BTC","amount":"-0.00002","balance":"12.71680095","description":"Trading
+        fees for 0.02 BTC @ 442.1 on BFX (0.1%) on wallet Exchange","timestamp":"1456094970.0"},{"currency":"BTC","amount":"1.67418794","balance":"12.69849514","description":"Exchange
+        1.67418794 BTC for USD @ 442.1 on wallet Exchange","timestamp":"1456094957.0"},{"currency":"BTC","amount":"-0.00167419","balance":"12.69682095","description":"Trading
+        fees for 1.6742 BTC @ 442.1 on BFX (0.1%) on wallet Exchange","timestamp":"1456094957.0"},{"currency":"BTC","amount":"2.0","balance":"11.04572","description":"Exchange
+        2.0 BTC for USD @ 442.1 on wallet Exchange","timestamp":"1456094928.0"},{"currency":"BTC","amount":"-0.0004","balance":"11.04532","description":"Trading
+        fees for 0.2 BTC @ 442.1 on BFX (0.2%) on wallet Exchange","timestamp":"1456094928.0"},{"currency":"BTC","amount":"-0.0170128","balance":"11.0283072","description":"Trading
+        fees for 8.5064 BTC @ 442.06 on BFX (0.2%) on wallet Exchange","timestamp":"1456094928.0"},{"currency":"BTC","amount":"-0.004","balance":"11.0243072","description":"Trading
+        fees for 2.0 BTC @ 442.1 on BFX (0.2%) on wallet Exchange","timestamp":"1456094928.0"},{"currency":"BTC","amount":"0.2","balance":"0.53932","description":"Exchange
+        0.2 BTC for USD @ 442.1 on wallet Exchange","timestamp":"1456094927.0"},{"currency":"BTC","amount":"8.5064","balance":"9.04572","description":"Exchange
+        8.5064 BTC for USD @ 442.06 on wallet Exchange","timestamp":"1456094927.0"},{"currency":"BTC","amount":"0.34","balance":"0.34","description":"Exchange
+        0.34 BTC for USD @ 441.6 on wallet Exchange","timestamp":"1456094821.0"},{"currency":"BTC","amount":"-0.00068","balance":"0.33932","description":"Trading
+        fees for 0.34 BTC @ 441.6 on BFX (0.2%) on wallet Exchange","timestamp":"1456094821.0"},{"currency":"BTC","amount":"-1.95536802","balance":"0.0","description":"Transfer
+        of 1.9554 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1455967076.0"},{"currency":"BTC","amount":"0.00732535","balance":"1.95537535","description":"Exchange
+        0.00732535 BTC for USD @ 431.01 on wallet Exchange","timestamp":"1455966786.0"},{"currency":"BTC","amount":"-0.00000733","balance":"1.95536802","description":"Trading
+        fees for 0.0073 BTC @ 431.01 on BFX (0.1%) on wallet Exchange","timestamp":"1455966786.0"},{"currency":"BTC","amount":"0.1","balance":"1.94815","description":"Exchange
+        0.1 BTC for USD @ 431.01 on wallet Exchange","timestamp":"1455966775.0"},{"currency":"BTC","amount":"-0.0001","balance":"1.94805","description":"Trading
+        fees for 0.1 BTC @ 431.01 on BFX (0.1%) on wallet Exchange","timestamp":"1455966775.0"},{"currency":"BTC","amount":"0.35","balance":"1.8485","description":"Exchange
+        0.35 BTC for USD @ 431.01 on wallet Exchange","timestamp":"1455966392.0"},{"currency":"BTC","amount":"-0.00035","balance":"1.84815","description":"Trading
+        fees for 0.35 BTC @ 431.01 on BFX (0.1%) on wallet Exchange","timestamp":"1455966392.0"},{"currency":"BTC","amount":"1.0","balance":"1.4995","description":"Exchange
+        1.0 BTC for USD @ 431.01 on wallet Exchange","timestamp":"1455966390.0"},{"currency":"BTC","amount":"-0.001","balance":"1.4985","description":"Trading
+        fees for 1.0 BTC @ 431.01 on BFX (0.1%) on wallet Exchange","timestamp":"1455966390.0"},{"currency":"BTC","amount":"0.5","balance":"0.5","description":"Exchange
+        0.5 BTC for USD @ 431.01 on wallet Exchange","timestamp":"1455966275.0"},{"currency":"BTC","amount":"-0.0005","balance":"0.4995","description":"Trading
+        fees for 0.5 BTC @ 431.01 on BFX (0.1%) on wallet Exchange","timestamp":"1455966275.0"},{"currency":"BTC","amount":"-5.00499","balance":"0.0","description":"Transfer
+        of 5.005 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1455798731.0"},{"currency":"BTC","amount":"0.71","balance":"5.0057","description":"Exchange
+        0.71 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455798245.0"},{"currency":"BTC","amount":"-0.00071","balance":"5.00499","description":"Trading
+        fees for 0.71 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455798245.0"},{"currency":"BTC","amount":"-0.001","balance":"4.2957","description":"Trading
+        fees for 1.0 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797716.0"},{"currency":"BTC","amount":"1.0","balance":"4.2967","description":"Exchange
+        1.0 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797715.0"},{"currency":"BTC","amount":"0.1","balance":"3.2968","description":"Exchange
+        0.1 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797608.0"},{"currency":"BTC","amount":"-0.0001","balance":"3.2967","description":"Trading
+        fees for 0.1 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797608.0"},{"currency":"BTC","amount":"0.1","balance":"3.1969","description":"Exchange
+        0.1 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797606.0"},{"currency":"BTC","amount":"-0.0001","balance":"3.1968","description":"Trading
+        fees for 0.1 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797606.0"},{"currency":"BTC","amount":"0.1","balance":"3.097","description":"Exchange
+        0.1 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797602.0"},{"currency":"BTC","amount":"-0.0001","balance":"3.0969","description":"Trading
+        fees for 0.1 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797602.0"},{"currency":"BTC","amount":"1.0","balance":"2.998","description":"Exchange
+        1.0 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797538.0"},{"currency":"BTC","amount":"-0.001","balance":"2.997","description":"Trading
+        fees for 1.0 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797538.0"},{"currency":"BTC","amount":"1.0","balance":"1.999","description":"Exchange
+        1.0 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797531.0"},{"currency":"BTC","amount":"-0.001","balance":"1.998","description":"Trading
+        fees for 1.0 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797531.0"},{"currency":"BTC","amount":"1.0","balance":"1.0","description":"Exchange
+        1.0 BTC for USD @ 423.45 on wallet Exchange","timestamp":"1455797525.0"},{"currency":"BTC","amount":"-0.001","balance":"0.999","description":"Trading
+        fees for 1.0 BTC @ 423.45 on BFX (0.1%) on wallet Exchange","timestamp":"1455797525.0"},{"currency":"BTC","amount":"-4.8450904","balance":"0.0","description":"Transfer
+        of 4.8451 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1455468738.0"},{"currency":"BTC","amount":"0.1","balance":"4.7548","description":"Exchange
+        0.1 BTC for USD @ 401.57 on wallet Exchange","timestamp":"1455468640.0"},{"currency":"BTC","amount":"0.1","balance":"4.8548","description":"Exchange
+        0.1 BTC for USD @ 401.57 on wallet Exchange","timestamp":"1455468640.0"},{"currency":"BTC","amount":"-0.0093096","balance":"4.8454904","description":"Trading
+        fees for 4.6548 BTC @ 401.62 on BFX (0.2%) on wallet Exchange","timestamp":"1455468640.0"},{"currency":"BTC","amount":"-0.0002","balance":"4.8452904","description":"Trading
+        fees for 0.1 BTC @ 401.57 on BFX (0.2%) on wallet Exchange","timestamp":"1455468640.0"},{"currency":"BTC","amount":"-0.0002","balance":"4.8450904","description":"Trading
+        fees for 0.1 BTC @ 401.57 on BFX (0.2%) on wallet Exchange","timestamp":"1455468640.0"},{"currency":"BTC","amount":"4.6548","balance":"4.6548","description":"Exchange
+        4.6548 BTC for USD @ 401.62 on wallet Exchange","timestamp":"1455468639.0"},{"currency":"BTC","amount":"-7.19110626","balance":"0.0","description":"Transfer
+        of 7.1911 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1455466966.0"},{"currency":"BTC","amount":"-0.00489374","balance":"7.19110626","description":"Settlement
+        @ 402.28 on wallet Exchange","timestamp":"1455466903.0"},{"currency":"BTC","amount":"7.196","balance":"7.196","description":"Exchange
+        7.196 BTC for USD @ 402.28 on wallet Exchange","timestamp":"1455466901.0"},{"currency":"BTC","amount":"-1.14916812","balance":"0.0","description":"Transfer
+        of 1.1492 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1453398792.0"},{"currency":"BTC","amount":"-10.2","balance":"1.14916812","description":"Exchange
+        10.2 BTC for USD @ 409.91 on wallet Exchange","timestamp":"1453398744.0"},{"currency":"BTC","amount":"11.34916812","balance":"11.34916812","description":"Transfer
+        of 11.3492 BTC from wallet Deposit to Exchange on wallet Exchange","timestamp":"1453398669.0"},{"currency":"BTC","amount":"-10.2","balance":"0.0","description":"Transfer
+        of 10.2 BTC from wallet Exchange to Deposit on wallet Exchange","timestamp":"1453323788.0"},{"currency":"BTC","amount":"10.2","balance":"10.2","description":"Exchange
+        10.2 BTC for USD @ 408.24 on wallet Exchange","timestamp":"1453313065.0"},{"currency":"BTC","amount":"-8.99788147","balance":"0.0","description":"Exchange
+        8.99788147 BTC for USD @ 405.47 on wallet Exchange","timestamp":"1452859945.0"},{"currency":"BTC","amount":"-0.57652249","balance":"8.99788147","description":"Exchange
+        0.57652249 BTC for USD @ 405.47 on wallet Exchange","timestamp":"1452859926.0"},{"currency":"BTC","amount":"-0.07206527","balance":"9.57440396","description":"Exchange
+        0.07206527 BTC for USD @ 405.47 on wallet Exchange","timestamp":"1452859925.0"},{"currency":"BTC","amount":"-1.9318","balance":"9.64646923","description":"Exchange
+        1.9318 BTC for USD @ 405.47 on wallet Exchange","timestamp":"1452859893.0"},{"currency":"BTC","amount":"11.57826923","balance":"11.57826923","description":"Transfer
+        of 11.5783 BTC from wallet Deposit to Exchange on wallet Exchange","timestamp":"1452859806.0"},{"currency":"BTC","amount":"-12.65","balance":"0.0","description":"Exchange
+        12.65 BTC for USD @ 403.67 on wallet Exchange","timestamp":"1452859209.0"},{"currency":"BTC","amount":"12.65","balance":"12.65","description":"Transfer
+        of 12.65 BTC from wallet Trading to Exchange on wallet Exchange","timestamp":"1452859181.0"}]'
+    http_version: 
+  recorded_at: Thu, 09 Mar 2017 13:14:42 GMT
+- request:
+    method: post
+    uri: https://api.bitfinex.com/v1/history
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      X-BFX-PAYLOAD:
+      - eyJub25jZSI6IjE0ODkwNjUyODIwODQ2IiwicmVxdWVzdCI6Ii92MS9oaXN0b3J5IiwibGltaXQiOjUwMCwidW50aWwiOjE0NTI4NTkxODAsIndhbGxldCI6ImV4Y2hhbmdlIiwiY3VycmVuY3kiOiJCVEMifQ==
+      X-BFX-SIGNATURE:
+      - 8de94e2fb754f70ff077de50034f7d0738a0ce9ba060c06747e795eccd1bd1df32e4dcf08386d8c42308fb096da198fd
+      X-BFX-APIKEY:
+      - 123467889
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      date:
+      - Thu, 09 Mar 2017 13:14:39 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      set-cookie:
+      - __cfduid=d1e0d3200c5740c70447536abd9488e0b1489065279; expires=Fri, 09-Mar-18
+        13:14:39 GMT; path=/; domain=.bitfinex.com; HttpOnly
+      strict-transport-security:
+      - max-age=31536000
+      x-frame-options:
+      - SAMEORIGIN, SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+      etag:
+      - '"8d8c3f4920b942a6102b4ad2901fe2c8"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - a1c92512-ba72-4509-8892-0ae8479fe277
+      x-runtime:
+      - '0.010688'
+      server:
+      - cloudflare-nginx
+      cf-ray:
+      - 33ce4c6c49493e98-ZRH
+    body:
+      encoding: ASCII-8BIT
+      string: "[]"
+    http_version: 
+  recorded_at: Thu, 09 Mar 2017 13:14:42 GMT
+recorded_with: VCR 3.0.3
