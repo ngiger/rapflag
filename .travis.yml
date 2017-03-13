@@ -21,3 +21,5 @@ notifications:
   email:
     recipients:
       - ngiger@ywesee.com
+env:
+  - TZ=UTC-1
