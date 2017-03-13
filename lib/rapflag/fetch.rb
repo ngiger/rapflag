@@ -8,10 +8,10 @@ module RAPFLAG
     attr_reader :history, :wallet, :currency, :btc_to_usd, :bfx_to_usd
     DATE_FORMAT = '%Y.%m.%d'
     DATE_TIME_FORMAT = '%Y.%m.%d %H:%M:%S'
+    @@btc_to_usd = {}
+    @@bfx_to_usd = {}
 
     def initialize(wallet = 'trading', currency = 'USD')
-      @btc_to_usd = {}
-      @bfx_to_usd = {}
       @wallet = wallet
       @currency = currency
     end
@@ -19,8 +19,8 @@ module RAPFLAG
     def get_usd_exchange(date_time = Time.now, from='BTC')
       return 1.0 if from == 'USD'
       key = date_time.strftime(DATE_FORMAT)
-      return @btc_to_usd[key] if from.eql?('BTC') && @btc_to_usd.size > 0
-      return @bfx_to_usd[key] if from.eql?('BFC') && @bfx_to_usd.size > 0
+      return @@btc_to_usd[key] if from.eql?('BTC') && @@btc_to_usd.size > 0
+      return @@bfx_to_usd[key] if from.eql?('BFX') && @@bfx_to_usd.size > 0
 
       ms =  (date_time.is_a?(Date) ? date_time.to_time : date_time).to_i*1000
       ms_next_date = ms + (3*24*3600)*1000
@@ -28,11 +28,16 @@ module RAPFLAG
       # url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
       url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
       # therefore we just return the most uptodate
-      url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{Time.now.to_i*1000}"
+      url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}"
+      puts "Fetching #{date_time}: #{url} #{@@btc_to_usd.size} BTC #{@@bfx_to_usd.size} BFX" if $VERBOSE
       response = Faraday.get(url)
       items = eval(response.body)
       rates = {}
       items.each do |item|
+        if item.first.eql?(:error)
+          puts "Fetching returned #{item}. Aborting"
+          exit(1)
+        end
         # http://docs.bitfinex.com/v2/reference#rest-public-candles
         # field definitions for  [ MTS, OPEN, CLOSE, HIGH, LOW, VOLUME ],
         # MTS   int   millisecond time stamp
@@ -45,8 +50,10 @@ module RAPFLAG
         timestamp = Time.at(item.first/1000).strftime(DATE_FORMAT)
         rates[timestamp] = item[2]
       end;
-      from.eql?('BTC') ? @btc_to_usd = rates : @bfx_to_usd = rates
+      from.eql?('BTC') ? @@btc_to_usd = rates.clone : @@bfx_to_usd = rates.clone
       rates[key] ? rates[key] : nil
+    rescue => err
+          binding.pry
     end
 
     def fetch_csv_history
@@ -145,6 +152,7 @@ module RAPFLAG
                        'date',
                       'income',
                       'balance',
+                      'rate',
                       'balance_in_usd',
                       ] #< column header
         ) do |csv|
@@ -156,6 +164,7 @@ module RAPFLAG
                   date,
                   info.income,
                   info.balance,
+                  rate ? rate : nil,
                   rate ? info.balance * get_usd_exchange(fetch_date, @currency) : nil,
                  ]
         end
