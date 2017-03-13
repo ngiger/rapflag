@@ -20,7 +20,7 @@ describe RAPFLAG do
   end
   context 'bitfinex' do
     before(:all) do
-      VCR.use_cassette("rapflag") do
+      VCR.use_cassette("rapflag", :record => :new_episodes) do
         FileUtils.rm_f(CSV_Test_File) if File.exist?(CSV_Test_File)
         FileUtils.rm_f(SUMMARY_Test_File) if File.exist?(CSV_Test_File)
         expect(File.exist?(CSV_Test_File)).to eql(false)
@@ -51,28 +51,35 @@ describe RAPFLAG do
   end
   context 'option --clean' do
     before(:all) do
-      VCR.use_cassette("rapflag") do
+      @date_test = Date.new(2017,1,10)
+      @date_btx_1 = Date.new(2017,1,21)
+      @date_btx_2 = Date.new(2017,1,10)
+      VCR.use_cassette("rapflag", :record => :new_episodes) do
         FileUtils.rm_f(SUMMARY_Test_File) if File.exist?(CSV_Test_File)
         expect(File.exist?(SUMMARY_Test_File)).to eql(false)
         @rap = RAPFLAG::History.new('exchange', 'BTC')
         @rap.fetch_csv_history
         @rap.create_summary
+        @bfx = @rap.get_usd_exchange(@date_test, 'BFX')
+        @btx_1 = @rap.get_usd_exchange(@date_btx_1, 'BTC')
+        @btx_2 = @rap.get_usd_exchange(@date_btx_2, 'BTC')
       end
     end
-    context 'csv' do
-      it 'should have generated a correct summary CSV file' do
-        expect(File.exist?(SUMMARY_Test_File)).to eql(true)
-        lines = IO.readlines(SUMMARY_Test_File)
-        expect(lines.first.chomp).to eql('currency,date,income,balance')
-        expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,8.99788147')
-# BTC -8.99788147 0 Exchange 8.99788147 BTC for USD @ 405.47 on wallet Exchange 2016.01.15 13:12:25
-# BTC -0.57652249 8.99788147  Exchange 0.57652249 BTC for USD @ 405.47 on wallet Exchange 2016.01.15 13:12:06
-# BTC -0.07206527 9.57440396  Exchange 0.07206527 BTC for USD @ 405.47 on wallet Exchange 2016.01.15 13:12:05
-# BTC -1.9318 9.64646923  Exchange 1.9318 BTC for USD @ 405.47 on wallet Exchange 2016.01.15 13:11:33
-# BTC 11.57826923 11.57826923 Transfer of 11.5783 BTC from wallet Deposit to Exchange on wallet Exchange  2016.01.15 13:10:06
-# BTC -12.65  0 Exchange 12.65 BTC for USD @ 403.67 on wallet Exchange  2016.01.15 13:00:09
-# BTC 12.65 12.65 Transfer of 12.65 BTC from wallet Trading to Exchange on wallet Exchange  2016.01.15 12:59:41
-      end
+    it 'should have generated a correct summary CSV file' do
+      expect(File.exist?(SUMMARY_Test_File)).to eql(true)
+      lines = IO.readlines(SUMMARY_Test_File)
+      expect(lines.first.chomp).to eql('currency,date,income,balance,balance_in_usd')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,8.99788147,')
+    end
+    it 'should have the correct BTC -> USD rate' do
+      expect(@btx_1).to eql 924.02
+      expect(@btx_2).to eql 905.76
+    end
+    it 'should have the correct BFX -> USD rate' do
+      expect(@bfx).to eql 0.5697
     end
   end
 end
+# https://api.bitfinex.com/v2/candles/trade:1D:tBTCUSD/hist
+# [[1489363200000,1224.4,1211.2,1238,1206.7,6157.96283895],
+#  [1489276800000,1172.5,1224.4,1232.7,1166.8,18976.8181757]
