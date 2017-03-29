@@ -1,6 +1,7 @@
 require 'csv'
 require 'open-uri'
 require 'faraday'
+require 'fileutils'
 
 module RAPFLAG
 
@@ -53,7 +54,8 @@ module RAPFLAG
       from.eql?('BTC') ? @@btc_to_usd = rates.clone : @@bfx_to_usd = rates.clone
       rates[key] ? rates[key] : nil
     rescue => err
-          binding.pry
+      puts "Err #{err}"
+      binding.pry if defined?(MiniTest)
     end
 
     def fetch_csv_history

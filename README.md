@@ -1,13 +1,14 @@
 # rapflag
 Bitfinex Exporter for your Taxman.
 
-### set your key in
+### set your key, desired currencies in
 ```
  ./etc/config.yml
 ```
 sample
 ```
 ---
+currencies: [ 'USD', 'BTC', 'BFX']
 api_key: ''
 secret: ''
 ```
