@@ -23,7 +23,7 @@ module RAPFLAG
 
   Config= YAML.load_file(config_file)
   Config['websocket_api_endpoint'] ||= 'wss://api.bitfinex.com/ws'
-  Config['currencies'] ||= ['BTC BFX XMR ZEC']
+  Config['currencies'] ||= ['BTC', 'BFX', 'XMR', 'ZEC']
   Config['currencies'] << 'USD' unless Config['currencies'].index('USD')
   Bitfinex::Client.configure do |conf|
     conf.api_key = Config['api_key']
