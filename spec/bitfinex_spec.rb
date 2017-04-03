@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'spec_helper'
-require 'rapflag/fetch'
+require 'rapflag/bitfinex'
 require 'vcr'
 
 VCR.configure do |config|
@@ -26,7 +26,7 @@ describe RAPFLAG do
         FileUtils.rm_f(SUMMARY_DEPOSIT_BFX_File) if File.exist?(SUMMARY_DEPOSIT_BFX_File)
         FileUtils.rm_f(SUMMARY_EXCHANGE_BTC_File) if File.exist?(CSV_Test_File)
         expect(File.exist?(CSV_Test_File)).to eql(false)
-        @rap = RAPFLAG::History.new('exchange', 'BTC')
+        @rap = RAPFLAG::Bitfinex.new('exchange', 'BTC')
         @rap.fetch_csv_history
         @rap.create_csv_file
       end
@@ -59,7 +59,7 @@ describe RAPFLAG do
       VCR.use_cassette("rapflag", :record => :new_episodes) do
         FileUtils.rm_f(SUMMARY_EXCHANGE_BTC_File) if File.exist?(CSV_Test_File)
         expect(File.exist?(SUMMARY_EXCHANGE_BTC_File)).to eql(false)
-        @exchange = RAPFLAG::History.new('exchange', 'BTC')
+        @exchange = RAPFLAG::Bitfinex.new('exchange', 'BTC')
         @exchange.fetch_csv_history
         @exchange.create_summary
         @bfx   = @exchange.get_usd_exchange(@date_bfx_1, 'BFX')
@@ -94,7 +94,7 @@ describe RAPFLAG do
       @date_btx_2 = Date.new(2017,1,10)
       VCR.use_cassette("rapflag", :record => :new_episodes) do
         expect(File.exist?(SUMMARY_DEPOSIT_BFX_File)).to eql(false)
-        @deposit = RAPFLAG::History.new('deposit', 'BFX')
+        @deposit = RAPFLAG::Bitfinex.new('deposit', 'BFX')
         @deposit.fetch_csv_history
         @deposit.create_summary
       end

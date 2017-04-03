@@ -3,7 +3,7 @@ dir =  File.expand_path(File.dirname(File.dirname(__FILE__)))
 $LOAD_PATH << File.join(dir, 'lib')
 require 'rapflag/version'
 require 'rapflag/config'
-require 'rapflag/fetch'
+require 'rapflag/bitfinex'
 require 'trollop'
 
 begin
@@ -13,13 +13,17 @@ end
 
 Opts = Trollop::options do
   opt :clean, "Create summary of transactions by day"
+  opt :poloniex, "Use Poloniex API instead of Bitfinex API"
 end
 
 RAPFLAG::Wallets.each do |wallet|
    RAPFLAG::Config['currencies'].each do |currency|
-    rap = RAPFLAG::History.new(wallet, currency)
-    rap.fetch_csv_history
-    rap.create_csv_file
-    rap.create_summary if Opts[:clean]
+    if Opts[:poloniex]
+    else
+      crypto_api = RAPFLAG::Bitfinex.new(wallet, currency)
+    end
+    crypto_api.fetch_csv_history
+    crypto_api.create_csv_file
+    crypto_api.create_summary if Opts[:clean]
   end
 end

@@ -1,4 +1,7 @@
 etc/
+pkg/
+*.log
 *.csv
 *#
-output
+output/
+Gemfile.lock
