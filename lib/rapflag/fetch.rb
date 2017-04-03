@@ -86,7 +86,7 @@ module RAPFLAG
     # Configure the client with the proper KEY/SECRET, you can create a new one from:
     # https://www.bitfinex.com/api
     def create_csv_file
-      out_file = "output/#{@wallet}_#{@currency}.csv"
+      out_file = "output/#{@currency}_#{@wallet}.csv"
       FileUtils.makedirs(File.dirname(out_file))
       CSV.open(out_file,'w',
           :write_headers=> true,
@@ -146,7 +146,7 @@ module RAPFLAG
         existing.balance = balance if balance != 0.0
         @daily[date] = existing
       end
-      out_file = "output/#{@wallet}_#{@currency}_summary.csv"
+      out_file = "output/#{@currency}_#{@wallet}_summary.csv"
       FileUtils.makedirs(File.dirname(out_file))
       CSV.open(out_file,'w',
           :write_headers=> true,

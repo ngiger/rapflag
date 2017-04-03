@@ -8,9 +8,9 @@ VCR.configure do |config|
   config.hook_into :faraday # or :fakeweb
 end
 
-CSV_Test_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/exchange_BTC.csv'))
-SUMMARY_EXCHANGE_BTC_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/exchange_BTC_summary.csv'))
-SUMMARY_DEPOSIT_BFX_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/deposit_BFX_summary.csv'))
+CSV_Test_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/BTC_exchange.csv'))
+SUMMARY_EXCHANGE_BTC_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/BTC_exchange_summary.csv'))
+SUMMARY_DEPOSIT_BFX_File = File.expand_path(File.join(__FILE__, '..', '..', 'output/BFX_deposit_summary.csv'))
 
 VCR.eject_cassette # we use insert/eject around each example
 describe RAPFLAG do
@@ -110,6 +110,3 @@ describe RAPFLAG do
     end
   end
 end
-# https://api.bitfinex.com/v2/candles/trade:1D:tBTCUSD/hist
-# [[1489363200000,1224.4,1211.2,1238,1206.7,6157.96283895],
-#  [1489276800000,1172.5,1224.4,1232.7,1166.8,18976.8181757]
