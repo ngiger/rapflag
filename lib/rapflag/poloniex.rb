@@ -5,6 +5,7 @@ require 'fileutils'
 require 'rapflag/history'
 require 'poloniex'
 require 'json'
+require 'pp'
 
 module RAPFLAG
 
@@ -64,14 +65,22 @@ module RAPFLAG
     end
 
     def fetch_csv_history
-      # https://poloniex.com/public?command=returnOrderBook&currencyPair=BTC_NXT
-      # can be called in ruby via x = ::Poloniex.order_book('BTC_NXT')
-      res = ::Poloniex.balances
-      res2 = ::Poloniex.balances
+      check_config
+      res = nil
+      error = nil
+      begin
+        res = ::Poloniex.balances
+      rescue => error
+        puts "Calling balances from poloniex failed. Configuration was"
+        pp ::Poloniex.configuration
+        exit 1
+      end
+      unless res
+        puts "Loading balances from poloniex failed. Configuration was"
+        pp ::Poloniex.configuration
+        exit 2
+      end
       balances = JSON.parse(res.body) if res
-      binding.pry
-      z = ::Poloniex.returnTicker
-      client = ::Poloniex::Client.new
       @history = []
       timestamp = Time.now.to_i + 1
       while true
