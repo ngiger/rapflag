@@ -14,11 +14,11 @@ describe RAPFLAG::Poloniex do
     before(:all) do
       VCR.use_cassette("poloniex", :record => :new_episodes) do
       end
-    end
+    end if false
   context 'balances' do
     it 'should return all balances' do
       @rap = RAPFLAG::Poloniex.new('exchange', 'BTC')
-      pending ('rapflag cannot yet return balances (via Trading API)')
+      # pending ('rapflag cannot yet return balances (via Trading API)')
       cur = @rap.get_balances
       expect(cur['BITUSD']['id']).to eql 271
       expect(cur['BITUSD']['name']).to eql 271
@@ -41,23 +41,18 @@ describe RAPFLAG::Poloniex do
   Poloniex_SUMMARY_EXCHANGE_BTC_File = TEST_OUTPUT_ROOT + '/BTC_exchange_summary.csv'
   Poloniex_SUMMARY_DEPOSIT_BFX_File  = TEST_OUTPUT_ROOT + '/BFX_deposit_summary.csv'
 
-  # include ServerMockHelper
-  before(:all) do
-     skip ('rapflag cannot yet return anything which requires the Trading API')
-  end
-  after(:all) do
-  end
   context 'poloniex' do
     before(:all) do
-      VCR.use_cassette("rapflag", :record => :new_episodes) do
+      # VCR.use_cassette("poloniex", :record => :new_episodes) do
         FileUtils.rm_f(Poloniex_CSV_Test_File) if File.exist?(Poloniex_CSV_Test_File)
         FileUtils.rm_f(Poloniex_SUMMARY_DEPOSIT_BFX_File) if File.exist?(Poloniex_SUMMARY_DEPOSIT_BFX_File)
         FileUtils.rm_f(Poloniex_SUMMARY_EXCHANGE_BTC_File) if File.exist?(Poloniex_CSV_Test_File)
         expect(File.exist?(Poloniex_CSV_Test_File)).to eql(false)
         @rap = RAPFLAG::Poloniex.new('exchange', 'BTC')
         @rap.fetch_csv_history
+        binding.pry
         @rap.create_csv_file
-      end
+       # end
     end
     context 'history' do
       it 'should have correct currency' do
@@ -84,7 +79,7 @@ describe RAPFLAG::Poloniex do
       @date_bfx_1 = Date.new(2017,1,10)
       @date_btx_1 = Date.new(2017,1,21)
       @date_btx_2 = Date.new(2017,1,10)
-      VCR.use_cassette("rapflag", :record => :new_episodes) do
+      VCR.use_cassette("poloniex", :record => :new_episodes) do
         FileUtils.rm_f(Poloniex_SUMMARY_EXCHANGE_BTC_File) if File.exist?(Poloniex_CSV_Test_File)
         expect(File.exist?(Poloniex_SUMMARY_EXCHANGE_BTC_File)).to eql(false)
         @exchange = RAPFLAG::Poloniex.new('exchange', 'BTC')

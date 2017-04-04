@@ -25,7 +25,6 @@ RAPFLAG::Wallets.each do |wallet|
       crypto_api = RAPFLAG::Bitfinex.new(wallet, currency)
     end
     crypto_api.fetch_csv_history
-    crypto_api.create_csv_file
-    crypto_api.create_summary if Opts[:clean]
+    exit(0) if Opts[:poloniex]
   end
 end
