@@ -52,8 +52,9 @@ module RAPFLAG
     end
 
     def fetch_csv_history
-      client = ::Bitfinex::Client.new
       @history = []
+      check_config
+      client = ::Bitfinex::Client.new
       timestamp = Time.now.to_i + 1
       while true
         begin
@@ -75,46 +76,18 @@ module RAPFLAG
       end
       puts "Feched #{@history.size} history entries" if $VERBOSE
     end
-
-    # Configure the client with the proper KEY/SECRET, you can create a new one from:
-    # https://www.bitfinex.com/api
-    def create_csv_file
-      out_file = "output/#{@currency}_#{@wallet}.csv"
-      FileUtils.makedirs(File.dirname(out_file))
-      CSV.open(out_file,'w',
-          :write_headers=> true,
-          :headers => ['currency',
-                      'amount',
-                      'balance',
-                      'description',
-                      'date_time',
-                      ] #< column header
-        ) do |csv|
-        @history.each do | hist_item|
-          csv << [ hist_item['currency'],
-                  hist_item['amount'],
-                  hist_item['balance'],
-                  hist_item['description'],
-                    Time.at(hist_item['timestamp'].to_i).strftime(DATE_TIME_FORMAT),
-                  ]
-        end
+    private
+    def check_config
+      Config['websocket_api_endpoint'] ||= 'wss://api.bitfinex.com/ws'
+      ['api_key',
+       'secret',
+       ].each do |item|
+          raise "Must define #{item} in config.yml" unless Config[item]
       end
-
-      sums = {}
-      @history.each do | hist_item|
-        key = /^[^\d]+/.match(hist_item['description'])[0].chomp
-        value = hist_item['amount'].to_f
-        if sums[key]
-          sums[key] +=  value
-        else
-          sums[key]  =  value
-        end
-      end
-
-      puts
-      puts "Summary for #{@wallet} #{@currency} (#{@history.size} entries}"
-      sums.each do |key, value|
-        puts " #{sprintf('%40s', key)} is #{value}"
+      ::Bitfinex::Client.configure do |conf|
+        conf.api_key = Config['api_key']
+        conf.secret  = Config['secret']
+        conf.websocket_api_endpoint = Config['websocket_api_endpoint']
       end
     end
   end
