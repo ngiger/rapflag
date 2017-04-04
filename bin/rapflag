@@ -4,6 +4,7 @@ $LOAD_PATH << File.join(dir, 'lib')
 require 'rapflag/version'
 require 'rapflag/config'
 require 'rapflag/bitfinex'
+require 'rapflag/poloniex'
 require 'trollop'
 
 begin
@@ -19,6 +20,7 @@ end
 RAPFLAG::Wallets.each do |wallet|
    RAPFLAG::Config['currencies'].each do |currency|
     if Opts[:poloniex]
+      crypto_api = RAPFLAG::Poloniex.new(wallet, currency)
     else
       crypto_api = RAPFLAG::Bitfinex.new(wallet, currency)
     end

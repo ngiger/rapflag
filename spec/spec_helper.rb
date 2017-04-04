@@ -4,7 +4,9 @@ rescue LOAD_ERROR
 end
 
 require 'rapflag/version'
+require 'rapflag/config'
 require 'bitfinex-api-rb'
+require 'poloniex'
 
 module RAPFLAG
   # create dummy config for spec tests
@@ -12,6 +14,10 @@ module RAPFLAG
     conf.api_key = '123467889'
     conf.secret  = 'SECRECT_KEY'
     conf.websocket_api_endpoint = 'wss://api.bitfinex.com/ws'
+  end
+  Poloniex.setup do | config |
+    config.key    = '9QCQPR2W-FW4T42TJ-MUWJ022K-ZWD32432' # 'P_123467889'
+    config.secret = '2fb626a344a51320926c620270f1db0ee4705d65a0c63ecf2cc4ded913a9874f96e6d0680e6d4cd2290fb0250d2f1f52bdf982622a16a1560fbb4ef89ecc1033' # 'P_SECRECT_KEY'
   end
 end
 
