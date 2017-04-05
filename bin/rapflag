@@ -15,6 +15,7 @@ end
 Opts = Trollop::options do
   opt :clean, "Create summary of transactions by day"
   opt :poloniex, "Use Poloniex API instead of Bitfinex API"
+  opt :dump, "Use Poloniex API and dump history into CSV files"
 end
 
 RAPFLAG::Wallets.each do |wallet|
@@ -24,7 +25,13 @@ RAPFLAG::Wallets.each do |wallet|
     else
       crypto_api = RAPFLAG::Bitfinex.new(wallet, currency)
     end
+    if Opts[:dump]
+      crypto_api.dump_history
+      exit(0)
+    end
     crypto_api.fetch_csv_history
     exit(0) if Opts[:poloniex]
+    crypto_api.create_csv_file
+    crypto_api.create_summary if Opts[:clean]
   end
 end

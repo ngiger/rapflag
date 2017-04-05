@@ -20,6 +20,7 @@ module RAPFLAG
       FileUtils.makedirs(File.dirname(out_file))
       CSV.open(out_file,'w',
           :write_headers=> true,
+          :col_sep => ';',
           :headers => ['currency',
                       'amount',
                       'balance',
@@ -84,6 +85,7 @@ module RAPFLAG
       saved_info = nil
       CSV.open(out_file,'w',
           :write_headers=> true,
+          :col_sep => ';',
           :headers => ['currency',
                        'date',
                       'income',
