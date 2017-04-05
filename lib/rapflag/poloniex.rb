@@ -272,12 +272,13 @@ module RAPFLAG
     private
     def load_or_save_json(name, param = nil)
       json_file = File.join(@spec_data, name.to_s + '.json')
-      if File.exist?(json_file) && defined?(RSpec)
+      body = nil
+      if File.directory?(@spec_data) && File.exist?(json_file) && defined?(RSpec)
         body = IO.read(json_file)
       else
         cmd = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
         body = eval(cmd)
-        File.open(json_file, 'w+') { |f| f.write(body)}
+        File.open(json_file, 'w+') { |f| f.write(body)} if defined?(RSpec)
       end
       eval("@#{name} = JSON.parse(body)")
     end
@@ -289,6 +290,7 @@ module RAPFLAG
         puts "Error was #{error.inspect}"
         puts "Calling @balances from poloniex failed. Configuration was"
         pp ::Poloniex.configuration
+        puts "Backtrace #{error.backtrace.join("\n")}"
         exit 1
       end
       @active_loans = load_or_save_json(:active_loans)
