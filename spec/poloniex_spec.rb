@@ -18,7 +18,7 @@ describe RAPFLAG::Poloniex do
 
   context 'poloniex' do
     before(:all) do
-      skip("We cannot yet use VCR here. Therefore omitting all spec tests")
+      # skip("We cannot yet use VCR here. Therefore omitting all spec tests")
       # VCR.use_cassette("poloniex", :record => :new_episodes) do
         FileUtils.rm_f(Poloniex_CSV_Test_File) if File.exist?(Poloniex_CSV_Test_File)
         FileUtils.rm_f(Poloniex_SUMMARY_DEPOSIT_BFX_File) if File.exist?(Poloniex_SUMMARY_DEPOSIT_BFX_File)
@@ -34,7 +34,7 @@ describe RAPFLAG::Poloniex do
         expect(@rap.currency).to eql('BTC')
       end
       it 'should have correct size' do
-        expect(@rap.history.size).to eql(206)
+        expect(@rap.history.size).to eql(368)
       end
     end
   end

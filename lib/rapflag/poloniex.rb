@@ -142,29 +142,118 @@ module RAPFLAG
         end
       end
     end
-    def fetch_csv_history
-      load_history_info
-      binding.pry
-      @history = []
-      @deposits_withdrawals.keys.each do |operation|
-        @deposits_withdrawals[operation].each do |movement|
-          example =  {"currency"=>"BTC",
- "amount"=>"-0.00000005",
- "balance"=>"0.0",
- "description"=>"Transfer of 0.0 BTC from wallet Exchange to Deposit on wallet Exchange",
- "timestamp"=>"1480796447.0"}
-          next
-          @history << example
-          to_add = { 'currency'    => movement['currency'],
-                     'amount'      => movement['amount'],
-                     'timestamp'   => movement['timestamp'],
-                     'balance'     => movement[''],
-                     'description' => movement[''],
-                     }
-          first_time = Time.at(movement.first['timestamp'].to_i).strftime(DATE_TIME_FORMAT)
+
+    def find_per_currency_and_day(items, currency, date)
+      puts "Searching for #{currency} in day #{date}" if $VERBOSE
+      start_time  = date.to_time.to_i
+      end_time    = (date + 1).to_time.to_i
+      found = items.find_all{|item| item.currency.eql?(currency) && item.timestamp >= start_time && item.timestamp < end_time}
+      puts "find_per_currency_and_day: found #{found.size} #{found.first} #{found.last}" if $VERBOSE
+      found
+    end
+
+    def find_lending_info_day(currency, date)
+      puts "Searching lending (close) for #{currency} in day #{date}" if $VERBOSE
+      found = @lending_history.find_all { |item| item.currency.eql?(currency) && date.eql?(Date.parse(item.close)) }
+      puts "find_lending_info_day: found #{found.size} #{found.first} #{found.last}" if $VERBOSE
+      found
+    end
+
+    # type is either buy or sell
+    def find_day_trade(currency, date, type)
+      found = []
+      @trade_history.each do |currency_pair, trades|
+        next unless /^#{currency}/.match(currency_pair)
+        trades.each do |trade|
+          if trade.type.eql?(type) && date.eql?(Date.parse(trade.date))
+            trade.cucurrency_pair = currency_pair
+            found << trade
+          end
         end
       end
-      puts "Fetched #{@history.size} history entries" # if $VERBOSE
+      puts "find_day_trade: #{date} #{currency} found #{found.size}" if $VERBOSE
+      found
+    end
+    def create_csv_file
+      binding.pry
+      puts "create_csv_file: already done"
+    end
+
+    def fetch_csv_history
+      load_history_info
+      @trade_history.values.collect{|values| values.collect{|x| x.date} }.max
+
+      max_time = [ @deposits.collect{|x| x.timestamp}.max,
+                   Time.parse(@trade_history.values.collect{|values| values.collect{|x| x.date} }.max.max).to_i,
+                   Time.parse(@lending_history.collect{|x| x.close}.max).to_i,
+                   @withdrawals.collect{|x| x.timestamp}.max,].max
+      min_time = [ @deposits.collect{|x| x.timestamp}.min,
+                   Time.parse(@trade_history.values.collect{|values| values.collect{|x| x.date} }.min.min).to_i,
+                   Time.parse(@lending_history.collect{|x| x.close}.min).to_i,
+                   @withdrawals.collect{|x| x.timestamp}.min,].min
+
+      min_date = Time.at(min_time).to_date
+      max_date = Time.at(max_time).to_date
+
+      puts "We start using the available_account_balances"
+      pp @available_account_balances
+      puts
+      puts "Should we better start using the complete_balances"
+      pp @complete_balances
+      puts "How should I handle the following currency_pair"
+      pp @trade_history.keys
+      @available_account_balances.each do |key, balances|
+        balances.each do |currency, balance|
+          puts "Calculation history for #{key} #{currency} with current balance of #{balance}"
+          out_name = "output/poloniex/#{key}_#{currency}.csv"
+          FileUtils.makedirs(File.dirname(out_name)) unless File.exists?(File.dirname(out_name))
+          @history = []
+          current_day =  max_date
+          current_balance  = balance.to_f
+          while (current_day >= min_date)
+            entry = OpenStruct.new
+            entry.current_day = current_day
+            entry.current_balance = current_balance
+
+            deposits = find_per_currency_and_day(@deposits, currency,current_day)
+            sum_deposits = 0.0; deposits.each{ |x| sum_deposits += x.amount.to_f }
+            entry.deposits = sum_deposits
+
+            withdrawals = find_per_currency_and_day(@withdrawals, currency, current_day)
+            sum_withdrawals = 0.0; withdrawals.each{ |x| sum_withdrawals += x.amount.to_f }
+            entry.withdrawals = sum_withdrawals
+
+            lendings = find_lending_info_day(currency, current_day)
+            earned = 0.0;  sum_fee = 0.0; lendings.each{ |x| earned += x.earned.to_f; sum_fee += x.fee.to_f }
+            entry.earned = earned
+            entry.fees = sum_fee
+
+            # End_of_Day_Balance = End_of_Day_Balance(-1) + Deposits - Withdrawals + Lending_Income - Trading_Fees + Purchases - Sales
+            sales = find_day_trade(currency, current_day, 'sell')
+            sum_sales = 0.0; sales.each{ |sale| sum_sales += sale.amount.to_f }
+            entry.sales = sum_sales
+
+            purchases = find_day_trade(currency, current_day, 'buy')
+            sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f }
+            entry.purchases = sum_purchase
+            entry.day_difference = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
+            @history << entry
+            current_day -= 1
+            # balance for previous day
+            current_balance = entry.current_balance - entry.day_difference
+          end
+          next unless @history.size > 0
+          CSV.open(out_name,'w+',
+                  :col_sep => ';',
+                  :write_headers=> true,
+                  :headers => @history.first.to_h.keys
+            ) do |csv|
+            @history.each do |info|
+              csv << info.to_h.values
+            end
+          end
+        end
+      end
     end
     private
     def check_config
@@ -183,7 +272,7 @@ module RAPFLAG
     private
     def load_or_save_json(name, param = nil)
       json_file = File.join(@spec_data, name.to_s + '.json')
-      if File.exist?(json_file) && defined?(MiniTest)
+      if File.exist?(json_file) && defined?(RSpec)
         body = IO.read(json_file)
       else
         cmd = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
