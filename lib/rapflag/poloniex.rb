@@ -10,7 +10,7 @@ require 'pp'
 module RAPFLAG
 
   class Poloniex < History
-    attr_reader :balances, :active_loans, :lendings, :withdrawls,:addrs,
+    attr_reader :complete_balances, :active_loans, :lending_history, :deposits, :withdrawals, :deposit_addresses,
         :trade_history, :available_account_balances, :open_orders, :tradable_balances
 
     @@btc_to_usd = {}
@@ -50,47 +50,28 @@ module RAPFLAG
 
     def dump_history
       load_history_info
-      CSV.open('output/complete_balances.csv', 'w',
+      FileUtils.makedirs('output') unless File.directory?('output')
+      CSV.open('output/trade_history.csv','w+',
                :col_sep => ';',
                :write_headers=> true,
-               :headers => [ 'currency', 'available', 'onOrders', 'btcValue' ]
-        ) do |csv|
-        @complete_balances.each do |balance|
-          csv << [balance[0]] + balance[1].values
-        end
-      end
-      CSV.open('output/active_loans.csv', 'w',
-               :col_sep => ';',
-               :write_headers=> true,
-               :headers => [ 'key', 'id', 'currency', 'rate', 'amount', 'duration', 'autoRenew', 'date', 'fees', ]
-        ) do |csv|
-        @active_loans.each do |key, loans|
-          loans.each do | loan |
-            csv << [key] + loan.values
-          end
-        end
-      end
-      CSV.open('output/lending_history.csv','w',
-               :col_sep => ';',
-               :write_headers=> true,
-               :headers => [ 'id', 'currency', 'rate', 'amount', 'duration', 'interest', 'fee', 'earned', 'open', 'close', ]
-        ) do |csv|
-        @lending_history.each do |info|
-          csv << info.values
-        end
-      end
-      CSV.open('output/trade_history.csv','w',
-               :col_sep => ';',
-               :write_headers=> true,
-               :headers => [ 'globalTradeID', 'tradeID', 'date', 'rate', 'amount', 'total', 'fee', 'orderNumber', 'type', 'category', ]
+               :headers => [ 'currency_pair'] + @trade_history.values.first.first.to_h.keys
         ) do |csv|
         @trade_history.each do |currency_pair, trades|
           trades.each do |trace|
-            csv << [ currency_pair] + trace.values
+            csv << [ currency_pair] + trace.to_h.values
           end
         end
       end
-      CSV.open('output/tradable_balances.csv','w',
+      CSV.open('output/lending_history.csv','w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => @lending_history.first.to_h.keys
+        ) do |csv|
+        @lending_history.each do |info|
+          csv << info.to_h.values
+        end
+      end
+      CSV.open('output/tradable_balances.csv','w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'from_currency', 'to_from_currency', ]
@@ -101,24 +82,72 @@ module RAPFLAG
           end
         end
       end
-      CSV.open('output/deposits_withdrawls.csv','w',
+      CSV.open('output/complete_balances.csv', 'w+',
                :col_sep => ';',
                :write_headers=> true,
-               :headers => [ 'key', 'withdrawalNumber', 'currency', 'address', 'amount', 'timestamp', 'status', 'ipAddress' ]
+               :headers => [ 'currency', 'available', 'onOrders', 'btcValue' ]
         ) do |csv|
-       @deposits_withdrawls.each do |key, balance|
-          balance.each do |info|
-            csv << [ key] + info.values
+        @complete_balances.each do |balance|
+          csv << [balance[0]] + balance[1].values
+        end
+      end
+      CSV.open('output/active_loans.csv', 'w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => [ 'key', 'id', 'currency', 'rate', 'amount', 'duration', 'autoRenew', 'date', 'fees', ]
+        ) do |csv|
+        @active_loans.each do |key, loans|
+          loans.each do | loan |
+            csv << [key] + loan.values
           end
         end
       end
-      File.open('output/available_account_balances.txt','w'){ |f| f.puts @available_account_balances.inspect}
+
+      CSV.open('output/available_account_balances.csv', 'w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => [ 'key', 'currency', 'balance']
+        ) do |csv|
+        @available_account_balances.each do |key, balances|
+          balances.each do |currency, balance|
+            csv << [key, currency, balance]
+          end
+        end
+      end
+      CSV.open('output/deposit_addresses.csv', 'w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => [ 'currency', 'id']
+        ) do |csv|
+        @deposit_addresses.each do |currency, id|
+          csv << [currency, id]
+        end
+      end
+      CSV.open('output/withdrawals.csv','w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => @deposits.first.to_h.keys
+        ) do |csv|
+        @deposits.each do |info|
+          csv << info.to_h.values
+        end
+      end
+      CSV.open('output/deposits.csv','w+',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => @withdrawals.first.to_h.keys
+        ) do |csv|
+        @withdrawals.each do |info|
+          csv << info.to_h.values
+        end
+      end
     end
     def fetch_csv_history
       load_history_info
+      binding.pry
       @history = []
-      @deposits_withdrawls.keys.each do |operation|
-        @deposits_withdrawls[operation].each do |movement|
+      @deposits_withdrawals.keys.each do |operation|
+        @deposits_withdrawals[operation].each do |movement|
           example =  {"currency"=>"BTC",
  "amount"=>"-0.00000005",
  "balance"=>"0.0",
@@ -139,6 +168,7 @@ module RAPFLAG
     end
     private
     def check_config
+      @spec_data = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'spec', 'data'))
       ['poloniex_api_key',
        'poloniex_secret',
        ].each do |item|
@@ -151,27 +181,56 @@ module RAPFLAG
       nil
     end
     private
+    def load_or_save_json(name, param = nil)
+      json_file = File.join(@spec_data, name.to_s + '.json')
+      if File.exist?(json_file) && defined?(MiniTest)
+        body = IO.read(json_file)
+      else
+        cmd = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
+        body = eval(cmd)
+        File.open(json_file, 'w+') { |f| f.write(body)}
+      end
+      eval("@#{name} = JSON.parse(body)")
+    end
     def load_history_info
       check_config
-      return if @balances && @balances.size > 0
       begin
-        @balances = JSON.parse(::Poloniex.balances.body)
+        @balances = load_or_save_json(:balances)
       rescue => error
         puts "Error was #{error.inspect}"
         puts "Calling @balances from poloniex failed. Configuration was"
         pp ::Poloniex.configuration
         exit 1
       end
-      @active_loans = JSON.parse(::Poloniex.active_loans.body)
-      @available_account_balances = JSON.parse(::Poloniex.available_account_balances.body)
-      all = JSON.parse(::Poloniex.complete_balances.body)
+      @active_loans = load_or_save_json(:active_loans)
+      @available_account_balances = load_or_save_json(:available_account_balances)
+      all = load_or_save_json(:complete_balances)
       @complete_balances = all.find_all{ | currency, values| values["available"].to_f != 0.0 }
-      @deposit_addresses = JSON.parse(::Poloniex.deposit_addresses.body)
-      @deposits_withdrawls  = JSON.parse(::Poloniex.deposits_withdrawls.body)
-      @lending_history = JSON.parse(::Poloniex.lending_history.body)
-      @open_orders  = JSON.parse(::Poloniex.open_orders('all').body)
-      @tradable_balances  = JSON.parse(::Poloniex.tradable_balances.body)
-      @trade_history  = JSON.parse(::Poloniex.trade_history('all').body)
+      @deposit_addresses = load_or_save_json(:deposit_addresses)
+
+      @deposits_withdrawals  = load_or_save_json(:deposits_withdrawls)
+      # deposits and withdrawals have a different structure
+      @deposits = []
+      @deposits_withdrawals['deposits'].each {|x| @deposits << OpenStruct.new(x) };
+      @withdrawals =[]
+      @deposits_withdrawals['withdrawals'].each {|x| @withdrawals << OpenStruct.new(x) };
+      info = load_or_save_json(:lending_history)
+      @lending_history = []
+      info.each {|x| @lending_history << OpenStruct.new(x) };
+
+      @open_orders  = load_or_save_json(:open_orders, 'all')
+      info  = load_or_save_json(:trade_history, 'all')
+      @trade_history = {}
+      info.each do |currency_pair, trades|
+        @trade_history[currency_pair] = []
+        trades.each {|x| @trade_history[currency_pair] << OpenStruct.new(x) };
+        @trade_history[currency_pair].sort!{|x,y| x[:date] <=> y[:date]}.collect{ |x| x[:date]}
+      end
+      # @trade_history.values.first.first.tradeID
+      @tradable_balances  = load_or_save_json(:tradable_balances)
+      @active_loans   # key
+      @provided_loans = []; @active_loans['provided'].each {|x| @provided_loans << OpenStruct.new(x) };
+      @used_loans = []; @active_loans['used'].each {|x| @used_loans << OpenStruct.new(x) };
     end
   end
 end
