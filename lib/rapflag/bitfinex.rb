@@ -48,7 +48,6 @@ module RAPFLAG
       rates[key] ? rates[key] : nil
     rescue => err
       puts "Err #{err}"
-      binding.pry if defined?(MiniTest)
     end
 
     def fetch_csv_history

@@ -46,11 +46,19 @@ module RAPFLAG
       rates[key] ? rates[key] : nil
     rescue => err
       puts "Err #{err}"
-      binding.pry if defined?(MiniTest)
     end
 
     def dump_history
       load_history_info
+      CSV.open('output/complete_balances.csv', 'w',
+               :col_sep => ';',
+               :write_headers=> true,
+               :headers => [ 'currency', 'available', 'onOrders', 'btcValue' ]
+        ) do |csv|
+        @complete_balances.each do |balance|
+          csv << [balance[0]] + balance[1].values
+        end
+      end
       CSV.open('output/active_loans.csv', 'w',
                :col_sep => ';',
                :write_headers=> true,
@@ -152,17 +160,18 @@ module RAPFLAG
         puts "Error was #{error.inspect}"
         puts "Calling @balances from poloniex failed. Configuration was"
         pp ::Poloniex.configuration
-        binding.pry if defined?(Pry)
         exit 1
       end
       @active_loans = JSON.parse(::Poloniex.active_loans.body)
-      @lending_history = JSON.parse(::Poloniex.lending_history.body)
-      @deposits_withdrawls  = JSON.parse(::Poloniex.deposits_withdrawls.body)
-      @deposit_addresses = JSON.parse(::Poloniex.deposit_addresses.body)
-      @trade_history  = JSON.parse(::Poloniex.trade_history('all').body) # returns []
       @available_account_balances = JSON.parse(::Poloniex.available_account_balances.body)
-      @open_orders  = JSON.parse(::Poloniex.open_orders('all').body) # returns 0
+      all = JSON.parse(::Poloniex.complete_balances.body)
+      @complete_balances = all.find_all{ | currency, values| values["available"].to_f != 0.0 }
+      @deposit_addresses = JSON.parse(::Poloniex.deposit_addresses.body)
+      @deposits_withdrawls  = JSON.parse(::Poloniex.deposits_withdrawls.body)
+      @lending_history = JSON.parse(::Poloniex.lending_history.body)
+      @open_orders  = JSON.parse(::Poloniex.open_orders('all').body)
       @tradable_balances  = JSON.parse(::Poloniex.tradable_balances.body)
+      @trade_history  = JSON.parse(::Poloniex.trade_history('all').body)
     end
   end
 end
