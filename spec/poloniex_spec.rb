@@ -21,12 +21,18 @@ describe RAPFLAG::Poloniex do
         expect(File.exist?(Poloniex_CSV_Test_Lending_File)).to eql(true)
         lines = IO.readlines(Poloniex_CSV_Test_Lending_File)
         expect(lines.first.chomp).to eql('current_day;current_balance;deposits;withdrawals;earned;fees;sales;purchases;day_difference')
+
         first_trade = lines.find{|line| /2017-03-25/.match(line)}.chomp
         day_difference = first_trade.split(';')[-1]
         expect(day_difference.to_f).to eql(-1.0018463600000007)
+
         second_trade = lines.find{|line| /2017-03-24/.match(line)}.chomp
         day_difference = second_trade.split(';')[-1]
         expect(day_difference.to_f).to eql(-3.6816801927881175)
+
+        third_trade = lines.find{|line| /2016-06-17/.match(line)}.chomp
+        day_difference = third_trade.split(';')[-1]
+        expect(day_difference.to_f).to eql(7.177347194443261)
       end
       it 'should have correct size' do
         expect(@rap.history.size).to eql(368)

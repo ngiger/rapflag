@@ -234,7 +234,7 @@ module RAPFLAG
             entry.sales = sum_sales
 
             purchases = find_day_trade(currency, current_day, 'sell')
-            sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f+purchase.rate.to_f }
+            sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f*purchase.rate.to_f }
             entry.purchases = sum_purchase
             entry.day_difference = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
             @history << entry
