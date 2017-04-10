@@ -11,7 +11,8 @@ module RAPFLAG
 
   class Poloniex < History
     attr_reader :complete_balances, :active_loans, :lending_history, :deposits, :withdrawals, :deposit_addresses,
-        :trade_history, :available_account_balances, :open_orders, :tradable_balances
+        :trade_history, :available_account_balances, :open_orders, :tradable_balances,
+        :output_prefix
 
     @@btc_to_usd = {}
     @@bfx_to_usd = {}
@@ -51,7 +52,7 @@ module RAPFLAG
     def dump_history
       load_history_info
       FileUtils.makedirs('output') unless File.directory?('output')
-      CSV.open('output/trade_history.csv','w+',
+      CSV.open("#{@output_prefix}/trade_history.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'currency_pair'] + @trade_history.values.first.first.to_h.keys
@@ -62,7 +63,7 @@ module RAPFLAG
           end
         end
       end
-      CSV.open('output/lending_history.csv','w+',
+      CSV.open("#{@output_prefix}/lending_history.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => @lending_history.first.to_h.keys
@@ -71,7 +72,7 @@ module RAPFLAG
           csv << info.to_h.values
         end
       end
-      CSV.open('output/tradable_balances.csv','w+',
+      CSV.open("#{@output_prefix}/tradable_balances.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'from_currency', 'to_from_currency', ]
@@ -82,7 +83,7 @@ module RAPFLAG
           end
         end
       end
-      CSV.open('output/complete_balances.csv', 'w+',
+      CSV.open("#{@output_prefix}/complete_balances.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'currency', 'available', 'onOrders', 'btcValue' ]
@@ -91,7 +92,7 @@ module RAPFLAG
           csv << [balance[0]] + balance[1].values
         end
       end
-      CSV.open('output/active_loans.csv', 'w+',
+      CSV.open("#{@output_prefix}/active_loans.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'key', 'id', 'currency', 'rate', 'amount', 'duration', 'autoRenew', 'date', 'fees', ]
@@ -103,7 +104,7 @@ module RAPFLAG
         end
       end
 
-      CSV.open('output/available_account_balances.csv', 'w+',
+      CSV.open("#{@output_prefix}/available_account_balances.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'key', 'currency', 'balance']
@@ -114,7 +115,7 @@ module RAPFLAG
           end
         end
       end
-      CSV.open('output/deposit_addresses.csv', 'w+',
+      CSV.open("#{@output_prefix}/deposit_addresses.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => [ 'currency', 'id']
@@ -123,7 +124,7 @@ module RAPFLAG
           csv << [currency, id]
         end
       end
-      CSV.open('output/withdrawals.csv','w+',
+      CSV.open("#{@output_prefix}/withdrawals.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => @deposits.first.to_h.keys
@@ -132,7 +133,7 @@ module RAPFLAG
           csv << info.to_h.values
         end
       end
-      CSV.open('output/deposits.csv','w+',
+      CSV.open("#{@output_prefix}/deposits.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
                :headers => @withdrawals.first.to_h.keys
@@ -204,7 +205,7 @@ module RAPFLAG
       @available_account_balances.each do |key, balances|
         balances.each do |currency, balance|
           puts "Calculation history for #{key} #{currency} with current balance of #{balance}"
-          out_name = "output/poloniex/#{key}_#{currency}.csv"
+          out_name = "#{@output_prefix}/#{key}_#{currency}.csv"
           FileUtils.makedirs(File.dirname(out_name)) unless File.exists?(File.dirname(out_name))
           @history = []
           current_day =  max_date
@@ -238,7 +239,7 @@ module RAPFLAG
             entry.day_difference = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
             @history << entry
             current_day -= 1
-            # balance for previous day
+            # balance for previous dayq
             current_balance = entry.current_balance - entry.day_difference
           end
           next unless @history.size > 0
@@ -256,6 +257,7 @@ module RAPFLAG
     end
     private
     def check_config
+      @output_prefix = 'output/poloniex'
       @spec_data = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'spec', 'data'))
       ['poloniex_api_key',
        'poloniex_secret',
