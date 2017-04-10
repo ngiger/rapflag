@@ -166,7 +166,7 @@ module RAPFLAG
         next unless /^#{currency}/.match(currency_pair)
         trades.each do |trade|
           if trade.type.eql?(type) && date.eql?(Date.parse(trade.date))
-            trade.cucurrency_pair = currency_pair
+            trade.currency_pair = currency_pair
             found << trade
           end
         end
@@ -175,7 +175,6 @@ module RAPFLAG
       found
     end
     def create_csv_file
-      binding.pry
       puts "create_csv_file: already done"
     end
 
@@ -229,12 +228,12 @@ module RAPFLAG
             entry.fees = sum_fee
 
             # End_of_Day_Balance = End_of_Day_Balance(-1) + Deposits - Withdrawals + Lending_Income - Trading_Fees + Purchases - Sales
-            sales = find_day_trade(currency, current_day, 'sell')
-            sum_sales = 0.0; sales.each{ |sale| sum_sales += sale.amount.to_f }
+            sales = find_day_trade(currency, current_day, 'buy')
+            sum_sales = 0.0; sales.each{ |sale| sum_sales += sale.amount.to_f*sale.rate.to_f }
             entry.sales = sum_sales
 
-            purchases = find_day_trade(currency, current_day, 'buy')
-            sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f }
+            purchases = find_day_trade(currency, current_day, 'sell')
+            sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f+purchase.rate.to_f }
             entry.purchases = sum_purchase
             entry.day_difference = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
             @history << entry
@@ -272,15 +271,20 @@ module RAPFLAG
     private
     def load_or_save_json(name, param = nil)
       json_file = File.join(@spec_data, name.to_s + '.json')
+      parse_body = "@#{name} = JSON.parse(body)"
+      load_json = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
       body = nil
       if File.directory?(@spec_data) && File.exist?(json_file) && defined?(RSpec)
         body = IO.read(json_file)
       else
-        cmd = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
-        body = eval(cmd)
-        File.open(json_file, 'w+') { |f| f.write(body)} if defined?(RSpec)
+        body = eval(load_json)
+        File.open(json_file, 'w+') { |f| f.write(body)} if defined?(RSpec) && body
       end
-      eval("@#{name} = JSON.parse(body)")
+      eval(parse_body) if body
+    rescue => error
+      puts "Calling '#{load_json}' for #{name} failed with error: #{error}"
+      # puts "Backtrace #{error.backtrace.join("\n")}"
+      exit(1)
     end
     def load_history_info
       check_config
