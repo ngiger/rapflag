@@ -192,7 +192,7 @@ module RAPFLAG
                    Time.parse(@lending_history.collect{|x| x.close}.min).to_i,
                    @withdrawals.collect{|x| x.timestamp}.min,].min
 
-      min_date = Time.at(min_time).to_date
+      min_date = Time.at(min_time).to_date - 1
       max_date = Time.at(max_time).to_date
 
       puts "We start using the available_account_balances"
@@ -208,39 +208,43 @@ module RAPFLAG
           out_name = "#{@output_prefix}/#{key}_#{currency}.csv"
           FileUtils.makedirs(File.dirname(out_name)) unless File.exists?(File.dirname(out_name))
           @history = []
-          current_day =  max_date
-          current_balance  = balance.to_f
-          while (current_day >= min_date)
+          current_day = min_date
+          current_balance  = 0.0
+          while (current_day < max_date)
             entry = OpenStruct.new
             entry.current_day = current_day
-            entry.current_balance = current_balance
+            entry.balance_BEG = current_balance
 
             deposits = find_per_currency_and_day(@deposits, currency,current_day)
             sum_deposits = 0.0; deposits.each{ |x| sum_deposits += x.amount.to_f }
-            entry.deposits = sum_deposits
 
             withdrawals = find_per_currency_and_day(@withdrawals, currency, current_day)
             sum_withdrawals = 0.0; withdrawals.each{ |x| sum_withdrawals += x.amount.to_f }
-            entry.withdrawals = sum_withdrawals
 
             lendings = find_lending_info_day(currency, current_day)
             earned = 0.0;  sum_fee = 0.0; lendings.each{ |x| earned += x.earned.to_f; sum_fee += x.fee.to_f }
-            entry.earned = earned
-            entry.fees = sum_fee
 
             # End_of_Day_Balance = End_of_Day_Balance(-1) + Deposits - Withdrawals + Lending_Income - Trading_Fees + Purchases - Sales
             sales = find_day_trade(currency, current_day, 'buy')
             sum_sales = 0.0; sales.each{ |sale| sum_sales += sale.amount.to_f*sale.rate.to_f }
-            entry.sales = sum_sales
 
             purchases = find_day_trade(currency, current_day, 'sell')
             sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f*purchase.rate.to_f }
+            diff_day = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
+
+            entry.deposits = sum_deposits
+            entry.income = earned -sum_fee
+            entry.withdraw = sum_withdrawals
+            entry.sales = sum_sales
             entry.purchases = sum_purchase
-            entry.day_difference = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
+            entry.balance_END = current_balance + diff_day
+            entry.earned = earned
+            entry.fees = sum_fee
+            entry.day_difference = diff_day
             @history << entry
-            current_day -= 1
+            current_day += 1
             # balance for previous dayq
-            current_balance = entry.current_balance - entry.day_difference
+            current_balance = entry.balance_END
           end
           next unless @history.size > 0
           CSV.open(out_name,'w+',
