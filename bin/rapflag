@@ -27,7 +27,6 @@ RAPFLAG::Wallets.each do |wallet|
     end
     if Opts[:dump]
       crypto_api.dump_history
-      exit(0)
     end
     crypto_api.fetch_csv_history
     exit(0) if Opts[:poloniex]

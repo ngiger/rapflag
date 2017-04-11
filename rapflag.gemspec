@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'poloniex'
+  spec.add_dependency 'ypoloniex', '>= 1.0.2'
   spec.add_dependency 'bitfinex-rb'
   spec.add_dependency 'trollop'
 

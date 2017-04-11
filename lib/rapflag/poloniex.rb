@@ -197,11 +197,7 @@ module RAPFLAG
 
       puts "We start using the available_account_balances"
       pp @available_account_balances
-      puts
-      puts "Should we better start using the complete_balances"
       pp @complete_balances
-      puts "How should I handle the following currency_pair"
-      pp @trade_history.keys
       @available_account_balances.each do |key, balances|
         balances.each do |currency, balance|
           puts "Calculation history for #{key} #{currency} with current balance of #{balance}"
@@ -211,6 +207,7 @@ module RAPFLAG
           current_day = min_date
           current_balance  = 0.0
           while (current_day < max_date)
+            puts "#{key}: at #{current_day}" if current_day.day == 1 && current_day.month % 3 == 1
             entry = OpenStruct.new
             entry.current_day = current_day
             entry.balance_BEG = current_balance
@@ -222,7 +219,8 @@ module RAPFLAG
             sum_withdrawals = 0.0; withdrawals.each{ |x| sum_withdrawals += x.amount.to_f }
 
             lendings = find_lending_info_day(currency, current_day)
-            earned = 0.0;  sum_fee = 0.0; lendings.each{ |x| earned += x.earned.to_f; sum_fee += x.fee.to_f }
+            # fee field is negative, therefore we let sum_fee be negative, too
+            income = 0.0;  sum_fee = 0.0; lendings.each{ |x| income += x.earned.to_f; sum_fee += x.fee.to_f }
 
             # End_of_Day_Balance = End_of_Day_Balance(-1) + Deposits - Withdrawals + Lending_Income - Trading_Fees + Purchases - Sales
             sales = find_day_trade(currency, current_day, 'buy')
@@ -230,20 +228,19 @@ module RAPFLAG
 
             purchases = find_day_trade(currency, current_day, 'sell')
             sum_purchase = 0.0; purchases.each{ |purchase| sum_purchase += purchase.amount.to_f*purchase.rate.to_f }
-            diff_day = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + sum_fee
+            diff_day = sum_deposits - sum_withdrawals + sum_purchase - sum_sales + income
 
             entry.deposits = sum_deposits
-            entry.income = earned -sum_fee
+            entry.income = income
             entry.withdraw = sum_withdrawals
             entry.sales = sum_sales
             entry.purchases = sum_purchase
             entry.balance_END = current_balance + diff_day
-            entry.earned = earned
             entry.fees = sum_fee
             entry.day_difference = diff_day
             @history << entry
             current_day += 1
-            # balance for previous dayq
+            # balance for previous day
             current_balance = entry.balance_END
           end
           next unless @history.size > 0
@@ -275,24 +272,57 @@ module RAPFLAG
       nil
     end
     private
+
+    def load_lending_history
+      # we must load this history in pieces, as we cannot return all items at once
+      end_time = Time.now.to_i
+      limit = 1000
+      full_history = []
+      while true
+        @lending_history = []
+        puts "After #{full_history.size} items. Loading upto #{limit} lending_history items before #{Time.at(end_time)}"
+        lendings = load_or_save_json(:lending_history, {:start => 0, :end_time => end_time, :limit => limit})
+        break if lendings.size == 0
+        lendings.each_with_index {|item| full_history.push(OpenStruct.new(item.clone)) };
+        min_time = lendings.collect{|x| x['close']}.min
+        min_time_i = Time.parse(min_time).to_i
+        end_time = min_time_i-1
+        break if defined?(RSpec) # We don't simulate loading more than 1 json file
+      end
+      @lending_history = full_history
+      puts "Loaded #{@lending_history.size} lending_history items"
+    end
+
     def load_or_save_json(name, param = nil)
+      load_json = nil
       json_file = File.join(@spec_data, name.to_s + '.json')
       parse_body = "@#{name} = JSON.parse(body)"
-      load_json = param ? "::Poloniex.#{name.to_s}('#{param}').body" : "::Poloniex.#{name.to_s}.body"
       body = nil
       if File.directory?(@spec_data) && File.exist?(json_file) && defined?(RSpec)
         body = IO.read(json_file)
       else
+        if param
+          if param.is_a?(String)
+            load_json = "::Poloniex.#{name.to_s}('#{param}').body"
+          else
+            load_json = "::Poloniex.#{name.to_s}(#{param.values.join(',')}).body"
+          end
+        else
+          load_json = "::Poloniex.#{name.to_s}.body"
+        end
+        # puts "Poloniex version #{::Poloniex::VERSION}: Will call '#{load_json}' for #{name}"
         body = eval(load_json)
-        File.open(json_file, 'w+') { |f| f.write(body)} if defined?(RSpec) && body
+        FileUtils.makedirs(File.dirname(json_file))
+        File.open(json_file, 'w+') { |f| f.write(body)} if body && defined?(RSpec)
       end
       eval(parse_body) if body
     rescue => error
-      puts "Calling '#{load_json}' for #{name} failed with error: #{error}"
+      puts "Calling version #{::Poloniex::VERSION} '#{load_json}' for #{name} failed with error: #{error}"
       # puts "Backtrace #{error.backtrace.join("\n")}"
       exit(1)
     end
     def load_history_info
+      return if @balances && @balances.size > 0
       check_config
       begin
         @balances = load_or_save_json(:balances)
@@ -303,6 +333,7 @@ module RAPFLAG
         puts "Backtrace #{error.backtrace.join("\n")}"
         exit 1
       end
+      load_lending_history
       @active_loans = load_or_save_json(:active_loans)
       @available_account_balances = load_or_save_json(:available_account_balances)
       all = load_or_save_json(:complete_balances)
@@ -315,10 +346,6 @@ module RAPFLAG
       @deposits_withdrawals['deposits'].each {|x| @deposits << OpenStruct.new(x) };
       @withdrawals =[]
       @deposits_withdrawals['withdrawals'].each {|x| @withdrawals << OpenStruct.new(x) };
-      info = load_or_save_json(:lending_history)
-      @lending_history = []
-      info.each {|x| @lending_history << OpenStruct.new(x) };
-
       @open_orders  = load_or_save_json(:open_orders, 'all')
       info  = load_or_save_json(:trade_history, 'all')
       @trade_history = {}
@@ -332,6 +359,7 @@ module RAPFLAG
       @active_loans   # key
       @provided_loans = []; @active_loans['provided'].each {|x| @provided_loans << OpenStruct.new(x) };
       @used_loans = []; @active_loans['used'].each {|x| @used_loans << OpenStruct.new(x) };
+
     end
   end
 end

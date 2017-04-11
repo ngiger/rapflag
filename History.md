@@ -1,3 +1,7 @@
+# 0.0.6 of 2017.04.11
+
+* Download complete lending history not only he default of 500 items
+
 # 0.0.5 of 2017.04.10
 
 * Fixed daily balance for poloniex
