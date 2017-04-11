@@ -15,9 +15,11 @@ secret: ''
 comment out "currencies" if you want to export all currencies.
 ### run as follows
 ```
-rapflag
-rapflag -c (clean option to show daily income and daily value of your wallet)
-rapflag -p
+Options:
+  -c, --clean       Create Bitfinex summary of transactions by day
+  -p, --poloniex    Use Poloniex API instead of Bitfinex API
+  -d, --dump        Use Poloniex API and dump history into CSV files
+  -h, --help        Show this message
 ```
 Enjoy your reports. More to come. Feedback always welcome.
 
