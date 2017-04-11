@@ -12,6 +12,7 @@ currencies: [ 'USD', 'BTC', 'BFX']
 api_key: ''
 secret: ''
 ```
+comment out "currencies" if you want to export all currencies.
 ### run as follows
 ```
 rapflag
