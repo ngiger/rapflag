@@ -1,5 +1,5 @@
 # rapflag
-Bitfinex Exporter for your Taxman.
+Bitfinex and Poloniex Exporter for your Taxman.
 
 ### set your key, desired currencies in
 ```
@@ -14,8 +14,9 @@ secret: ''
 ```
 ### run as follows
 ```
-ruby rapflag.rb
-ruby rapflag.rb -c (clean option to show daily income and daily value of your wallet)
+rapflag
+rapflag -c (clean option to show daily income and daily value of your wallet)
+rapflag -p
 ```
 Enjoy your reports. More to come. Feedback always welcome.
 
