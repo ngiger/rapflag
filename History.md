@@ -1,6 +1,10 @@
+# 0.0.8 of 2017.04.17
+
+* Wait (possibly several times) when we hit the rate limiter of the bitfinex REST API while fetching the currency rates
+
 # 0.0.7 of 2017.04.17
 
-* Wait (possibly several times) when we hit the rate limiter of the bitfinex REST API
+* Wait (possibly several times) when we hit the rate limiter of the bitfinex REST API while fetching the histor
 
 # 0.0.6 of 2017.04.11
 
