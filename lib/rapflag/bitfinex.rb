@@ -52,25 +52,31 @@ module RAPFLAG
 
     def fetch_csv_history
       @history = []
+      delay_in_seconds = 30
       check_config
       client = ::Bitfinex::Client.new
       timestamp = Time.now.to_i + 1
       while true
         begin
-          partial = client.history(@currency, { :limit => 500, :until => timestamp, :wallet => @wallet})
-          break unless partial && partial.size > 0
-          if partial.is_a?(Hash)
-            puts "Got #{partial['error']} while fetching #{@wallet} #{@currency} until #{Time.at(timestamp)}"
-            exit 3
+          partial = nil
+          while true
+            partial = client.history(@currency, { :limit => 1000, :until => timestamp, :wallet => @wallet})
+            if partial.is_a?(Hash) && (partial.size > 0) && partial['error'].eql?('ERR_RATE_LIMIT')
+              puts "Got #{partial['error']} while fetching #{@wallet} #{@currency} #{client.history} items"
+              puts "  Will wait #{delay_in_seconds} seconds before retrying"
+              sleep(delay_in_seconds)
+            end
+            break if partial && partial.is_a?(Array)
           end
+          break if partial.size <= 1
           first_time = Time.at(partial.first['timestamp'].to_i).strftime(DATE_TIME_FORMAT)
           last_time = Time.at(partial.last['timestamp'].to_i).strftime(DATE_TIME_FORMAT)
-          puts "Feched #{partial.size} @history entries #{first_time} -> #{last_time}"  if $VERBOSE
+          puts "Fetched #{partial.size} @history entries #{first_time} -> #{last_time}"  if $VERBOSE
           timestamp = (partial.last['timestamp'].to_i - 1)
           @history = @history | partial
-          break if partial.size <= 1
         rescue => error
           puts "error #{error}"
+          puts " backtrace: #{error.backtrace[0..10].join("\n")}"
         end
       end
       puts "Feched #{@history.size} history entries" if $VERBOSE
