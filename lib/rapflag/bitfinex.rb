@@ -9,6 +9,7 @@ module RAPFLAG
   class Bitfinex < History
     @@btc_to_usd = {}
     @@bfx_to_usd = {}
+    Delay_in_seconds = 30
 
     def get_usd_exchange(date_time = Time.now, from='BTC')
       return 1.0 if from == 'USD'
@@ -20,18 +21,22 @@ module RAPFLAG
       ms_next_date = ms + (3*24*3600)*1000
       # this does not work
       # url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
-      url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
       # therefore we just return the most uptodate
       url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}"
-      puts "Fetching #{date_time}: #{url} #{@@btc_to_usd.size} BTC #{@@bfx_to_usd.size} BFX" if $VERBOSE
-      response = Faraday.get(url)
-      items = eval(response.body)
       rates = {}
-      items.each do |item|
-        if item.first.eql?(:error)
-          puts "Fetching returned #{item}. Aborting"
-          exit(1)
+      while true
+        puts "Fetching #{date_time}: #{url} #{@@btc_to_usd.size} BTC #{@@bfx_to_usd.size} BFX" if $VERBOSE
+        response = Faraday.get(url)
+        items = eval(response.body)
+        if items && items.size > 0 && items.first.first.eql?(:error)
+          puts "#{Time.now}: Fetching #{url} returned #{items.first}."
+          puts "   Retrying in #{Delay_in_seconds} seconds"
+          sleep(Delay_in_seconds)
+        else
+          break
         end
+      end
+      items.each do |item|
         # http://docs.bitfinex.com/v2/reference#rest-public-candles
         # field definitions for  [ MTS, OPEN, CLOSE, HIGH, LOW, VOLUME ],
         # MTS   int   millisecond time stamp
@@ -46,13 +51,14 @@ module RAPFLAG
       end;
       from.eql?('BTC') ? @@btc_to_usd = rates.clone : @@bfx_to_usd = rates.clone
       rates[key] ? rates[key] : nil
-    rescue => err
-      puts "Err #{err}"
+    rescue => error
+      puts "error #{error}"
+      puts " backtrace: #{error.backtrace[0..10].join("\n")}"
+      require 'pry'; binding.pry
     end
 
     def fetch_csv_history
       @history = []
-      delay_in_seconds = 30
       check_config
       client = ::Bitfinex::Client.new
       timestamp = Time.now.to_i + 1
@@ -63,8 +69,8 @@ module RAPFLAG
             partial = client.history(@currency, { :limit => 1000, :until => timestamp, :wallet => @wallet})
             if partial.is_a?(Hash) && (partial.size > 0) && partial['error'].eql?('ERR_RATE_LIMIT')
               puts "Got #{partial['error']} while fetching #{@wallet} #{@currency} #{client.history} items"
-              puts "  Will wait #{delay_in_seconds} seconds before retrying"
-              sleep(delay_in_seconds)
+              puts "  Will wait #{Delay_in_seconds} seconds before retrying"
+              sleep(Delay_in_seconds)
             end
             break if partial && partial.is_a?(Array)
           end
