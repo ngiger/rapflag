@@ -8,6 +8,11 @@ require 'rapflag/config'
 require 'bitfinex-api-rb'
 require 'poloniex'
 
+RAPFLAG::Config['poloniex_api_key'] = 'dummy poloniex_api_key'
+RAPFLAG::Config['poloniex_secret']  = 'dummy poloniex_secret'
+RAPFLAG::Config['api_key'] = 'dummy bitfinex api_key'
+RAPFLAG::Config['secret']  = 'dummy bitfinex secret'
+
 module RAPFLAG
   # create dummy config for spec tests
   Bitfinex::Client.configure do |conf|

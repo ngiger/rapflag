@@ -1,3 +1,7 @@
+# 0.0.7 of 2017.04.17
+
+* Wait (possibly several times) when we hit the rate limiter of the bitfinex REST API
+
 # 0.0.6 of 2017.04.11
 
 * Download complete lending history not only he default of 500 items

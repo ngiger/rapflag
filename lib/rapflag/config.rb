@@ -16,12 +16,16 @@ module RAPFLAG
       break
     end
   end
-  unless config_file && File.exist?(config_file)
-    puts "You must first add. Use one of the following places #{files_to_test}"
-    exit 2
-  end
+  if defined?(RSpec)
+    Config = Hash.new
+  else
+    unless config_file && File.exist?(config_file)
+      puts "You must first add a config.yml. Use one of the following places #{files_to_test}"
+      exit 2
+    end
 
-  Config= YAML.load_file(config_file)
+    Config= YAML.load_file(config_file)
+  end
   Config['currencies'] ||= ['BTC', 'BFX', 'XMR', 'ZEC']
   Config['currencies'] << 'USD' unless Config['currencies'].index('USD')
 end
