@@ -14,6 +14,8 @@ RAPFLAG::Config['api_key'] = 'dummy bitfinex api_key'
 RAPFLAG::Config['secret']  = 'dummy bitfinex secret'
 
 module RAPFLAG
+  @@outputDir = File.expand_path(File.join(File.dirname(__FILE__),  'output'))
+
   # create dummy config for spec tests
   Bitfinex::Client.configure do |conf|
     conf.api_key = '123467889'

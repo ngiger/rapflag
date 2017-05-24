@@ -13,13 +13,14 @@ rescue LoadError
 end
 
 Opts = Trollop::options do
-  opt :clean, "Create summary of transactions by day for #{RAPFLAG::Config['currencies'].join(', ')}"
-  opt :poloniex, "Use Poloniex API instead of Bitfinex API"
-  opt :dump, "Use Poloniex API and dump history into CSV files"
+  opt :bitfinex, "Bitfinex API. Create summary of transactions by day for #{RAPFLAG::Config['currencies'].join(', ')}"
+  opt :poloniex, "Use Poloniex API"
+  opt :dump, "(Only Poloniex). Dump history into CSV files"
 end
 
-RAPFLAG::Wallets.each do |wallet|
-   RAPFLAG::Config['currencies'].each do |currency|
+RAPFLAG::Config['currencies'].each do |currency|
+  crypto_api = nil
+  RAPFLAG::Wallets.each do |wallet|
     if Opts[:poloniex]
       crypto_api = RAPFLAG::Poloniex.new(wallet, currency)
     else
@@ -29,8 +30,10 @@ RAPFLAG::Wallets.each do |wallet|
       crypto_api.dump_history
     end
     crypto_api.fetch_csv_history
-    exit(0) if Opts[:poloniex]
-    crypto_api.create_csv_file
-    crypto_api.create_summary if Opts[:clean]
+    if Opts[:bitfinex]
+      crypto_api.create_csv_file
+      crypto_api.create_summary
+    end
   end
+  crypto_api.create_total
 end

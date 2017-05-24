@@ -2,10 +2,11 @@ require 'csv'
 require 'open-uri'
 require 'faraday'
 require 'fileutils'
+require 'date'
 
 module RAPFLAG
-
   class History
+    @@global_totals ||= {}
     attr_reader :history, :wallet, :currency, :btc_to_usd, :bfx_to_usd
     DATE_FORMAT = '%Y.%m.%d'
     DATE_TIME_FORMAT = '%Y.%m.%d %H:%M:%S'
@@ -16,7 +17,7 @@ module RAPFLAG
     end
 
     def create_csv_file
-      out_file = "output/#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}.csv"
+      out_file = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}.csv")
       FileUtils.makedirs(File.dirname(out_file))
       CSV.open(out_file,'w',
           :write_headers=> true,
@@ -78,7 +79,7 @@ module RAPFLAG
         existing.balance = balance if balance != 0.0
         @daily[date] = existing
       end
-      out_file = "output/#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}_summary.csv"
+      out_file = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}_summary.csv")
       FileUtils.makedirs(File.dirname(out_file))
       previous_date = nil
       saved_rate = nil
@@ -107,6 +108,7 @@ module RAPFLAG
                     saved_rate ? saved_rate : nil,
                     saved_rate ? info.balance * get_usd_exchange(intermediate, @currency) : nil,
                   ]
+            add_total(previous_date, saved_info.income, saved_info.balance)
           end if previous_date
           csv << [@currency,
                   date,
@@ -115,11 +117,53 @@ module RAPFLAG
                   rate ? rate : nil,
                   rate ? info.balance * get_usd_exchange(fetch_date, @currency) : nil,
                  ]
+          add_total(date, info.income, info.balance)
           previous_date = fetch_date
           saved_info = info
           saved_rate = nil
         end
       end
     end
+    private
+    def add_total(date, income, balance)
+      if date.is_a?(String)
+        key = [@currency, @wallet, date]
+      elsif date.is_a?(Date)
+        sdate = date.strftime(DATE_FORMAT)
+        key = [@currency, @wallet,sdate]
+      end
+      @@global_totals[key]    ||= [0, 0]
+      @@global_totals[key][0] += income
+      @@global_totals[key][1] += balance
+    end
+
+    public
+    def create_total
+      this_currency = @@global_totals.select{|v, k| v[0].eql?(@currency)}
+      sorted = Hash[ this_currency.sort_by { |key, val| key[2] } ]
+      dates = sorted.keys.collect{|x| x[2]}.uniq
+      total_filename = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_total.csv")
+      total_file = CSV.open(total_filename, 'w+',
+          :write_headers=> true,
+          :col_sep => ';',
+          :headers => ['currency',
+                       'date',
+                      'total_income',
+                      'total_balance',
+                      ] #< column header
+        )  do |csv|
+        dates.each do |date|
+          total_income = 0
+          total_balance = 0
+          this_day = this_currency.select{|v, k| v[2].eql?(date)}
+          this_day.each do |key, info|
+            total_income += info[0]
+            total_balance += info[1]
+          end
+          csv << [@currency, date, total_income, total_balance]
+        end
+      end
+    end
   end
 end
+# currency,date,income,balance

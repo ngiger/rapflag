@@ -3,14 +3,12 @@ require 'spec_helper'
 require 'rapflag/poloniex'
 
 describe RAPFLAG::Poloniex do
-  TEST_OUTPUT_ROOT = File.expand_path(File.join(__FILE__, '..', '..', 'output/poloniex'))
-  Poloniex_CSV_Test_Lending_File     = TEST_OUTPUT_ROOT + '/lending_BTC.csv'
-  Poloniex_CSV_Test_Exchange_File    = TEST_OUTPUT_ROOT + '/exchange_BTC.csv'
+  Poloniex_CSV_Test_Lending_File     = File.join(RAPFLAG.outputDir, 'poloniex', 'lending_BTC.csv')
+  Poloniex_CSV_Test_Exchange_File    = File.join(RAPFLAG.outputDir, 'poloniex', 'exchange_BTC.csv')
 
   context 'poloniex' do
     before(:all) do
-      FileUtils.rm_f(Poloniex_CSV_Test_Lending_File) if File.exist?(Poloniex_CSV_Test_Lending_File)
-      FileUtils.rm_f(Poloniex_CSV_Test_Exchange_File) if File.exist?(Poloniex_CSV_Test_Exchange_File)
+      FileUtils.rm_rf(RAPFLAG.outputDir)
       expect(File.exist?(Poloniex_CSV_Test_Lending_File)).to eql(false)
       @rap = RAPFLAG::Poloniex.new('exchange', 'BTC')
       @rap.fetch_csv_history
