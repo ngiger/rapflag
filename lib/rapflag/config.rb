@@ -26,6 +26,7 @@ module RAPFLAG
 
     Config= YAML.load_file(config_file)
   end
-  Config['currencies'] ||= ['BTC', 'BFX', 'XMR', 'ZEC']
+  Config['currencies'] ||= ['BTC', 'BFX', 'XMR', 'ZEC', 'XRP', 'ETH']
   Config['currencies'] << 'USD' unless Config['currencies'].index('USD')
+  Config['currencies'].sort!
 end
