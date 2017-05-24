@@ -54,7 +54,6 @@ module RAPFLAG
     rescue => error
       puts "error #{error}"
       puts " backtrace: #{error.backtrace[0..10].join("\n")}"
-      require 'pry'; binding.pry
     end
 
     def fetch_csv_history

@@ -51,7 +51,7 @@ module RAPFLAG
 
     def dump_history
       load_history_info
-      FileUtils.makedirs('output') unless File.directory?('output')
+      FileUtils.makedirs(RAPFLAG.outputDir) unless File.directory?(RAPFLAG.outputDir)
       CSV.open("#{@output_prefix}/trade_history.csv",'w+',
                :col_sep => ';',
                :write_headers=> true,
@@ -258,7 +258,7 @@ module RAPFLAG
     end
     private
     def check_config
-      @output_prefix = 'output/poloniex'
+      @output_prefix = File.join(RAPFLAG.outputDir, 'poloniex')
       @spec_data = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'spec', 'data'))
       ['poloniex_api_key',
        'poloniex_secret',
