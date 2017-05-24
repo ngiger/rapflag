@@ -13,7 +13,7 @@ rescue LoadError
 end
 
 Opts = Trollop::options do
-  opt :clean, "Create summary of transactions by day"
+  opt :clean, "Create summary of transactions by day for #{RAPFLAG::Config['currencies'].join(', ')}"
   opt :poloniex, "Use Poloniex API instead of Bitfinex API"
   opt :dump, "Use Poloniex API and dump history into CSV files"
 end
