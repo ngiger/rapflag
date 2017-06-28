@@ -28,7 +28,7 @@ module RAPFLAG
         puts "Fetching #{date_time}: #{url} #{@@btc_to_usd.size} BTC #{@@bfx_to_usd.size} BFX" if $VERBOSE
         response = Faraday.get(url)
         items = eval(response.body)
-        if items && items.size > 0 && items.first.first.eql?(:error)
+        if items && items.size > 0 && (items.first.is_a?(String) ?  items.first.eql?('error'): items.first.first.eql?(:error) )
           puts "#{Time.now}: Fetching #{url} returned #{items.first}."
           puts "   Retrying in #{Delay_in_seconds} seconds"
           sleep(Delay_in_seconds)

@@ -78,9 +78,9 @@ describe RAPFLAG::Bitfinex do
       it 'should have generated a correct CSV file' do
         expect(File.exist?(Bitfinex_CSV_Test_File)).to eql(true)
         lines = IO.readlines(Bitfinex_CSV_Test_File)
-        expect(lines.first.chomp).to eql('currency;amount;balance;description;date_time')
+        expect(lines.first.chomp).to eql('currency,amount,balance,description,date_time')
         expect(lines[1].chomp).to eql(
-          'BTC;-0.00000005;0.0;Transfer of 0.0 BTC from wallet Exchange to Deposit on wallet Exchange;2016.12.03 21:20:47')
+          'BTC,-0.00000005,0.0,Transfer of 0.0 BTC from wallet Exchange to Deposit on wallet Exchange,2016.12.03 21:20:47')
       end
     end
   end
@@ -91,15 +91,15 @@ describe RAPFLAG::Bitfinex do
     it 'should have generated a correct summary CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_EXCHANGE_BTC_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_EXCHANGE_BTC_File)
-      expect(lines.first.chomp).to eql('currency;date;income;balance;rate;balance_in_usd')
-      expect(lines[1].chomp).to eql('BTC;2016.01.15;0.0;8.99788147;;')
-      expect(lines[-1].chomp).to eql('BTC;2016.12.03;0.0;0.0;765.46;0.0')
+      expect(lines.first.chomp).to eql('currency,date,income,balance,rate,balance_in_usd')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,8.99788147,,')
+      expect(lines[-1].chomp).to eql('BTC,2016.12.03,0.0,0.0,765.46,0.0')
     end
     it 'should have a balance for for each day' do
       expect(File.exist?(BITFINEX_SUMMARY_EXCHANGE_BTC_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_EXCHANGE_BTC_File)
-      first_date = Date.strptime(lines[1].chomp.split(';')[1], '%Y.%m.%d')
-      last_date = Date.strptime(lines[-1].chomp.split(';')[1], '%Y.%m.%d')
+      first_date = Date.strptime(lines[1].chomp.split(RAPFLAG::COLUMN_SEPARATOR)[1], '%Y.%m.%d')
+      last_date = Date.strptime(lines[-1].chomp.split(RAPFLAG::COLUMN_SEPARATOR)[1], '%Y.%m.%d')
       (last_date >  first_date).should be true
       nr_dates = 323
       (last_date -  first_date).to_i.should eql nr_dates
@@ -153,16 +153,16 @@ describe RAPFLAG::Bitfinex do
     it 'should generate a correct summary CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_DEPOSIT_BFX_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_DEPOSIT_BFX_File)
-      expect(lines.first.chomp).to eql('currency;date;income;balance;rate;balance_in_usd')
-      expect(lines[1].chomp).to eql('BFX;2016.01.15;0.0;8.99788147;;')
+      expect(lines.first.chomp).to eql('currency,date,income,balance,rate,balance_in_usd')
+      expect(lines[1].chomp).to eql('BFX,2016.01.15,0.0,8.99788147,,')
     end
     it 'should generate a correct BTX_total file' do
       expect(File.exist?(BITFINEX_TOTAL_BTC_File)).to eql(true)
       lines = IO.readlines(BITFINEX_TOTAL_BTC_File)
       expect(lines.first).not_to be_nil
-      expect(lines.first.chomp).to eql('currency;date;total_income;total_balance')
-      expect(lines[1].chomp).to eql('BTC;2016.01.15;0.0;53.987288819999996')
-      expect(lines[4].chomp).to eql('BTC;2016.02.14;-0.05825760000000001;29.0705424')
+      expect(lines.first.chomp).to eql('currency,date,total_income,total_balance')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,134.96822204999995')
+      expect(lines[4].chomp).to eql('BTC,2016.02.14,-0.11651520000000001,58.1410848')
     end
   end
 end

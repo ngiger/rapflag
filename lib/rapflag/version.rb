@@ -4,5 +4,6 @@ module RAPFLAG
     @@outputDir
   end
   Wallets = ['trading', 'exchange', 'deposit']
-  VERSION='0.0.9'
+  COLUMN_SEPARATOR = ','
+  VERSION='1.0.0'
 end

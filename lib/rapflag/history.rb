@@ -21,7 +21,7 @@ module RAPFLAG
       FileUtils.makedirs(File.dirname(out_file))
       CSV.open(out_file,'w',
           :write_headers=> true,
-          :col_sep => ';',
+          :col_sep => COLUMN_SEPARATOR,
           :headers => ['currency',
                       'amount',
                       'balance',
@@ -86,7 +86,7 @@ module RAPFLAG
       saved_info = nil
       CSV.open(out_file,'w',
           :write_headers=> true,
-          :col_sep => ';',
+          :col_sep => COLUMN_SEPARATOR,
           :headers => ['currency',
                        'date',
                       'income',
@@ -145,7 +145,7 @@ module RAPFLAG
       total_filename = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_total.csv")
       total_file = CSV.open(total_filename, 'w+',
           :write_headers=> true,
-          :col_sep => ';',
+          :col_sep => COLUMN_SEPARATOR,
           :headers => ['currency',
                        'date',
                       'total_income',
