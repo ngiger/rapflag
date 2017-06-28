@@ -96,17 +96,17 @@ module RAPFLAG
           strings = date.split('.')
           fetch_date = Date.new(strings[0].to_i, strings[1].to_i, strings[2].to_i)
           (1..(fetch_date - previous_date -1).to_i).each do |j|
-            intermediate = (previous_date + j).strftime('%Y.%m.%d')
+            intermediate = (previous_date + j).strftime(DATE_FORMAT)
             csv << [@currency,
                     intermediate,
-                    saved_info.income,
+                    "",
                     saved_info.balance,
                   ]
-            add_total(previous_date, saved_info.income, saved_info.balance)
+            add_total(previous_date, 0.0, saved_info.balance)
           end if previous_date
           csv << [@currency,
                   date,
-                  info.income,
+                  info.income == 0.0 ? '': info.income,
                   info.balance,
                  ]
           add_total(date, info.income, info.balance)
