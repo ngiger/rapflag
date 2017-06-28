@@ -53,7 +53,7 @@ module RAPFLAG
       load_history_info
       FileUtils.makedirs(RAPFLAG.outputDir) unless File.directory?(RAPFLAG.outputDir)
       CSV.open("#{@output_prefix}/trade_history.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'currency_pair'] + @trade_history.values.first.first.to_h.keys
         ) do |csv|
@@ -64,7 +64,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/lending_history.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => @lending_history.first.to_h.keys
         ) do |csv|
@@ -73,7 +73,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/tradable_balances.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'from_currency', 'to_from_currency', ]
         ) do |csv|
@@ -84,7 +84,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/complete_balances.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'currency', 'available', 'onOrders', 'btcValue' ]
         ) do |csv|
@@ -93,7 +93,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/active_loans.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'key', 'id', 'currency', 'rate', 'amount', 'duration', 'autoRenew', 'date', 'fees', ]
         ) do |csv|
@@ -105,7 +105,7 @@ module RAPFLAG
       end
 
       CSV.open("#{@output_prefix}/available_account_balances.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'key', 'currency', 'balance']
         ) do |csv|
@@ -116,7 +116,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/deposit_addresses.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => [ 'currency', 'id']
         ) do |csv|
@@ -125,7 +125,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/withdrawals.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => @deposits.first.to_h.keys
         ) do |csv|
@@ -134,7 +134,7 @@ module RAPFLAG
         end
       end
       CSV.open("#{@output_prefix}/deposits.csv",'w+',
-               :col_sep => ';',
+               :col_sep => COLUMN_SEPARATOR,
                :write_headers=> true,
                :headers => @withdrawals.first.to_h.keys
         ) do |csv|
@@ -245,7 +245,7 @@ module RAPFLAG
           end
           next unless @history.size > 0
           CSV.open(out_name,'w+',
-                  :col_sep => ';',
+                  :col_sep => COLUMN_SEPARATOR,
                   :write_headers=> true,
                   :headers => @history.first.to_h.keys
             ) do |csv|
