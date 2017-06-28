@@ -29,13 +29,50 @@ module RAPFLAG
                       'date_time',
                       ] #< column header
         ) do |csv|
-        @history.each do | hist_item|
-          csv << [ hist_item['currency'],
-                  hist_item['amount'],
-                  hist_item['balance'],
-                  hist_item['description'],
-                    Time.at(hist_item['timestamp'].to_i).strftime(DATE_TIME_FORMAT),
-                  ]
+        skip_next = false
+        @history.each_with_index do | hist_item, index|
+          if skip_next
+            skip_next = false
+            next
+          end
+          timestamp = Time.at(hist_item['timestamp'].to_i).strftime(DATE_TIME_FORMAT)
+          next_timestamp = @history[index+1] && Time.at(@history[index+1]['timestamp'].to_i).strftime(DATE_TIME_FORMAT)
+          if next_timestamp.eql?(timestamp)
+            next_item = @history[index + 1]
+            this_day = Date.parse(timestamp).to_s
+            prev_day = (Date.parse(timestamp)-1).to_s
+            this_tx = history.find_all{|x| Time.at(x['timestamp'].to_i).to_date.to_s.eql?(this_day)}
+            prev_tx = history.find{|x| Time.at(x['timestamp'].to_i).to_date < Date.parse(timestamp)}
+            @total = prev_tx ?  prev_tx['balance'].to_f : 0.0
+            this_tx.each{|x|to_add =  x['amount'].to_f; @total = @total + to_add}
+            if @total == next_item['balance'].to_f
+              second = hist_item
+              first  = next_item
+            else
+              first  = hist_item
+              second = next_item
+            end
+            skip_next = true
+            csv << [ first['currency'],
+                    first['amount'],
+                    first['balance'],
+                    first['description'],
+                    Time.at(first['timestamp'].to_i).strftime(DATE_TIME_FORMAT),
+                    ]
+            csv << [ second['currency'],
+                    second['amount'],
+                    second['balance'],
+                    second['description'],
+                    Time.at(second['timestamp'].to_i).strftime(DATE_TIME_FORMAT),
+                    ]
+          else
+            csv << [ hist_item['currency'],
+                    hist_item['amount'],
+                    hist_item['balance'],
+                    hist_item['description'],
+                    timestamp,
+                    ]
+          end
         end
       end
 
@@ -96,17 +133,17 @@ module RAPFLAG
           strings = date.split('.')
           fetch_date = Date.new(strings[0].to_i, strings[1].to_i, strings[2].to_i)
           (1..(fetch_date - previous_date -1).to_i).each do |j|
-            intermediate = (previous_date + j).strftime('%Y.%m.%d')
+            intermediate = (previous_date + j).strftime(DATE_FORMAT)
             csv << [@currency,
                     intermediate,
-                    saved_info.income,
+                    "",
                     saved_info.balance,
                   ]
-            add_total(previous_date, saved_info.income, saved_info.balance)
+            add_total(previous_date, 0.0, saved_info.balance)
           end if previous_date
           csv << [@currency,
                   date,
-                  info.income,
+                  info.income == 0.0 ? '': info.income,
                   info.balance,
                  ]
           add_total(date, info.income, info.balance)
