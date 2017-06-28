@@ -30,9 +30,6 @@ def gen_exchange
     @exchange = RAPFLAG::Bitfinex.new('exchange', 'BTC')
     @exchange.fetch_csv_history
     @exchange.create_summary
-    @bfx   = @exchange.get_usd_exchange(@date_bfx_1, 'BFX')
-    @btx_1 = @exchange.get_usd_exchange(@date_btx_1, 'BTC')
-    @btx_2 = @exchange.get_usd_exchange(@date_btx_2, 'BTC')
   end
 end
 def gen_trading
@@ -111,9 +108,6 @@ describe RAPFLAG::Bitfinex do
     it 'should have NOT have generated a correct summary deposit BFX CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_DEPOSIT_BFX_File)).to eql(false)
     end
-    it 'should have the correct BFX -> USD rate' do
-      expect(@bfx).to eql 0.5697
-    end
   end
   context 'deposit option --clean' do
     before(:all) do
@@ -123,17 +117,11 @@ describe RAPFLAG::Bitfinex do
         @exchange = RAPFLAG::Bitfinex.new('exchange', 'BTC')
         @exchange.fetch_csv_history
         @exchange.create_summary
-        @bfx   = @exchange.get_usd_exchange(@date_bfx_1, 'BFX')
-        @btx_1 = @exchange.get_usd_exchange(@date_btx_1, 'BTC')
-        @btx_2 = @exchange.get_usd_exchange(@date_btx_2, 'BTC')
       end
       VCR.use_cassette("rapflag", :record => :new_episodes) do
         @trading = RAPFLAG::Bitfinex.new('trading', 'BTC')
         @trading.fetch_csv_history
         @trading.create_summary
-        @bfx   = @trading.get_usd_exchange(@date_bfx_1, 'BFX')
-        @btx_1 = @trading.get_usd_exchange(@date_btx_1, 'BTC')
-        @btx_2 = @trading.get_usd_exchange(@date_btx_2, 'BTC')
       end
       @trading.create_total
     end
