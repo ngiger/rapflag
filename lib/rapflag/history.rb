@@ -82,7 +82,6 @@ module RAPFLAG
       out_file = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}_summary.csv")
       FileUtils.makedirs(File.dirname(out_file))
       previous_date = nil
-      saved_rate = nil
       saved_info = nil
       CSV.open(out_file,'w',
           :write_headers=> true,
@@ -91,22 +90,17 @@ module RAPFLAG
                        'date',
                       'income',
                       'balance',
-                      'rate',
-                      'balance_in_usd',
                       ] #< column header
         ) do |csv|
         @daily.each do |date, info|
           strings = date.split('.')
           fetch_date = Date.new(strings[0].to_i, strings[1].to_i, strings[2].to_i)
-          rate = get_usd_exchange(fetch_date, @currency)
           (1..(fetch_date - previous_date -1).to_i).each do |j|
             intermediate = (previous_date + j).strftime('%Y.%m.%d')
             csv << [@currency,
                     intermediate,
                     saved_info.income,
                     saved_info.balance,
-                    saved_rate ? saved_rate : nil,
-                    saved_rate ? info.balance * get_usd_exchange(intermediate, @currency) : nil,
                   ]
             add_total(previous_date, saved_info.income, saved_info.balance)
           end if previous_date
@@ -114,13 +108,10 @@ module RAPFLAG
                   date,
                   info.income,
                   info.balance,
-                  rate ? rate : nil,
-                  rate ? info.balance * get_usd_exchange(fetch_date, @currency) : nil,
                  ]
           add_total(date, info.income, info.balance)
           previous_date = fetch_date
           saved_info = info
-          saved_rate = nil
         end
       end
     end

@@ -14,41 +14,6 @@ module RAPFLAG
         :trade_history, :available_account_balances, :open_orders, :tradable_balances,
         :output_prefix
 
-    @@btc_to_usd = {}
-    @@bfx_to_usd = {}
-
-    def get_usd_exchange(date_time = Time.now, from='BTC')
-      return 1.0 if from == 'USD'
-      daily  = ::Poloniex.get_all_daily_exchange_rates('BTC_GNT')
-
-      key = date_time.strftime(DATE_FORMAT)
-      return @@btc_to_usd[key] if from.eql?('BTC') && @@btc_to_usd.size > 0
-      return @@bfx_to_usd[key] if from.eql?('BFX') && @@bfx_to_usd.size > 0
-      ms =  (date_time.is_a?(Date) ? date_time.to_time : date_time).to_i*1000
-      ms_next_date = ms + (3*24*3600)*1000
-      # this does not work
-      # url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
-      url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}?end:#{ms_next_date}"
-      # therefore we just return the most uptodate
-      url = "https://api.bitfinex.com/v2/candles/trade:1D:t#{from}USD/hist?start:#{ms}"
-      puts "Fetching #{date_time}: #{url} #{@@btc_to_usd.size} BTC #{@@bfx_to_usd.size} BFX" if $VERBOSE
-      response = Faraday.get(url)
-      items = eval(response.body)
-      rates = {}
-      items.each do |item|
-        if item.first.eql?(:error)
-          puts "Fetching returned #{item}. Aborting"
-          exit(1)
-        end
-        timestamp = Time.at(item.first/1000).strftime(DATE_FORMAT)
-        rates[timestamp] = item[2]
-      end;
-      from.eql?('BTC') ? @@btc_to_usd = rates.clone : @@bfx_to_usd = rates.clone
-      rates[key] ? rates[key] : nil
-    rescue => err
-      puts "Err #{err}"
-    end
-
     def dump_history
       load_history_info
       FileUtils.makedirs(RAPFLAG.outputDir) unless File.directory?(RAPFLAG.outputDir)
