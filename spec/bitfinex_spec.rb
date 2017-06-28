@@ -79,6 +79,13 @@ describe RAPFLAG::Bitfinex do
         expect(lines[1].chomp).to eql(
           'BTC,-0.00000005,0.0,Transfer of 0.0 BTC from wallet Exchange to Deposit on wallet Exchange,2016.12.03 21:20:47')
       end
+      it 'should have some lines inverted if the timestamp match' do
+        expect(File.exist?(Bitfinex_CSV_Test_File)).to eql(true)
+        lines = IO.readlines(Bitfinex_CSV_Test_File)
+        first  = lines.index("BTC,-0.0170128,11.0283072,Trading fees for 8.5064 BTC @ 442.06 on BFX (0.2%) on wallet Exchange,2016.02.21 23:48:48\n")
+        second = lines.index("BTC,-0.0004,11.04532,Trading fees for 0.2 BTC @ 442.1 on BFX (0.2%) on wallet Exchange,2016.02.21 23:48:48\n")
+        expect(second + 1).to eq first
+      end
     end
   end
   context 'exchange option --clean' do
