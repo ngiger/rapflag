@@ -91,9 +91,9 @@ describe RAPFLAG::Bitfinex do
     it 'should have generated a correct summary CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_EXCHANGE_BTC_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_EXCHANGE_BTC_File)
-      expect(lines.first.chomp).to eql('currency,date,income,balance,rate,balance_in_usd')
-      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,8.99788147,,')
-      expect(lines[-1].chomp).to eql('BTC,2016.12.03,0.0,0.0,765.46,0.0')
+      expect(lines.first.chomp).to eql('currency,date,income,balance')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,8.99788147')
+      expect(lines[-1].chomp).to eql('BTC,2016.12.03,0.0,0.0')
     end
     it 'should have a balance for for each day' do
       expect(File.exist?(BITFINEX_SUMMARY_EXCHANGE_BTC_File)).to eql(true)
@@ -110,10 +110,6 @@ describe RAPFLAG::Bitfinex do
     end
     it 'should have NOT have generated a correct summary deposit BFX CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_DEPOSIT_BFX_File)).to eql(false)
-    end
-    it 'should have the correct BTC -> USD rate' do
-      expect(@btx_1).to eql 924.02
-      expect(@btx_2).to eql 905.76
     end
     it 'should have the correct BFX -> USD rate' do
       expect(@bfx).to eql 0.5697
@@ -153,8 +149,8 @@ describe RAPFLAG::Bitfinex do
     it 'should generate a correct summary CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_DEPOSIT_BFX_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_DEPOSIT_BFX_File)
-      expect(lines.first.chomp).to eql('currency,date,income,balance,rate,balance_in_usd')
-      expect(lines[1].chomp).to eql('BFX,2016.01.15,0.0,8.99788147,,')
+      expect(lines.first.chomp).to eql('currency,date,income,balance')
+      expect(lines[1].chomp).to eql('BFX,2016.01.15,0.0,8.99788147')
     end
     it 'should generate a correct BTX_total file' do
       expect(File.exist?(BITFINEX_TOTAL_BTC_File)).to eql(true)
