@@ -39,7 +39,7 @@ module RAPFLAG
           puts " backtrace: #{error.backtrace[0..10].join("\n")}"
         end
       end
-      puts "Feched #{@history.size} history entries" if $VERBOSE
+      puts "Fetched #{@history.size} history entries" if $VERBOSE
     end
     private
     def check_config
