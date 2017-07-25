@@ -3,5 +3,6 @@ pkg/
 *.log
 *.csv
 *#
+*.patch
 output/
 Gemfile.lock

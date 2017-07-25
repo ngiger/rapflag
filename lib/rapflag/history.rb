@@ -101,6 +101,7 @@ module RAPFLAG
       @history.sort{|x,y| x['timestamp'] <=> y['timestamp']}.each do | hist_item|
         date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
         info = Struct::Daily.new(date, hist_item['amount'].to_f, hist_item['balance'].to_f, hist_item['description'])
+
         amount = hist_item['amount'].to_f
         balance = hist_item['balance'].to_f
         if @daily[date]
@@ -139,7 +140,7 @@ module RAPFLAG
                     "",
                     saved_info.balance,
                   ]
-            add_total(previous_date, 0.0, saved_info.balance)
+            add_total(intermediate, 0.0, saved_info.balance)
           end if previous_date
           csv << [@currency,
                   date,
@@ -164,7 +165,6 @@ module RAPFLAG
       @@global_totals[key][0] += income
       @@global_totals[key][1] += balance
     end
-
     public
     def create_total
       this_currency = @@global_totals.select{|v, k| v[0].eql?(@currency)}
