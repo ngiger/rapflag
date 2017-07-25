@@ -152,8 +152,10 @@ describe RAPFLAG::Bitfinex do
       lines = IO.readlines(BITFINEX_TOTAL_BTC_File)
       expect(lines.first).not_to be_nil
       expect(lines.first.chomp).to eql('currency,date,total_income,total_balance')
-      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,134.96822204999995')
-      expect(lines[4].chomp).to eql('BTC,2016.02.14,-0.029128800000000003,58.1410848')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,26.993644409999998')
+      expect(lines[2].chomp).to eql('BTC,2016.01.16,0.0,26.993644409999998')
+      expect(lines[4].chomp).to eql('BTC,2016.01.18,0.0,26.993644409999998')
+      expect(lines[6].chomp).to eql('BTC,2016.01.20,0.0,30.599999999999998')
     end
   end
 end
