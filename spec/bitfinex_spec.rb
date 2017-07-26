@@ -32,7 +32,19 @@ def gen_exchange
     @exchange.create_summary
   end
 end
-def gen_trading
+def gen_dump(wallet = 'deposit')
+  @date_bfx_1 = Date.new(2017,1,10)
+  @date_btx_1 = Date.new(2017,1,21)
+  @date_btx_2 = Date.new(2017,1,10)
+  VCR.use_cassette("btc_#{wallet}", :record => :new_episodes) do
+    @history_name = File.join(RAPFLAG.outputDir, 'bitfinex', "BTC_#{wallet}_history.csv")
+    expect(File.exist?(@history_name)).to eql(false)
+    @exchange = RAPFLAG::Bitfinex.new(wallet, 'BTC')
+    @exchange.fetch_csv_history
+    @exchange.dump_history
+    @exchange.create_summary
+    @exchange.create_total
+  end
 end
 describe RAPFLAG::Bitfinex do
   OUTPUT_ROOT = File.expand_path(File.join(__FILE__, '..', 'output'))
@@ -147,15 +159,51 @@ describe RAPFLAG::Bitfinex do
       expect(lines.first.chomp).to eql('currency,date,income,balance')
       expect(lines[1].chomp).to eql('BFX,2016.01.15,"",8.99788147')
     end
-    it 'should generate a correct BTX_total file' do
-      expect(File.exist?(BITFINEX_TOTAL_BTC_File)).to eql(true)
-      lines = IO.readlines(BITFINEX_TOTAL_BTC_File)
-      expect(lines.first).not_to be_nil
+  end
+  context 'option --dump' do
+    before(:all) do
+      FileUtils.rm_rf(RAPFLAG.outputDir)
+      RAPFLAG::Wallets.each{ |wallet| gen_dump(wallet) }
+      @stichtag = '2017.05.23'
+    end
+    it 'should have generated a correct deposit history CSV file' do
+      history_name = File.join(RAPFLAG.outputDir, 'bitfinex', "BTC_deposit_history.csv")
+      expect(File.exist?(history_name)).to eql(true)
+      lines = IO.readlines(history_name)
+      expect(lines.first.chomp).to eql('currency,amount,balance,description,timestamp,date')
+      expect(lines[1].chomp).to eql('BTC,0.00000183,26.23947379,Margin Funding Payment on wallet Deposit,1500773485.0,2017.07.23')
+      expect(lines[-1].chomp).to eql('BTC,2.0,2.0,Deposit (BITCOIN) #614485 on wallet Deposit,1446157557.0,2015.10.29')
+      stich_item = lines.find{|x| /#{@stichtag}/.match(x)}.chomp
+      expect(stich_item).to eql 'BTC,-1.10078339,41.64921661,Transfer of 1.1008 BTC from wallet Deposit to Exchange on wallet Deposit,1495556898.0,2017.05.23'
+    end
+    it 'should have generated a correct exchange history CSV file' do
+      history_name = File.join(RAPFLAG.outputDir, 'bitfinex', "BTC_exchange_history.csv")
+      expect(File.exist?(history_name)).to eql(true)
+      lines = IO.readlines(history_name)
+      expect(lines.first.chomp).to eql('currency,amount,balance,description,timestamp,date')
+      expect(lines[1].chomp).to eql('BTC,-2.9,0.0,Transfer of 2.9 BTC from wallet Exchange to Deposit on wallet Exchange,1497288653.0,2017.06.12')
+      expect(lines[-1].chomp).to eql('BTC,12.65,12.65,Transfer of 12.65 BTC from wallet Trading to Exchange on wallet Exchange,1452859181.0,2016.01.15')
+      stich_item = lines.find{|x| /#{@stichtag}/.match(x)}.chomp
+      expect(stich_item).to eql 'BTC,-0.98257955,0.0,Exchange 0.98257955 BTC for USD @ 2220.8 on wallet Exchange,1495557186.0,2017.05.23'
+    end
+    it 'should have generated a correct trading history CSV file' do
+      history_name = File.join(RAPFLAG.outputDir, 'bitfinex', "BTC_trading_history.csv")
+      expect(File.exist?(history_name)).to eql(true)
+      lines = IO.readlines(history_name)
+      expect(lines.first.chomp).to eql('currency,amount,balance,description,timestamp,date')
+      expect(lines[1].chomp).to eql('BTC,-12.65,0.0,Transfer of 12.65 BTC from wallet Trading to Exchange on wallet Trading,1452859181.0,2016.01.15')
+      expect(lines[-1].chomp).to eql('BTC,12.65,12.65,Transfer of 12.65 BTC from wallet Deposit to Trading on wallet Trading,1452859061.0,2016.01.15')
+      expect(lines.find{|x| /#{@stichtag}/.match(x)}).to eql nil
+    end
+    it 'should have generated a correct total CSV file' do
+      total_name = File.join(RAPFLAG.outputDir, 'bitfinex', "BTC_total.csv")
+      expect(File.exist?(total_name)).to eql(true)
+      lines = IO.readlines(total_name)
       expect(lines.first.chomp).to eql('currency,date,total_income,total_balance')
-      expect(lines[1].chomp).to eql('BTC,2016.01.15,0.0,26.993644409999998')
-      expect(lines[2].chomp).to eql('BTC,2016.01.16,0.0,26.993644409999998')
-      expect(lines[4].chomp).to eql('BTC,2016.01.18,0.0,26.993644409999998')
-      expect(lines[6].chomp).to eql('BTC,2016.01.20,0.0,30.599999999999998')
+      expect(lines[1].chomp).to eql('BTC,2015.10.29,0.0,2.0')
+      expect(lines[-1].chomp).to eql('BTC,2017.07.23,1.83e-06,26.23947379')
+      stich_item = lines.find{|x| /#{@stichtag}/.match(x)}.chomp
+      expect(stich_item).to eql 'BTC,2017.05.23,0.030693480000000002,42.63179616'
     end
   end
 end

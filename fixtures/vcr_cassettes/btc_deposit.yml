@@ -1,0 +1,656 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.bitfinex.com/v1/history
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      X-BFX-PAYLOAD:
+      - eyJub25jZSI6IjE1MDEwNzY4MTUxNjYzIiwicmVxdWVzdCI6Ii92MS9oaXN0b3J5IiwibGltaXQiOjEwMDAsInVudGlsIjoxNTAxMDc2ODE2LCJ3YWxsZXQiOiJkZXBvc2l0IiwiY3VycmVuY3kiOiJCVEMifQ==
+      X-BFX-SIGNATURE:
+      - 9e18a676e5c1c9d50eb112a5e9bafeb0358ee709fde5a6ef2ff14d187f192e15aff7791953803f57c200416c32b898e3
+      X-BFX-APIKEY:
+      - H0pjSg6k1V2Q3J7ItzzEPUYrRwd4KDK7jsK0W48QPXp
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      date:
+      - Wed, 26 Jul 2017 13:46:46 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      set-cookie:
+      - __cfduid=dd23926a242ff3e06044fe7229c393b1d1501076806; expires=Thu, 26-Jul-18
+        13:46:46 GMT; path=/; domain=.bitfinex.com; HttpOnly
+      strict-transport-security:
+      - max-age=31536000
+      x-frame-options:
+      - SAMEORIGIN, SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+      etag:
+      - '"4a86e9680be013f91b5037dc06b75bd5"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 91c55213-a71e-4ee5-9bba-4836ba1ccc11
+      x-runtime:
+      - '0.057296'
+      server:
+      - cloudflare-nginx
+      cf-ray:
+      - 3847ce983ca03ea4-ZRH
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency":"BTC","amount":"0.00000183","balance":"26.23947379","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500773485.0"},{"currency":"BTC","amount":"0.00000681","balance":"26.23947196","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500687085.0"},{"currency":"BTC","amount":"0.00000681","balance":"26.23946515","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500600849.0"},{"currency":"BTC","amount":"0.00000681","balance":"26.23945834","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500514424.0"},{"currency":"BTC","amount":"0.00003752","balance":"26.23945153","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500427895.0"},{"currency":"BTC","amount":"0.00009082","balance":"26.23941401","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500341672.0"},{"currency":"BTC","amount":"11.9999","balance":"26.23932319","description":"Deposit
+        (BITCOIN) #2525818 on wallet Deposit","timestamp":"1500306069.0"},{"currency":"BTC","amount":"0.00009082","balance":"14.23942319","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500255143.0"},{"currency":"BTC","amount":"13.25955777","balance":"14.23933237","description":"Deposit
+        (BITCOIN) #2511348 on wallet Deposit","timestamp":"1500214668.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.9797746","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500168781.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97968378","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1500082300.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97959296","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499996037.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97950214","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499909466.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97941132","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499823102.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.9793205","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499736718.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97922968","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499650265.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97913886","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499563885.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97904804","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499477476.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97895722","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499391079.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.9788664","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499304713.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97877558","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499218361.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97868476","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499131893.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97859394","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1499045459.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97850312","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498959076.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.9784123","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498872670.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97832148","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498786285.0"},{"currency":"BTC","amount":"0.00009082","balance":"0.97823066","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498699864.0"},{"currency":"BTC","amount":"-14.89740611","balance":"0.97853984","description":"Bitcoin
+        Withdrawal #2308155 on wallet Deposit","timestamp":"1498637028.0"},{"currency":"BTC","amount":"-0.0004","balance":"0.97813984","description":"Crypto
+        Withdrawal fee on wallet Deposit","timestamp":"1498637028.0"},{"currency":"BTC","amount":"0.00009082","balance":"15.87594595","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498613469.0"},{"currency":"BTC","amount":"0.00052013","balance":"15.87585513","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498527098.0"},{"currency":"BTC","amount":"0.00115468","balance":"15.875335","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498440683.0"},{"currency":"BTC","amount":"0.00147051","balance":"15.87418032","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498354326.0"},{"currency":"BTC","amount":"0.0015419","balance":"15.87270981","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498267875.0"},{"currency":"BTC","amount":"0.00153746","balance":"15.87116791","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498181463.0"},{"currency":"BTC","amount":"0.00153788","balance":"15.86963045","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498095064.0"},{"currency":"BTC","amount":"0.0015514","balance":"15.86809257","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1498008667.0"},{"currency":"BTC","amount":"0.00154413","balance":"15.86654117","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497922281.0"},{"currency":"BTC","amount":"0.00155859","balance":"15.86499704","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497835908.0"},{"currency":"BTC","amount":"0.00167774","balance":"15.86343845","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497749472.0"},{"currency":"BTC","amount":"0.0019485","balance":"15.86176071","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497663122.0"},{"currency":"BTC","amount":"0.00197855","balance":"15.85981221","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497576718.0"},{"currency":"BTC","amount":"0.00199685","balance":"15.85783366","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497490388.0"},{"currency":"BTC","amount":"0.00219897","balance":"15.85583681","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497403941.0"},{"currency":"BTC","amount":"0.00136814","balance":"15.85363784","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497317555.0"},{"currency":"BTC","amount":"2.9","balance":"15.8522697","description":"Transfer
+        of 2.9 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1497288653.0"},{"currency":"BTC","amount":"-2.9","balance":"12.9522697","description":"Transfer
+        of 2.9 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497288648.0"},{"currency":"BTC","amount":"-1.1","balance":"15.8522697","description":"Transfer
+        of 1.1 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497288579.0"},{"currency":"BTC","amount":"-1.25","balance":"16.9522697","description":"Transfer
+        of 1.25 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497281966.0"},{"currency":"BTC","amount":"-1.0","balance":"18.2022697","description":"Transfer
+        of 1.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497278718.0"},{"currency":"BTC","amount":"-0.0001","balance":"29.2022697","description":"Crypto
+        Withdrawal fee on wallet Deposit","timestamp":"1497267366.0"},{"currency":"BTC","amount":"-10.0","balance":"19.2022697","description":"Bitcoin
+        Withdrawal #2144184 on wallet Deposit","timestamp":"1497267366.0"},{"currency":"BTC","amount":"-1.25","balance":"29.2023697","description":"Transfer
+        of 1.25 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497265643.0"},{"currency":"BTC","amount":"-1.75","balance":"30.4523697","description":"Transfer
+        of 1.75 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497264099.0"},{"currency":"BTC","amount":"0.00076376","balance":"32.2023697","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497231095.0"},{"currency":"BTC","amount":"-0.0001","balance":"32.20760594","description":"Crypto
+        Withdrawal fee on wallet Deposit","timestamp":"1497175313.0"},{"currency":"BTC","amount":"-0.006","balance":"32.20160594","description":"Bitcoin
+        Withdrawal #2136045 on wallet Deposit","timestamp":"1497175313.0"},{"currency":"BTC","amount":"-1.01357611","balance":"32.20770594","description":"Transfer
+        of 1.0136 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1497174756.0"},{"currency":"BTC","amount":"0.00665116","balance":"33.22128205","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497144695.0"},{"currency":"BTC","amount":"0.00848164","balance":"33.21463089","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1497058277.0"},{"currency":"BTC","amount":"0.0097254","balance":"33.20614925","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496971863.0"},{"currency":"BTC","amount":"0.00976045","balance":"33.19642385","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496885477.0"},{"currency":"BTC","amount":"0.00955779","balance":"33.1866634","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496799059.0"},{"currency":"BTC","amount":"0.01346753","balance":"33.17710561","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496712654.0"},{"currency":"BTC","amount":"0.01357878","balance":"33.16363808","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496626258.0"},{"currency":"BTC","amount":"0.01362386","balance":"33.1500593","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496539856.0"},{"currency":"BTC","amount":"0.0127573","balance":"33.13643544","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496453453.0"},{"currency":"BTC","amount":"0.01271322","balance":"33.12367814","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496367100.0"},{"currency":"BTC","amount":"0.01571971","balance":"33.11096492","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496280678.0"},{"currency":"BTC","amount":"0.01999465","balance":"33.09524521","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496194259.0"},{"currency":"BTC","amount":"0.02029577","balance":"33.07525056","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496107869.0"},{"currency":"BTC","amount":"0.02039539","balance":"33.05495479","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1496021470.0"},{"currency":"BTC","amount":"0.02081177","balance":"33.0345594","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495935069.0"},{"currency":"BTC","amount":"0.02128871","balance":"33.01374763","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495848673.0"},{"currency":"BTC","amount":"0.02068151","balance":"32.99245892","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495762266.0"},{"currency":"BTC","amount":"-0.5","balance":"32.97177741","description":"Transfer
+        of 0.5 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495712076.0"},{"currency":"BTC","amount":"-1.07","balance":"33.47177741","description":"Transfer
+        of 1.07 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495711603.0"},{"currency":"BTC","amount":"0.06830552","balance":"34.54177741","description":"Transfer
+        of 0.0683 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1495710497.0"},{"currency":"BTC","amount":"-3.12","balance":"34.47347189","description":"Transfer
+        of 3.12 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495710254.0"},{"currency":"BTC","amount":"-1.0","balance":"37.59347189","description":"Transfer
+        of 1.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495687137.0"},{"currency":"BTC","amount":"0.0230729","balance":"38.59347189","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495675898.0"},{"currency":"BTC","amount":"-1.5","balance":"38.57039899","description":"Transfer
+        of 1.5 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495636066.0"},{"currency":"BTC","amount":"0.39240716","balance":"40.07039899","description":"Transfer
+        of 0.3924 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1495615982.0"},{"currency":"BTC","amount":"-2.0","balance":"39.67799183","description":"Transfer
+        of 2.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495615675.0"},{"currency":"BTC","amount":"0.02877522","balance":"41.67799183","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495589535.0"},{"currency":"BTC","amount":"-1.10078339","balance":"41.64921661","description":"Transfer
+        of 1.1008 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495556898.0"},{"currency":"BTC","amount":"-1.25","balance":"42.75","description":"Transfer
+        of 1.25 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495552228.0"},{"currency":"BTC","amount":"2.35078339","balance":"44.0","description":"Transfer
+        of 2.3508 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1495551439.0"},{"currency":"BTC","amount":"-2.35078339","balance":"41.64921661","description":"Transfer
+        of 2.3508 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495551434.0"},{"currency":"BTC","amount":"-1.0","balance":"44.0","description":"Transfer
+        of 1.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495551309.0"},{"currency":"BTC","amount":"-2.59025838","balance":"45.0","description":"Transfer
+        of 2.5903 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495520883.0"},{"currency":"BTC","amount":"0.03176375","balance":"47.59025838","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495503063.0"},{"currency":"BTC","amount":"0.5","balance":"47.55849463","description":"Transfer
+        of 0.5 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1495449765.0"},{"currency":"BTC","amount":"-3.0","balance":"47.05849463","description":"Transfer
+        of 3.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495448662.0"},{"currency":"BTC","amount":"3.0","balance":"50.05849463","description":"Transfer
+        of 3.0 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1495448609.0"},{"currency":"BTC","amount":"-3.0","balance":"47.05849463","description":"Transfer
+        of 3.0 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495448586.0"},{"currency":"BTC","amount":"0.14861179","balance":"50.05849463","description":"Deposit
+        (BITCOIN) #2016170 on wallet Deposit","timestamp":"1495433845.0"},{"currency":"BTC","amount":"-2.15240121","balance":"49.90988284","description":"Transfer
+        of 2.1524 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1495432848.0"},{"currency":"BTC","amount":"0.03452248","balance":"52.06228405","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495416677.0"},{"currency":"BTC","amount":"0.03492624","balance":"52.02776157","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495330254.0"},{"currency":"BTC","amount":"0.03491887","balance":"51.99283533","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495243852.0"},{"currency":"BTC","amount":"0.03484088","balance":"51.95791646","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495157454.0"},{"currency":"BTC","amount":"0.03446853","balance":"51.92307558","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1495071054.0"},{"currency":"BTC","amount":"0.03301016","balance":"51.88860705","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494984651.0"},{"currency":"BTC","amount":"0.03276904","balance":"51.85559689","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494898266.0"},{"currency":"BTC","amount":"0.03271344","balance":"51.82282785","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494811853.0"},{"currency":"BTC","amount":"0.03204902","balance":"51.79011441","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494725460.0"},{"currency":"BTC","amount":"0.03129363","balance":"51.75806539","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494639054.0"},{"currency":"BTC","amount":"0.03086803","balance":"51.72677176","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494552652.0"},{"currency":"BTC","amount":"0.03079507","balance":"51.69590373","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494466257.0"},{"currency":"BTC","amount":"0.03031767","balance":"51.66510866","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494379858.0"},{"currency":"BTC","amount":"0.03030656","balance":"51.63479099","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494293454.0"},{"currency":"BTC","amount":"0.0309439","balance":"51.60448443","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494207057.0"},{"currency":"BTC","amount":"0.02997253","balance":"51.57354053","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494120652.0"},{"currency":"BTC","amount":"0.03077638","balance":"51.543568","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1494034254.0"},{"currency":"BTC","amount":"0.03282544","balance":"51.51279162","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493947875.0"},{"currency":"BTC","amount":"0.03319832","balance":"51.47996618","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493861475.0"},{"currency":"BTC","amount":"0.02693857","balance":"51.44676786","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493775057.0"},{"currency":"BTC","amount":"0.02362004","balance":"51.41982929","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493688662.0"},{"currency":"BTC","amount":"0.02186365","balance":"51.39620925","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493602270.0"},{"currency":"BTC","amount":"2.15650194","balance":"51.3743456","description":"Deposit
+        (BITCOIN) #1924491 on wallet Deposit","timestamp":"1493573475.0"},{"currency":"BTC","amount":"0.02134408","balance":"49.21784366","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493515870.0"},{"currency":"BTC","amount":"0.02135979","balance":"49.19649958","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493429455.0"},{"currency":"BTC","amount":"0.02128265","balance":"49.17513979","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493343092.0"},{"currency":"BTC","amount":"0.02142526","balance":"49.15385714","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493256648.0"},{"currency":"BTC","amount":"0.0214092","balance":"49.13243188","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493170241.0"},{"currency":"BTC","amount":"0.02121853","balance":"49.11102268","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1493083842.0"},{"currency":"BTC","amount":"0.02102811","balance":"49.08980415","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492997446.0"},{"currency":"BTC","amount":"0.02075191","balance":"49.06877604","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492911041.0"},{"currency":"BTC","amount":"0.0206212","balance":"49.04802413","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492824640.0"},{"currency":"BTC","amount":"0.0174112","balance":"49.02740293","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492738238.0"},{"currency":"BTC","amount":"0.01714135","balance":"49.00999173","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492651839.0"},{"currency":"BTC","amount":"0.01702618","balance":"48.99285038","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492565442.0"},{"currency":"BTC","amount":"0.01636683","balance":"48.9758242","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492479042.0"},{"currency":"BTC","amount":"0.01174492","balance":"48.95945737","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492392645.0"},{"currency":"BTC","amount":"6.18142128","balance":"48.94771245","description":"Transfer
+        of 6.1814 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1492388538.0"},{"currency":"BTC","amount":"0.01153775","balance":"42.76629117","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492306243.0"},{"currency":"BTC","amount":"0.01151629","balance":"42.75475342","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492219840.0"},{"currency":"BTC","amount":"0.01225926","balance":"42.74323713","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492133443.0"},{"currency":"BTC","amount":"0.01225046","balance":"42.73097787","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1492047041.0"},{"currency":"BTC","amount":"0.01051737","balance":"42.71872741","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491960644.0"},{"currency":"BTC","amount":"9.76407139","balance":"42.70821004","description":"Deposit
+        (BITCOIN) #1853020 on wallet Deposit","timestamp":"1491944975.0"},{"currency":"BTC","amount":"0.01029813","balance":"32.94413865","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491874243.0"},{"currency":"BTC","amount":"0.01052983","balance":"32.93384052","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491787845.0"},{"currency":"BTC","amount":"0.01054153","balance":"32.92331069","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491701445.0"},{"currency":"BTC","amount":"0.0107457","balance":"32.91276916","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491615046.0"},{"currency":"BTC","amount":"0.01127578","balance":"32.90202346","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491528643.0"},{"currency":"BTC","amount":"0.0115199","balance":"32.89074768","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491442255.0"},{"currency":"BTC","amount":"0.01159524","balance":"32.87922778","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491355844.0"},{"currency":"BTC","amount":"0.01152772","balance":"32.86763254","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491269450.0"},{"currency":"BTC","amount":"0.00812046","balance":"32.85610482","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491183047.0"},{"currency":"BTC","amount":"8.06674595","balance":"32.84798436","description":"Deposit
+        (BITCOIN) #1819426 on wallet Deposit","timestamp":"1491168025.0"},{"currency":"BTC","amount":"5.33533521","balance":"24.78123841","description":"Deposit
+        (BITCOIN) #1817207 on wallet Deposit","timestamp":"1491124821.0"},{"currency":"BTC","amount":"0.00679093","balance":"19.4459032","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491096645.0"},{"currency":"BTC","amount":"0.00664744","balance":"19.43911227","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1491010249.0"},{"currency":"BTC","amount":"0.00749038","balance":"19.43246483","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490923843.0"},{"currency":"BTC","amount":"0.0009156","balance":"19.42497445","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490837448.0"},{"currency":"BTC","amount":"13.40577725","balance":"19.42405885","description":"Deposit
+        (BITCOIN) #1804404 on wallet Deposit","timestamp":"1490830969.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.0182816","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490751052.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01738517","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490664649.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01648874","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490578261.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01559231","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490491853.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01469588","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490405453.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01379945","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490319047.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01290302","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490232650.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01200659","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490146251.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01111016","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1490059846.0"},{"currency":"BTC","amount":"0.00089643","balance":"6.01021373","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489973444.0"},{"currency":"BTC","amount":"0.00087941","balance":"6.0093173","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489887043.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00843789","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489800647.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00751085","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489714247.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00658381","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489627840.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00565677","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489541445.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00472973","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489455050.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00380269","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489368647.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00287565","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489282254.0"},{"currency":"BTC","amount":"0.00091383","balance":"6.00194861","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489195855.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00103478","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489109443.0"},{"currency":"BTC","amount":"0.00092704","balance":"6.00010774","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1489023044.0"},{"currency":"BTC","amount":"0.00092704","balance":"5.9991807","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488936648.0"},{"currency":"BTC","amount":"0.00092704","balance":"5.99825366","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488850247.0"},{"currency":"BTC","amount":"0.00092704","balance":"5.99732662","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488763846.0"},{"currency":"BTC","amount":"0.00092704","balance":"5.99639958","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488677441.0"},{"currency":"BTC","amount":"0.00086676","balance":"5.99547254","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488591039.0"},{"currency":"BTC","amount":"0.00124488","balance":"5.99460578","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488504641.0"},{"currency":"BTC","amount":"0.00149932","balance":"5.9933609","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488418238.0"},{"currency":"BTC","amount":"0.00149932","balance":"5.99186158","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488331838.0"},{"currency":"BTC","amount":"0.00149932","balance":"5.99036226","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488245434.0"},{"currency":"BTC","amount":"0.00150217","balance":"5.98886294","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488159039.0"},{"currency":"BTC","amount":"0.00151157","balance":"5.98736077","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1488072634.0"},{"currency":"BTC","amount":"0.00155387","balance":"5.9858492","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487986233.0"},{"currency":"BTC","amount":"0.00158379","balance":"5.98429533","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487899832.0"},{"currency":"BTC","amount":"-15.70418342","balance":"5.98271154","description":"Bitcoin
+        Withdrawal #1687267 on wallet Deposit","timestamp":"1487843259.0"},{"currency":"BTC","amount":"0.00185266","balance":"21.68689496","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487813433.0"},{"currency":"BTC","amount":"0.00376107","balance":"21.6850423","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487727039.0"},{"currency":"BTC","amount":"0.00457869","balance":"21.68128123","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487640632.0"},{"currency":"BTC","amount":"0.00479808","balance":"21.67670254","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487554230.0"},{"currency":"BTC","amount":"0.00468825","balance":"21.67190446","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487467833.0"},{"currency":"BTC","amount":"0.00480797","balance":"21.66721621","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487381439.0"},{"currency":"BTC","amount":"0.00497648","balance":"21.66240824","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487295035.0"},{"currency":"BTC","amount":"0.00533884","balance":"21.65743176","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487208632.0"},{"currency":"BTC","amount":"0.00498069","balance":"21.65209292","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487122232.0"},{"currency":"BTC","amount":"0.00472236","balance":"21.64711223","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1487035832.0"},{"currency":"BTC","amount":"0.00472236","balance":"21.64238987","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486949433.0"},{"currency":"BTC","amount":"0.00472488","balance":"21.63766751","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486863032.0"},{"currency":"BTC","amount":"0.00472521","balance":"21.63294263","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486776636.0"},{"currency":"BTC","amount":"0.00446337","balance":"21.62821742","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486690241.0"},{"currency":"BTC","amount":"0.00426185","balance":"21.62375405","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486603834.0"},{"currency":"BTC","amount":"0.00410491","balance":"21.6194922","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486517436.0"},{"currency":"BTC","amount":"0.00378058","balance":"21.61538729","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486431037.0"},{"currency":"BTC","amount":"0.00300816","balance":"21.61160671","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486344643.0"},{"currency":"BTC","amount":"0.0025326","balance":"21.60859855","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486258238.0"},{"currency":"BTC","amount":"0.0025326","balance":"21.60606595","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486171844.0"},{"currency":"BTC","amount":"0.0025326","balance":"21.60353335","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1486085439.0"},{"currency":"BTC","amount":"0.00253523","balance":"21.60100075","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485999038.0"},{"currency":"BTC","amount":"0.00265558","balance":"21.59846552","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485912636.0"},{"currency":"BTC","amount":"0.00265558","balance":"21.59580994","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485826236.0"},{"currency":"BTC","amount":"0.00477537","balance":"21.59315436","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485739838.0"},{"currency":"BTC","amount":"0.0064214","balance":"21.58837899","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485653437.0"},{"currency":"BTC","amount":"0.00642196","balance":"21.58195759","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485567039.0"},{"currency":"BTC","amount":"0.00642245","balance":"21.57553563","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485480639.0"},{"currency":"BTC","amount":"0.00641079","balance":"21.56911318","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485394238.0"},{"currency":"BTC","amount":"0.00641079","balance":"21.56270239","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485307837.0"},{"currency":"BTC","amount":"0.00641496","balance":"21.5562916","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485221449.0"},{"currency":"BTC","amount":"0.00639691","balance":"21.54987664","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485135040.0"},{"currency":"BTC","amount":"0.00663688","balance":"21.54347973","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1485048644.0"},{"currency":"BTC","amount":"0.00663688","balance":"21.53684285","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484962238.0"},{"currency":"BTC","amount":"0.00663688","balance":"21.53020597","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484875844.0"},{"currency":"BTC","amount":"0.00663688","balance":"21.52356909","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484789447.0"},{"currency":"BTC","amount":"0.00655061","balance":"21.51693221","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484703038.0"},{"currency":"BTC","amount":"0.00685942","balance":"21.5103816","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484616641.0"},{"currency":"BTC","amount":"0.00621192","balance":"21.50352218","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484530237.0"},{"currency":"BTC","amount":"0.00703526","balance":"21.49731026","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484443839.0"},{"currency":"BTC","amount":"0.00729225","balance":"21.490275","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484357438.0"},{"currency":"BTC","amount":"0.00785544","balance":"21.48298275","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484271042.0"},{"currency":"BTC","amount":"0.00683288","balance":"21.47512731","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484184643.0"},{"currency":"BTC","amount":"0.0073894","balance":"21.46829443","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484098244.0"},{"currency":"BTC","amount":"0.00896547","balance":"21.46090503","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1484011836.0"},{"currency":"BTC","amount":"0.00838516","balance":"21.45193956","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483925495.0"},{"currency":"BTC","amount":"0.00827264","balance":"21.4435544","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483839058.0"},{"currency":"BTC","amount":"0.00825893","balance":"21.43528176","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483752639.0"},{"currency":"BTC","amount":"0.00763159","balance":"21.42702283","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483666316.0"},{"currency":"BTC","amount":"0.0071268","balance":"21.41939124","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483579847.0"},{"currency":"BTC","amount":"0.0071235","balance":"21.41226444","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483493433.0"},{"currency":"BTC","amount":"0.00718659","balance":"21.40514094","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483407050.0"},{"currency":"BTC","amount":"0.00732649","balance":"21.39795435","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483320649.0"},{"currency":"BTC","amount":"0.00741195","balance":"21.39062786","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483234242.0"},{"currency":"BTC","amount":"0.00600058","balance":"21.38321591","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483147857.0"},{"currency":"BTC","amount":"0.00623031","balance":"21.37721533","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1483061447.0"},{"currency":"BTC","amount":"0.00702459","balance":"21.37098502","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482975043.0"},{"currency":"BTC","amount":"0.00733438","balance":"21.36396043","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482888646.0"},{"currency":"BTC","amount":"0.00639532","balance":"21.35662605","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482802241.0"},{"currency":"BTC","amount":"10.76845717","balance":"21.35023073","description":"Deposit
+        (BITCOIN) #1563443 on wallet Deposit","timestamp":"1482750023.0"},{"currency":"BTC","amount":"0.00447787","balance":"10.58177356","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482715840.0"},{"currency":"BTC","amount":"0.00447787","balance":"10.57729569","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482629435.0"},{"currency":"BTC","amount":"0.00447012","balance":"10.57281782","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482543037.0"},{"currency":"BTC","amount":"0.00448453","balance":"10.5683477","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482456632.0"},{"currency":"BTC","amount":"0.00442341","balance":"10.56386317","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482370233.0"},{"currency":"BTC","amount":"0.00472042","balance":"10.55943976","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482283831.0"},{"currency":"BTC","amount":"0.00472042","balance":"10.55471934","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482197440.0"},{"currency":"BTC","amount":"0.00472042","balance":"10.54999892","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482111039.0"},{"currency":"BTC","amount":"0.00472042","balance":"10.5452785","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1482024639.0"},{"currency":"BTC","amount":"0.00451026","balance":"10.54055808","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481938236.0"},{"currency":"BTC","amount":"0.00404464","balance":"10.53604782","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481851833.0"},{"currency":"BTC","amount":"0.00301095","balance":"10.53200318","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481765433.0"},{"currency":"BTC","amount":"0.00239426","balance":"10.52899223","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481679038.0"},{"currency":"BTC","amount":"0.00299376","balance":"10.52659797","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481592635.0"},{"currency":"BTC","amount":"0.00321534","balance":"10.52360421","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481506232.0"},{"currency":"BTC","amount":"0.00282016","balance":"10.52038887","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481419835.0"},{"currency":"BTC","amount":"0.00244676","balance":"10.51756871","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481333435.0"},{"currency":"BTC","amount":"0.00245853","balance":"10.51512195","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481247088.0"},{"currency":"BTC","amount":"0.00224849","balance":"10.51266342","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481160692.0"},{"currency":"BTC","amount":"0.00214949","balance":"10.51041493","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1481074286.0"},{"currency":"BTC","amount":"0.00158097","balance":"10.50826544","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1480987897.0"},{"currency":"BTC","amount":"0.00055962","balance":"10.50668447","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1480901492.0"},{"currency":"BTC","amount":"0.00000005","balance":"10.50612485","description":"Transfer
+        of 0.0 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1480796447.0"},{"currency":"BTC","amount":"10.5061248","balance":"10.5061248","description":"Deposit
+        (BITCOIN) #1493955 on wallet Deposit","timestamp":"1480796294.0"},{"currency":"BTC","amount":"-28.55445525","balance":"0.0","description":"Transfer
+        of 28.5545 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1467218453.0"},{"currency":"BTC","amount":"28.55445525","balance":"28.55445525","description":"Deposit
+        (BITCOIN) #1152380 on wallet Deposit","timestamp":"1467214866.0"},{"currency":"BTC","amount":"-4.24992018","balance":"0.0","description":"Transfer
+        of 4.2499 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1463935629.0"},{"currency":"BTC","amount":"4.2499","balance":"4.24992018","description":"Deposit
+        (BITCOIN) #1000834 on wallet Deposit","timestamp":"1463913420.0"},{"currency":"BTC","amount":"0.00002018","balance":"0.00002018","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1462239128.0"},{"currency":"BTC","amount":"-0.29478322","balance":"0.0","description":"Bitcoin
+        Withdrawal #957232 on wallet Deposit","timestamp":"1462218801.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29478322","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1462152725.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29474835","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1462066330.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29471348","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461979967.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29467861","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461893549.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29464374","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461807149.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29460887","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461749424.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.294574","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461632400.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29453913","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461546000.0"},{"currency":"BTC","amount":"0.00003487","balance":"0.29450426","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461459600.0"},{"currency":"BTC","amount":"-6.55466596","balance":"0.29069701","description":"Bitcoin
+        Withdrawal #935774 on wallet Deposit","timestamp":"1461390897.0"},{"currency":"BTC","amount":"0.00077304","balance":"0.29446939","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461373200.0"},{"currency":"BTC","amount":"0.00081218","balance":"0.29369635","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461286800.0"},{"currency":"BTC","amount":"0.00095989","balance":"0.29288417","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461200400.0"},{"currency":"BTC","amount":"-3.5126185","balance":"6.84536297","description":"Bitcoin
+        Withdrawal #930354 on wallet Deposit","timestamp":"1461176452.0"},{"currency":"BTC","amount":"0.00122727","balance":"0.29192428","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461114000.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.3567542","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1461027600.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35552693","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460941200.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35429966","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460854800.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35307239","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460768400.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35184512","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460682000.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35061785","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460595600.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.34939058","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460509200.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.34816331","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460422800.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.35798147","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460336400.0"},{"currency":"BTC","amount":"0.00122727","balance":"10.34693604","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460250000.0"},{"currency":"BTC","amount":"-1.30267619","balance":"10.34570877","description":"Transfer
+        of 1.3027 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1460201566.0"},{"currency":"BTC","amount":"0.00146535","balance":"11.64838496","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460166783.0"},{"currency":"BTC","amount":"0.00148097","balance":"11.64691961","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460081266.0"},{"currency":"BTC","amount":"0.00154519","balance":"11.64543864","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1460010040.0"},{"currency":"BTC","amount":"-2.757","balance":"11.64389345","description":"Bitcoin
+        Withdrawal #905375 on wallet Deposit","timestamp":"1459960343.0"},{"currency":"BTC","amount":"0.002021","balance":"14.40089345","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459910025.0"},{"currency":"BTC","amount":"-6.339","balance":"14.39887245","description":"Bitcoin
+        Withdrawal #903267 on wallet Deposit","timestamp":"1459860820.0"},{"currency":"BTC","amount":"-14.34","balance":"20.73787245","description":"Bitcoin
+        Withdrawal #902749 on wallet Deposit","timestamp":"1459835198.0"},{"currency":"BTC","amount":"0.00365291","balance":"35.07787245","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459820243.0"},{"currency":"BTC","amount":"-0.89","balance":"35.07421954","description":"Bitcoin
+        Withdrawal #901741 on wallet Deposit","timestamp":"1459783639.0"},{"currency":"BTC","amount":"0.00390998","balance":"35.96421954","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459733862.0"},{"currency":"BTC","amount":"-1.773","balance":"35.96030956","description":"Bitcoin
+        Withdrawal #900333 on wallet Deposit","timestamp":"1459716894.0"},{"currency":"BTC","amount":"-0.184","balance":"37.73330956","description":"Bitcoin
+        Withdrawal #900299 on wallet Deposit","timestamp":"1459713603.0"},{"currency":"BTC","amount":"0.01993207","balance":"37.91730956","description":"Transfer
+        of 0.0199 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1459698194.0"},{"currency":"BTC","amount":"-0.27","balance":"37.89737749","description":"Bitcoin
+        Withdrawal #899883 on wallet Deposit","timestamp":"1459690005.0"},{"currency":"BTC","amount":"0.00226895","balance":"38.16737749","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459647465.0"},{"currency":"BTC","amount":"0.00528296","balance":"38.16510854","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459568672.0"},{"currency":"BTC","amount":"0.00226363","balance":"38.15982558","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459490447.0"},{"currency":"BTC","amount":"0.00190299","balance":"38.15756195","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459400540.0"},{"currency":"BTC","amount":"0.00181389","balance":"38.15565896","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459307706.0"},{"currency":"BTC","amount":"0.00174836","balance":"38.15384507","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459215449.0"},{"currency":"BTC","amount":"0.00171766","balance":"38.15209671","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459146933.0"},{"currency":"BTC","amount":"0.116267","balance":"38.15037905","description":"Transfer
+        of 0.1163 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1459105732.0"},{"currency":"BTC","amount":"0.00170969","balance":"38.03411205","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1459066793.0"},{"currency":"BTC","amount":"0.00170997","balance":"38.03240236","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458976216.0"},{"currency":"BTC","amount":"0.00171231","balance":"38.03069239","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458891146.0"},{"currency":"BTC","amount":"0.00176903","balance":"38.02898008","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458806799.0"},{"currency":"BTC","amount":"0.00162709","balance":"38.02721105","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458715315.0"},{"currency":"BTC","amount":"0.00227307","balance":"38.02558396","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458629254.0"},{"currency":"BTC","amount":"-7.2","balance":"38.02331089","description":"Bitcoin
+        Withdrawal #877361 on wallet Deposit","timestamp":"1458556791.0"},{"currency":"BTC","amount":"0.00267928","balance":"45.22331089","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458528052.0"},{"currency":"BTC","amount":"0.00217086","balance":"45.22063161","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458442198.0"},{"currency":"BTC","amount":"0.00202985","balance":"45.21846075","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458355474.0"},{"currency":"BTC","amount":"0.00202001","balance":"45.2164309","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458279151.0"},{"currency":"BTC","amount":"0.00203046","balance":"45.21441089","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458179836.0"},{"currency":"BTC","amount":"0.00201267","balance":"45.21238043","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458092943.0"},{"currency":"BTC","amount":"0.0020327","balance":"45.21036776","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1458016468.0"},{"currency":"BTC","amount":"0.00208628","balance":"45.20833506","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457920966.0"},{"currency":"BTC","amount":"-4.02418843","balance":"45.20624878","description":"Bitcoin
+        Withdrawal #860035 on wallet Deposit","timestamp":"1457865415.0"},{"currency":"BTC","amount":"0.00204325","balance":"49.23043721","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457833113.0"},{"currency":"BTC","amount":"0.00152156","balance":"49.22839396","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457746673.0"},{"currency":"BTC","amount":"0.00185439","balance":"49.2268724","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457660266.0"},{"currency":"BTC","amount":"-3.85347968","balance":"49.22501801","description":"Bitcoin
+        Withdrawal #854859 on wallet Deposit","timestamp":"1457606262.0"},{"currency":"BTC","amount":"0.00254375","balance":"53.07849769","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457577610.0"},{"currency":"BTC","amount":"-4.93266509","balance":"53.07595394","description":"Bitcoin
+        Withdrawal #854197 on wallet Deposit","timestamp":"1457562651.0"},{"currency":"BTC","amount":"0.00257843","balance":"58.00861903","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457487590.0"},{"currency":"BTC","amount":"0.00254646","balance":"58.0060406","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457401083.0"},{"currency":"BTC","amount":"0.0022371","balance":"58.00349414","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457314689.0"},{"currency":"BTC","amount":"0.00258655","balance":"58.00125704","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457228394.0"},{"currency":"BTC","amount":"0.00250468","balance":"57.99867049","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457141964.0"},{"currency":"BTC","amount":"0.00251145","balance":"57.99616581","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1457057718.0"},{"currency":"BTC","amount":"0.0026114","balance":"57.99365436","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456972405.0"},{"currency":"BTC","amount":"0.00246701","balance":"57.99104296","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456886243.0"},{"currency":"BTC","amount":"0.00258599","balance":"57.98857595","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456799759.0"},{"currency":"BTC","amount":"0.00257494","balance":"57.98598996","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456713312.0"},{"currency":"BTC","amount":"0.00257552","balance":"57.98341502","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456626942.0"},{"currency":"BTC","amount":"0.00259018","balance":"57.9808395","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456550713.0"},{"currency":"BTC","amount":"0.00257121","balance":"57.97824932","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456469526.0"},{"currency":"BTC","amount":"0.0025912","balance":"57.97567811","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456367617.0"},{"currency":"BTC","amount":"0.00260623","balance":"57.97308691","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456278840.0"},{"currency":"BTC","amount":"0.00260129","balance":"57.97048068","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456205127.0"},{"currency":"BTC","amount":"0.00207794","balance":"57.96787939","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456105119.0"},{"currency":"BTC","amount":"13.92296764","balance":"57.96580145","description":"Transfer
+        of 13.923 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1456095009.0"},{"currency":"BTC","amount":"0.00192791","balance":"44.04283381","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1456018747.0"},{"currency":"BTC","amount":"1.95536802","balance":"44.0409059","description":"Transfer
+        of 1.9554 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1455967076.0"},{"currency":"BTC","amount":"0.00186588","balance":"42.08553788","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455932273.0"},{"currency":"BTC","amount":"0.00171515","balance":"42.083672","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455845870.0"},{"currency":"BTC","amount":"5.00499","balance":"42.08195685","description":"Transfer
+        of 5.005 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1455798731.0"},{"currency":"BTC","amount":"0.00165657","balance":"37.07696685","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455759486.0"},{"currency":"BTC","amount":"0.00166273","balance":"37.07531028","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455679534.0"},{"currency":"BTC","amount":"0.00165616","balance":"37.07364755","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455593184.0"},{"currency":"BTC","amount":"0.00111486","balance":"37.07199139","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455505991.0"},{"currency":"BTC","amount":"4.8450904","balance":"37.07087653","description":"Transfer
+        of 4.8451 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1455468738.0"},{"currency":"BTC","amount":"7.19110626","balance":"32.22578613","description":"Transfer
+        of 7.1911 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1455466966.0"},{"currency":"BTC","amount":"0.00085269","balance":"25.03467987","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455413840.0"},{"currency":"BTC","amount":"0.00110722","balance":"25.03382718","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455327500.0"},{"currency":"BTC","amount":"0.00088425","balance":"25.03271996","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455253882.0"},{"currency":"BTC","amount":"0.00111103","balance":"25.03183571","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455161572.0"},{"currency":"BTC","amount":"0.00105759","balance":"25.03072468","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1455082021.0"},{"currency":"BTC","amount":"0.00112853","balance":"25.02966709","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454981890.0"},{"currency":"BTC","amount":"0.0011037","balance":"25.02853856","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454901527.0"},{"currency":"BTC","amount":"0.00112244","balance":"25.02743486","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454809101.0"},{"currency":"BTC","amount":"0.00112342","balance":"25.02631242","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454728230.0"},{"currency":"BTC","amount":"0.00112492","balance":"25.025189","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454642139.0"},{"currency":"BTC","amount":"0.00112624","balance":"25.02406408","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454556293.0"},{"currency":"BTC","amount":"0.00160259","balance":"25.02293784","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454463481.0"},{"currency":"BTC","amount":"0.00142968","balance":"25.02133525","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454377569.0"},{"currency":"BTC","amount":"0.00107205","balance":"25.01990557","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454301662.0"},{"currency":"BTC","amount":"0.00072051","balance":"25.01883352","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454222319.0"},{"currency":"BTC","amount":"0.00110769","balance":"25.01811301","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454120317.0"},{"currency":"BTC","amount":"0.00111277","balance":"25.01700532","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1454034013.0"},{"currency":"BTC","amount":"0.00110804","balance":"25.01589255","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453947281.0"},{"currency":"BTC","amount":"0.0010856","balance":"25.01478451","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453858713.0"},{"currency":"BTC","amount":"0.0011207","balance":"25.01369891","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453774405.0"},{"currency":"BTC","amount":"0.00112044","balance":"25.01257821","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453685864.0"},{"currency":"BTC","amount":"0.00112545","balance":"25.01145777","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453599418.0"},{"currency":"BTC","amount":"0.00112954","balance":"25.01033232","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453513051.0"},{"currency":"BTC","amount":"0.00145745","balance":"25.00920278","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453428921.0"},{"currency":"BTC","amount":"1.14916812","balance":"25.00774533","description":"Transfer
+        of 1.1492 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1453398792.0"},{"currency":"BTC","amount":"-11.34916812","balance":"23.85857721","description":"Transfer
+        of 11.3492 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1453398669.0"},{"currency":"BTC","amount":"0.00127344","balance":"35.20774533","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453340220.0"},{"currency":"BTC","amount":"10.2","balance":"35.20647189","description":"Transfer
+        of 10.2 BTC from wallet Exchange to Deposit on wallet Deposit","timestamp":"1453323788.0"},{"currency":"BTC","amount":"0.00123369","balance":"25.00647189","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453253845.0"},{"currency":"BTC","amount":"0.00116455","balance":"25.0052382","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453167446.0"},{"currency":"BTC","amount":"0.00113262","balance":"25.00407365","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453081013.0"},{"currency":"BTC","amount":"0.00112895","balance":"25.00294103","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1453002732.0"},{"currency":"BTC","amount":"0.00181208","balance":"25.00181208","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452918317.0"},{"currency":"BTC","amount":"-11.57826923","balance":"25.0","description":"Transfer
+        of 11.5783 BTC from wallet Deposit to Exchange on wallet Deposit","timestamp":"1452859806.0"},{"currency":"BTC","amount":"-12.65","balance":"36.57826923","description":"Transfer
+        of 12.65 BTC from wallet Deposit to Trading on wallet Deposit","timestamp":"1452859061.0"},{"currency":"BTC","amount":"0.00240545","balance":"49.22826923","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452821834.0"},{"currency":"BTC","amount":"0.0022882","balance":"49.22586378","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452745555.0"},{"currency":"BTC","amount":"0.00225193","balance":"49.22357558","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452658894.0"},{"currency":"BTC","amount":"0.00221527","balance":"49.22132365","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452560400.0"},{"currency":"BTC","amount":"0.00164241","balance":"49.21401187","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452476292.0"},{"currency":"BTC","amount":"0.00058701","balance":"49.21910838","description":"Margin
+        Funding Payment correction for 2016-01-10 on wallet deposit","timestamp":"1452476292.0"},{"currency":"BTC","amount":"0.00007636","balance":"49.21236946","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452389873.0"},{"currency":"BTC","amount":"0.00212723","balance":"49.21852137","description":"Margin
+        Funding Payment correction for 2016-01-09 on wallet deposit","timestamp":"1452389873.0"},{"currency":"BTC","amount":"0.00081962","balance":"49.2122931","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452303494.0"},{"currency":"BTC","amount":"0.00139011","balance":"49.21639414","description":"Margin
+        Funding Payment correction for 2016-01-08 on wallet deposit","timestamp":"1452303494.0"},{"currency":"BTC","amount":"0.00198108","balance":"49.21147348","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452217160.0"},{"currency":"BTC","amount":"0.00022949","balance":"49.21500403","description":"Margin
+        Funding Payment correction for 2016-01-07 on wallet deposit","timestamp":"1452217160.0"},{"currency":"BTC","amount":"0.00223729","balance":"49.2094924","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452132996.0"},{"currency":"BTC","amount":"-0.00001395","balance":"49.21477454","description":"Margin
+        Funding Payment correction for 2016-01-06 on wallet deposit","timestamp":"1452132996.0"},{"currency":"BTC","amount":"0.00220354","balance":"49.20725511","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1452044241.0"},{"currency":"BTC","amount":"0.00003204","balance":"49.21478849","description":"Margin
+        Funding Payment correction for 2016-01-05 on wallet deposit","timestamp":"1452044241.0"},{"currency":"BTC","amount":"0.0022141","balance":"49.20505157","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451959486.0"},{"currency":"BTC","amount":"0.00000607","balance":"49.21475645","description":"Margin
+        Funding Payment correction for 2016-01-04 on wallet deposit","timestamp":"1451959486.0"},{"currency":"BTC","amount":"0.00220007","balance":"49.20283747","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451871440.0"},{"currency":"BTC","amount":"0.00002328","balance":"49.21475038","description":"Margin
+        Funding Payment correction for 2016-01-03 on wallet deposit","timestamp":"1451871440.0"},{"currency":"BTC","amount":"0.00220039","balance":"49.2006374","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451785053.0"},{"currency":"BTC","amount":"0.00001102","balance":"49.2147271","description":"Margin
+        Funding Payment correction for 2016-01-02 on wallet deposit","timestamp":"1451785053.0"},{"currency":"BTC","amount":"0.0022102","balance":"49.19843701","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451696400.0"},{"currency":"BTC","amount":"0.00209039","balance":"49.19622681","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451610000.0"},{"currency":"BTC","amount":"0.00009413","balance":"49.21471608","description":"Margin
+        Funding Payment correction for 2015-12-31 on wallet deposit","timestamp":"1451610000.0"},{"currency":"BTC","amount":"0.00226311","balance":"49.19413642","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451525819.0"},{"currency":"BTC","amount":"0.00004844","balance":"49.21462195","description":"Margin
+        Funding Payment correction for 2015-12-30 on wallet deposit","timestamp":"1451525819.0"},{"currency":"BTC","amount":"0.00241269","balance":"49.19187331","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451439407.0"},{"currency":"BTC","amount":"0.00224452","balance":"49.18946062","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451356409.0"},{"currency":"BTC","amount":"0.00007255","balance":"49.21457351","description":"Margin
+        Funding Payment correction for 2015-12-28 on wallet deposit","timestamp":"1451356409.0"},{"currency":"BTC","amount":"0.00217336","balance":"49.1872161","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451266679.0"},{"currency":"BTC","amount":"0.00007611","balance":"49.21450096","description":"Margin
+        Funding Payment correction for 2015-12-27 on wallet deposit","timestamp":"1451266679.0"},{"currency":"BTC","amount":"0.00221707","balance":"49.18504274","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451180290.0"},{"currency":"BTC","amount":"0.00210301","balance":"49.18282567","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451093821.0"},{"currency":"BTC","amount":"0.00006733","balance":"49.21442485","description":"Margin
+        Funding Payment correction for 2015-12-25 on wallet deposit","timestamp":"1451093821.0"},{"currency":"BTC","amount":"0.00214666","balance":"49.18072266","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1451007385.0"},{"currency":"BTC","amount":"0.00005836","balance":"49.21435752","description":"Margin
+        Funding Payment correction for 2015-12-24 on wallet deposit","timestamp":"1451007385.0"},{"currency":"BTC","amount":"0.00190813","balance":"49.178576","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450921029.0"},{"currency":"BTC","amount":"0.00028729","balance":"49.21429916","description":"Margin
+        Funding Payment correction for 2015-12-23 on wallet deposit","timestamp":"1450921029.0"},{"currency":"BTC","amount":"0.00219318","balance":"49.17666787","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450832400.0"},{"currency":"BTC","amount":"0.00223051","balance":"49.17447469","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450746000.0"},{"currency":"BTC","amount":"0.00205741","balance":"49.17224418","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450659600.0"},{"currency":"BTC","amount":"0.00087739","balance":"49.16845916","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450575448.0"},{"currency":"BTC","amount":"0.00110402","balance":"49.16758177","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450489054.0"},{"currency":"BTC","amount":"0.00197282","balance":"49.16647775","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450402628.0"},{"currency":"BTC","amount":"0.00203339","balance":"49.16450493","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450316289.0"},{"currency":"BTC","amount":"0.00172761","balance":"49.17018677","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450227600.0"},{"currency":"BTC","amount":"0.00195571","balance":"49.16247154","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450150013.0"},{"currency":"BTC","amount":"0.00196131","balance":"49.16051583","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1450057024.0"},{"currency":"BTC","amount":"0.00058535","balance":"49.15855452","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449971824.0"},{"currency":"BTC","amount":"17.39656214","balance":"49.15796917","description":"Deposit
+        (BITCOIN) #711847 on wallet Deposit","timestamp":"1449950459.0"},{"currency":"BTC","amount":"0.00136853","balance":"31.76140703","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449885780.0"},{"currency":"BTC","amount":"0.00138997","balance":"31.7600385","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449797862.0"},{"currency":"BTC","amount":"0.00101592","balance":"31.75864853","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449711444.0"},{"currency":"BTC","amount":"0.00105446","balance":"31.75763261","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449632026.0"},{"currency":"BTC","amount":"0.00152812","balance":"31.75657815","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449538639.0"},{"currency":"BTC","amount":"0.00045177","balance":"31.75505003","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449460512.0"},{"currency":"BTC","amount":"-5.0","balance":"31.75459826","description":"Bitcoin
+        Withdrawal #696367 on wallet Deposit","timestamp":"1449421176.0"},{"currency":"BTC","amount":"0.00028251","balance":"36.75459826","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449370882.0"},{"currency":"BTC","amount":"0.00111255","balance":"36.75431575","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449279461.0"},{"currency":"BTC","amount":"0.00282834","balance":"36.7532032","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449193026.0"},{"currency":"BTC","amount":"-5.6888","balance":"36.75037486","description":"Bitcoin
+        Withdrawal #691415 on wallet Deposit","timestamp":"1449167877.0"},{"currency":"BTC","amount":"-1.5068","balance":"42.43917486","description":"Bitcoin
+        Withdrawal #691393 on wallet Deposit","timestamp":"1449166933.0"},{"currency":"BTC","amount":"0.00300362","balance":"43.94597486","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449106658.0"},{"currency":"BTC","amount":"0.00281384","balance":"43.94297124","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1449020274.0"},{"currency":"BTC","amount":"0.00349428","balance":"43.9401574","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448937869.0"},{"currency":"BTC","amount":"-1.13","balance":"43.93666312","description":"Bitcoin
+        Withdrawal #684163 on wallet Deposit","timestamp":"1448865857.0"},{"currency":"BTC","amount":"0.00363657","balance":"45.06666312","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448847493.0"},{"currency":"BTC","amount":"-3.32","balance":"45.06302655","description":"Bitcoin
+        Withdrawal #683205 on wallet Deposit","timestamp":"1448830444.0"},{"currency":"BTC","amount":"-0.74","balance":"48.38302655","description":"Bitcoin
+        Withdrawal #682983 on wallet Deposit","timestamp":"1448813743.0"},{"currency":"BTC","amount":"0.00398303","balance":"49.12302655","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448761075.0"},{"currency":"BTC","amount":"0.00390923","balance":"49.11904352","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448674621.0"},{"currency":"BTC","amount":"0.00400627","balance":"49.11513429","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448590757.0"},{"currency":"BTC","amount":"0.00139869","balance":"49.11112802","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448501861.0"},{"currency":"BTC","amount":"0.00317428","balance":"49.10972933","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448415428.0"},{"currency":"BTC","amount":"0.00454348","balance":"49.10655505","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448329025.0"},{"currency":"BTC","amount":"0.0042321","balance":"49.10201157","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448242627.0"},{"currency":"BTC","amount":"0.00450216","balance":"49.09777947","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448160279.0"},{"currency":"BTC","amount":"0.00320253","balance":"49.09327731","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1448069824.0"},{"currency":"BTC","amount":"0.00418145","balance":"49.09007478","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447983423.0"},{"currency":"BTC","amount":"0.00478159","balance":"49.08589333","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447897022.0"},{"currency":"BTC","amount":"0.00433467","balance":"49.08111174","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447810606.0"},{"currency":"BTC","amount":"0.005418","balance":"49.07677707","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447724224.0"},{"currency":"BTC","amount":"0.00461828","balance":"49.07135907","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447637826.0"},{"currency":"BTC","amount":"0.00612428","balance":"49.06674079","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447551398.0"},{"currency":"BTC","amount":"0.00615733","balance":"49.06061651","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447465021.0"},{"currency":"BTC","amount":"0.00530822","balance":"49.05445918","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447378624.0"},{"currency":"BTC","amount":"0.00648126","balance":"49.04915096","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447294620.0"},{"currency":"BTC","amount":"0.00506778","balance":"49.0426697","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447205897.0"},{"currency":"BTC","amount":"0.00479532","balance":"49.03760192","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447119534.0"},{"currency":"BTC","amount":"0.00488687","balance":"49.0328066","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1447033133.0"},{"currency":"BTC","amount":"0.00490151","balance":"49.02791973","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446946745.0"},{"currency":"BTC","amount":"0.00504817","balance":"49.02301822","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446860527.0"},{"currency":"BTC","amount":"0.00299741","balance":"49.01797005","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446776240.0"},{"currency":"BTC","amount":"0.00647073","balance":"49.01497264","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446690617.0"},{"currency":"BTC","amount":"0.01467423","balance":"49.00850191","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446601378.0"},{"currency":"BTC","amount":"0.01989674","balance":"48.99382768","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446522443.0"},{"currency":"BTC","amount":"0.0202741","balance":"48.97393094","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446428404.0"},{"currency":"BTC","amount":"0.00729541","balance":"48.95365684","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446342032.0"},{"currency":"BTC","amount":"5.0","balance":"48.94636143","description":"Deposit
+        (BITCOIN) #618341 on wallet Deposit","timestamp":"1446308004.0"},{"currency":"BTC","amount":"5.0","balance":"43.94636143","description":"Deposit
+        (BITCOIN) #618339 on wallet Deposit","timestamp":"1446308003.0"},{"currency":"BTC","amount":"1.94626144","balance":"38.94636143","description":"Deposit
+        (BITCOIN) #618337 on wallet Deposit","timestamp":"1446308002.0"},{"currency":"BTC","amount":"5.0","balance":"37.00009999","description":"Deposit
+        (BITCOIN) #618335 on wallet Deposit","timestamp":"1446308001.0"},{"currency":"BTC","amount":"5.0","balance":"32.00009999","description":"Deposit
+        (BITCOIN) #618333 on wallet Deposit","timestamp":"1446308000.0"},{"currency":"BTC","amount":"5.0","balance":"27.00009999","description":"Deposit
+        (BITCOIN) #618331 on wallet Deposit","timestamp":"1446307999.0"},{"currency":"BTC","amount":"5.0","balance":"22.00009999","description":"Deposit
+        (BITCOIN) #618329 on wallet Deposit","timestamp":"1446307998.0"},{"currency":"BTC","amount":"5.0","balance":"17.00009999","description":"Deposit
+        (BITCOIN) #618215 on wallet Deposit","timestamp":"1446300496.0"},{"currency":"BTC","amount":"5.0","balance":"12.00009999","description":"Deposit
+        (BITCOIN) #618185 on wallet Deposit","timestamp":"1446298686.0"},{"currency":"BTC","amount":"5.0","balance":"7.00009999","description":"Deposit
+        (BITCOIN) #618107 on wallet Deposit","timestamp":"1446295460.0"},{"currency":"BTC","amount":"0.0000935","balance":"2.00009999","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446255659.0"},{"currency":"BTC","amount":"0.00000649","balance":"2.00000649","description":"Margin
+        Funding Payment on wallet Deposit","timestamp":"1446169280.0"},{"currency":"BTC","amount":"2.0","balance":"2.0","description":"Deposit
+        (BITCOIN) #614485 on wallet Deposit","timestamp":"1446157557.0"}]'
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 13:46:55 GMT
+- request:
+    method: post
+    uri: https://api.bitfinex.com/v1/history
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      X-BFX-PAYLOAD:
+      - eyJub25jZSI6IjE1MDEwNzY4MTU1MTU0IiwicmVxdWVzdCI6Ii92MS9oaXN0b3J5IiwibGltaXQiOjEwMDAsInVudGlsIjoxNDQ2MTU3NTU2LCJ3YWxsZXQiOiJkZXBvc2l0IiwiY3VycmVuY3kiOiJCVEMifQ==
+      X-BFX-SIGNATURE:
+      - 2155e42ff6d8efe9d51e11c9c94c238343587e5db5a429aee838b715daae31ca3ce75d14728b96d6a9301a90f1ffbf35
+      X-BFX-APIKEY:
+      - H0pjSg6k1V2Q3J7ItzzEPUYrRwd4KDK7jsK0W48QPXp
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      date:
+      - Wed, 26 Jul 2017 13:46:47 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      set-cookie:
+      - __cfduid=da26e12a7cfaf86c72fbeef2a61b86a681501076806; expires=Thu, 26-Jul-18
+        13:46:46 GMT; path=/; domain=.bitfinex.com; HttpOnly
+      strict-transport-security:
+      - max-age=31536000
+      x-frame-options:
+      - SAMEORIGIN, SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+      etag:
+      - '"7c80fdec42947d6aa86175d5a9bdc477"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 50fdb2f3-86dc-4ee5-a096-75b949ff14dc
+      x-runtime:
+      - '0.014636'
+      server:
+      - cloudflare-nginx
+      cf-ray:
+      - 3847ce9a6cf63e56-ZRH
+    body:
+      encoding: ASCII-8BIT
+      string: "[]"
+    http_version: 
+  recorded_at: Wed, 26 Jul 2017 13:46:55 GMT
+recorded_with: VCR 3.0.3
