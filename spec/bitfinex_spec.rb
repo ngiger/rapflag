@@ -104,12 +104,12 @@ describe RAPFLAG::Bitfinex do
       lines = IO.readlines(BITFINEX_SUMMARY_EXCHANGE_BTC_File)
       first_date = Date.strptime(lines[1].chomp.split(RAPFLAG::COLUMN_SEPARATOR)[1], '%Y.%m.%d')
       last_date = Date.strptime(lines[-1].chomp.split(RAPFLAG::COLUMN_SEPARATOR)[1], '%Y.%m.%d')
-      (last_date >  first_date).should be true
+      expect((last_date >  first_date)).to be true
       nr_dates = 323
-      (last_date -  first_date).to_i.should eql nr_dates
+      expect((last_date -  first_date).to_i).to eql nr_dates
       (1..nr_dates).each do |j|
         wish_date = (first_date + j).strftime('%Y.%m.%d')
-        lines.find_all{|line| line.index(wish_date)}.size.should eql 1
+        expect(lines.find_all{|line| line.index(wish_date)}.size).to eql 1
       end
     end
     it 'should have NOT have generated a correct summary deposit BFX CSV file' do
