@@ -1,3 +1,8 @@
+# 1.0.3 of 2017.07.26
+
+* <ticker>_total has balance + sum of balance fields of [deposit,trading,exchange]
+* Added spec test for BTC. Checks balance of 2017.05.23
+
 # 1.0.2 of 2017.07.26
 
 * Correct calculation of balance for total files. 

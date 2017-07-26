@@ -143,7 +143,6 @@ module RAPFLAG
                     "",
                     saved_info.balance,
                   ]
-            add_total(intermediate, 0.0, saved_info.balance)
           end if previous_date
           csv << [@currency,
                   date,
@@ -160,7 +159,7 @@ module RAPFLAG
     def should_break(string_date)
       return false
       aDate = Date.parse(string_date)
-      @currency.eql?('XRP') && aDate.year == 2017 && aDate.month == 05 && aDate.day == 23
+      @currency.eql?('BTC') && aDate.year == 2017 && aDate.month == 05 && aDate.day == 23
     end
     def add_total(date, income, balance)
       if date.is_a?(String)
@@ -176,7 +175,7 @@ module RAPFLAG
         binding.pry
       end
       @@global_totals[key][0] += income
-      @@global_totals[key][1] += balance unless @wallet.eql?('deposit')
+      @@global_totals[key][1] += balance
     end
     public
     def create_total
