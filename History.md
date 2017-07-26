@@ -1,3 +1,12 @@
+# 1.0.2 of 2017.07.26
+
+* Correct calculation of balance for total files. 
+* Consider settlement as income
+* Correct calculation of balance for total files. Consider settlement (for dump)
+* Remove empty test target
+* Implemented dump_history also for bitfinex
+
+
 # 1.0.1 of 2017.07.26
 
 * Create correct entries for intermediate dates
