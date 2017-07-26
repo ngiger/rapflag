@@ -39,6 +39,9 @@ module RAPFLAG
           puts " backtrace: #{error.backtrace[0..10].join("\n")}"
         end
       end
+      @history.each do |hist_item|
+        hist_item['date'] =  date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
+      end
       puts "Fetched #{@history.size} history entries" if $VERBOSE
     end
     def dump_history
