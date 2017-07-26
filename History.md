@@ -1,4 +1,24 @@
-# 0.0.9 of 2017.05.17
+# 1.0.2 of 2017.07.26
+
+* Correct calculation of balance for total files. 
+* Consider settlement as income
+* Correct calculation of balance for total files. Consider settlement (for dump)
+* Remove empty test target
+* Implemented dump_history also for bitfinex
+
+
+# 1.0.1 of 2017.07.26
+
+* Create correct entries for intermediate dates
+
+# 1.0.0 of 2017.05.28
+
+* Handle two transactions with same timestamp
+* Fix duplicated income
+* Do not emit rate and balance_in_usd for bitfinex
+* Use ',' as column separator.
+
+# 0.0.9 of 2017.05.24
 
 * Add <currency>_total files for bitfinex
 

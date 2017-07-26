@@ -39,7 +39,29 @@ module RAPFLAG
           puts " backtrace: #{error.backtrace[0..10].join("\n")}"
         end
       end
+      @history.each do |hist_item|
+        hist_item['date'] =  date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
+      end
       puts "Fetched #{@history.size} history entries" if $VERBOSE
+    end
+    def dump_history
+      unless @history && @history.size > 0
+        puts "Skipping dump_history for #{@currency}/#{@wallet} as history is nil or has no entries"
+        return
+      end
+      output_dir = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}")
+      FileUtils.makedirs(output_dir) unless File.directory?(output_dir)
+      out_file = File.join(output_dir, "#{@currency}_#{@wallet}_history.csv")
+      puts "Creating #{out_file}"
+      CSV.open(out_file, 'w+',
+               :col_sep => COLUMN_SEPARATOR,
+               :write_headers=> true,
+               :headers => @history.first.keys
+        ) do |csv|
+        @history.each do |entry|
+          csv << entry.values
+        end
+      end
     end
     private
     def check_config
