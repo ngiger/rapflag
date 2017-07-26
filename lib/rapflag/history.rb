@@ -10,6 +10,7 @@ module RAPFLAG
     attr_reader :history, :wallet, :currency, :btc_to_usd, :bfx_to_usd
     DATE_FORMAT = '%Y.%m.%d'
     DATE_TIME_FORMAT = '%Y.%m.%d %H:%M:%S'
+    INCOME_PATTERN = /Settlement|Wire Withdrawal fee|Crypto Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i
 
     def initialize(wallet = 'trading', currency = 'USD')
       @wallet = wallet
@@ -101,7 +102,7 @@ module RAPFLAG
       @history.sort{|x,y| x['timestamp'] <=> y['timestamp']}.each do | hist_item|
         date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
         info = Struct::Daily.new(date, hist_item['amount'].to_f, hist_item['balance'].to_f, hist_item['description'])
-
+        same_date = @history.select{|v| v['date'].eql?(date)}
         amount = hist_item['amount'].to_f
         balance = hist_item['balance'].to_f
         if @daily[date]
@@ -111,10 +112,11 @@ module RAPFLAG
           info.income = 0.0
           existing = info
         end
-        if /Wire Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i.match( hist_item['description'])
+        if INCOME_PATTERN.match( hist_item['description'])
           existing.income += amount
         end
         existing.balance = balance if balance != 0.0
+        puts "#{hist_item} existing #{existing} info #{info} balance #{balance}" if should_break(date)
         @daily[date] = existing
       end
       out_file = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}_summary.csv")
@@ -130,6 +132,7 @@ module RAPFLAG
                       'balance',
                       ] #< column header
         ) do |csv|
+
         @daily.each do |date, info|
           strings = date.split('.')
           fetch_date = Date.new(strings[0].to_i, strings[1].to_i, strings[2].to_i)
@@ -154,22 +157,33 @@ module RAPFLAG
       end
     end
     private
+    def should_break(string_date)
+      return false
+      aDate = Date.parse(string_date)
+      @currency.eql?('XRP') && aDate.year == 2017 && aDate.month == 05 && aDate.day == 23
+    end
     def add_total(date, income, balance)
       if date.is_a?(String)
-        key = [@currency, @wallet, date]
+        key = [@currency, date]
+        sdate = date
       elsif date.is_a?(Date)
         sdate = date.strftime(DATE_FORMAT)
-        key = [@currency, @wallet,sdate]
+        key = [@currency, sdate]
       end
       @@global_totals[key]    ||= [0, 0]
+      if should_break(sdate)
+        puts "add_total #{sdate} #{income} #{balance} to #{@@global_totals[key]} #{@wallet}"
+        binding.pry
+      end
       @@global_totals[key][0] += income
-      @@global_totals[key][1] += balance
+      @@global_totals[key][1] += balance unless @wallet.eql?('deposit')
     end
     public
     def create_total
       this_currency = @@global_totals.select{|v, k| v[0].eql?(@currency)}
-      sorted = Hash[ this_currency.sort_by { |key, val| key[2] } ]
-      dates = sorted.keys.collect{|x| x[2]}.uniq
+      day_index = 1
+      sorted = Hash[ this_currency.sort_by { |key, val| key[day_index] } ]
+      dates = sorted.keys.collect{|x| x[day_index]}.uniq
       total_filename = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_total.csv")
       total_file = CSV.open(total_filename, 'w+',
           :write_headers=> true,
@@ -183,7 +197,8 @@ module RAPFLAG
         dates.each do |date|
           total_income = 0
           total_balance = 0
-          this_day = this_currency.select{|v, k| v[2].eql?(date)}
+          this_day = this_currency.select{|v, k| v[day_index].eql?(date)}
+          binding.pry if date && should_break(date)
           this_day.each do |key, info|
             total_income += info[0]
             total_balance += info[1]
