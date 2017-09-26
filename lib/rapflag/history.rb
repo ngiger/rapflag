@@ -10,7 +10,7 @@ module RAPFLAG
     attr_reader :history, :wallet, :currency, :btc_to_usd, :bfx_to_usd
     DATE_FORMAT = '%Y.%m.%d'
     DATE_TIME_FORMAT = '%Y.%m.%d %H:%M:%S'
-    INCOME_PATTERN = /Settlement|Wire Withdrawal fee|Crypto Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i
+    INCOME_PATTERN = /Dividend|distribution|Settlement|Wire Withdrawal fee|Crypto Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i
 
     def initialize(wallet = 'trading', currency = 'USD')
       @wallet = wallet
@@ -184,6 +184,7 @@ module RAPFLAG
       sorted = Hash[ this_currency.sort_by { |key, val| key[day_index] } ]
       dates = sorted.keys.collect{|x| x[day_index]}.uniq
       total_filename = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_total.csv")
+      FileUtils.makedirs(File.dirname(total_filename)) unless File.directory?(File.dirname(total_filename))
       total_file = CSV.open(total_filename, 'w+',
           :write_headers=> true,
           :col_sep => COLUMN_SEPARATOR,
