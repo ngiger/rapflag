@@ -1,3 +1,7 @@
+# 1.0.4 of 2017.09.26
+
+* Consider dividend and distribution as income
+
 # 1.0.3 of 2017.07.26
 
 * <ticker>_total has balance + sum of balance fields of [deposit,trading,exchange]
