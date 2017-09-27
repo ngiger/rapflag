@@ -202,6 +202,9 @@ describe RAPFLAG::Bitfinex do
       expect(lines.first.chomp).to eql('currency,date,total_income,total_balance')
       expect(lines[1].chomp).to eql('BTC,2015.10.29,0.0,2.0')
       expect(lines[-1].chomp).to eql('BTC,2017.07.23,1.83e-06,26.23947379')
+
+      # If no trades were given we must repeat the amount for each day
+      expect(lines.find_all{ |x| /0.0,28.55445545/.match(x) }.size).to be > 1
       stich_item = lines.find{|x| /#{@stichtag}/.match(x)}.chomp
       expect(stich_item).to eql 'BTC,2017.05.23,0.030693480000000002,42.63179616'
     end

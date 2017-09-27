@@ -136,19 +136,14 @@ module RAPFLAG
         @daily.each do |date, info|
           strings = date.split('.')
           fetch_date = Date.new(strings[0].to_i, strings[1].to_i, strings[2].to_i)
-          (1..(fetch_date - previous_date -1).to_i).each do |j|
+          (1..((fetch_date - previous_date).to_i.-1)).each do |j|
             intermediate = (previous_date + j).strftime(DATE_FORMAT)
-            csv << [@currency,
-                    intermediate,
-                    "",
-                    saved_info.balance,
-                  ]
+            content = [@currency, intermediate, "",  saved_info.balance,]
+            csv << content
+            add_total(intermediate, 0.0, saved_info.balance)
           end if previous_date
-          csv << [@currency,
-                  date,
-                  info.income == 0.0 ? '': info.income,
-                  info.balance,
-                 ]
+          content = [@currency, date, info.income == 0.0 ? '': info.income, info.balance,]
+          csv << content
           add_total(date, info.income, info.balance)
           previous_date = fetch_date
           saved_info = info
