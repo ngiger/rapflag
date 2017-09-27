@@ -1,3 +1,7 @@
+# 1.0.5 of 2017.09.27
+
+* Fix emitting totals for each day
+
 # 1.0.4 of 2017.09.26
 
 * Consider dividend and distribution as income

@@ -5,5 +5,5 @@ module RAPFLAG
   end
   Wallets = ['trading', 'exchange', 'deposit']
   COLUMN_SEPARATOR = ','
-  VERSION='1.0.4'
+  VERSION='1.0.5'
 end
