@@ -104,11 +104,11 @@ describe RAPFLAG::Bitfinex do
     before(:all) do
       gen_exchange
     end
-    it 'should have generated a correct summary CSV file' do
+    it 'should have generated a correct exchange summary CSV file' do
       expect(File.exist?(BITFINEX_SUMMARY_EXCHANGE_BTC_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_EXCHANGE_BTC_File)
       expect(lines.first.chomp).to eql('currency,date,income,balance')
-      expect(lines[1].chomp).to eql('BTC,2016.01.15,"",8.99788147')
+      expect(lines[1].chomp).to eql('BTC,2016.01.15,"",0.0')
       expect(lines[-1].chomp).to eql('BTC,2016.12.03,"",0.0')
     end
     it 'should have a balance for for each day' do
@@ -157,7 +157,7 @@ describe RAPFLAG::Bitfinex do
       expect(File.exist?(BITFINEX_SUMMARY_DEPOSIT_BFX_File)).to eql(true)
       lines = IO.readlines(BITFINEX_SUMMARY_DEPOSIT_BFX_File)
       expect(lines.first.chomp).to eql('currency,date,income,balance')
-      expect(lines[1].chomp).to eql('BFX,2016.01.15,"",8.99788147')
+      expect(lines[1].chomp).to eql('BFX,2016.01.15,"",0.0')
     end
   end
   context 'option --dump' do
@@ -204,9 +204,12 @@ describe RAPFLAG::Bitfinex do
       expect(lines[-1].chomp).to eql('BTC,2017.07.23,1.83e-06,26.23947379')
 
       # If no trades were given we must repeat the amount for each day
-      expect(lines.find_all{ |x| /0.0,28.55445545/.match(x) }.size).to be > 1
+      first_date = lines.find_all{ |x| /BTC,2016.07.01/.match(x)}[0]
+      amounts = /BTC,2016.07.01,(.*)/.match(first_date)[1]
+      all_days = lines.find_all{ |x| x.index(amounts) }
+      expect(all_days = lines.find_all{ |x| x.index(amounts) }.size).to be > 1
       stich_item = lines.find{|x| /#{@stichtag}/.match(x)}.chomp
-      expect(stich_item).to eql 'BTC,2017.05.23,0.030693480000000002,42.63179616'
+      expect(stich_item).to eql 'BTC,2017.05.23,0.030693480000000002,41.64921661'
     end
   end
 end

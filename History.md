@@ -1,3 +1,7 @@
+# 1.0.6 of 2017.09.27
+
+* Fix calculation of daily income/balance
+
 # 1.0.5 of 2017.09.27
 
 * Fix emitting totals for each day

@@ -99,28 +99,29 @@ module RAPFLAG
 
     def create_summary
       @daily = {}
-      @history.sort{|x,y| x['timestamp'] <=> y['timestamp']}.each do | hist_item|
-        date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
-        info = Struct::Daily.new(date, hist_item['amount'].to_f, hist_item['balance'].to_f, hist_item['description'])
-        same_date = @history.select{|v| v['date'].eql?(date)}
-        amount = hist_item['amount'].to_f
-        balance = hist_item['balance'].to_f
-        if @daily[date]
-          old_balance = @daily[date]
-          existing = @daily[date]
-        else
-          info.income = 0.0
-          existing = info
-        end
-        if INCOME_PATTERN.match( hist_item['description'])
-          existing.income += amount
-        end
-        existing.balance = balance if balance != 0.0
-        puts "#{hist_item} existing #{existing} info #{info} balance #{balance}" if should_break(date)
-        @daily[date] = existing
-      end
       out_file = File.join(RAPFLAG.outputDir, "#{self.class.to_s.split('::').last.downcase}/#{@currency}_#{@wallet}_summary.csv")
       FileUtils.makedirs(File.dirname(out_file))
+      sorted_history =  @history.sort{|x,y| x['timestamp'] <=> y['timestamp']}
+      sorted_history.each_with_index do | hist_item, index|
+        date = Time.at(hist_item['timestamp'].to_i).strftime(DATE_FORMAT)
+        next if @daily[date]
+        @balance_last_day = (index == 0) ? 0.0 : sorted_history[index-1]['balance'].to_f
+        this_day = Struct::Daily.new(date, 0.0, 0.0, hist_item['description'], 0.0)
+        same_date = @history.select{|v| v['date'].eql?(date)}
+        same_date.each do |info_item|
+          amount = info_item['amount'].to_f
+          info_item['time'] = Time.at(hist_item['timestamp'].to_i).utc
+          this_day.amount += amount
+          this_day.income += amount if INCOME_PATTERN.match(info_item['description'])
+        end;
+        @balance_last_day += this_day.amount
+        this_day.balance = sorted_history[index+same_date.size-1]['balance'].to_f
+        unless (diff = (@balance_last_day - sorted_history[index+same_date.size-1]['balance'].to_f)) < 0.01
+          # puts "diff #{diff} for #{@currency}:#{index} #{date} #{same_date}"
+          # Looks like the exchange rates varied between the day and therefore the calculated diff is not always correct
+        end
+        @daily[date] = this_day
+      end
       previous_date = nil
       saved_info = nil
       CSV.open(out_file,'w',
