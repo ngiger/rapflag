@@ -1,16 +1,23 @@
 # rapflag
 Bitfinex and Poloniex Exporter for your Taxman.
 
-### set your key, desired currencies in
+### example installation instructions
+```
+yum install ruby-devel gcc-c++ make
+gem install public_suffix:2.0.5 rapflag
+```
+
+### set your keys, desired currencies in
 ```
  ./etc/config.yml
 ```
 sample
 ```
----
 currencies: [ 'USD', 'BTC', 'BFX']
 api_key: ''
 secret: ''
+poloniex_api_key: ''
+poloniex_secret: ''
 ```
 comment out "currencies" if you want to export all currencies.
 ### run as follows
