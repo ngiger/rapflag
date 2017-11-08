@@ -1,3 +1,8 @@
+# 1.0.7 of 2017.11.08
+
+* Add LTC and BCH to list of default currencies
+* ignore entries like Bitcoin Gold snapshot step3 on Funding wallet from income
+
 # 1.0.6 of 2017.09.27
 
 * Fix calculation of daily income/balance
