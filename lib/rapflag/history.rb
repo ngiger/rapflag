@@ -10,7 +10,8 @@ module RAPFLAG
     attr_reader :history, :wallet, :currency, :btc_to_usd, :bfx_to_usd
     DATE_FORMAT = '%Y.%m.%d'
     DATE_TIME_FORMAT = '%Y.%m.%d %H:%M:%S'
-    INCOME_PATTERN = /Dividend|distribution|Settlement|Wire Withdrawal fee|Crypto Withdrawal fee|Trading fees for|Margin Funding Payment on wallet/i
+    INCOME_PATTERN = /Dividend|distribution|Settlement|Wire Withdrawal fee|Crypto Withdrawal fee|\
+Bitcoin Gold snapshot step3 on Funding wallet|Trading fees for|Margin Funding Payment on wallet/i
 
     def initialize(wallet = 'trading', currency = 'USD')
       @wallet = wallet
